@@ -71,4 +71,8 @@ export class SidebarComponent implements OnInit {
   redirectProfile() {
     this.router.navigateByUrl('/administration/users/profile');
   }
+
+  redirectHome() {
+    this.router.navigate(['/rrhh/home-rrhh']);
+  }
 }

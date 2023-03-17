@@ -1,7 +1,7 @@
 <div id="sidebar" class="sidebar" [ngClass]="{'close':closed}" (mouseleave)="closeMenu()">
   <div class="logo-details">
     <a href="javascript:void(0);"><i class="pi pi-bars" (click)="showCloseMenu()"></i></a>
-    <span class="logo_name">IGNUG</span>
+    <span class="logo_name">ALAS DE COLIBRÍ</span>
     <a *ngIf="!closed" href="javascript:void(0);">
       <i class='pi'
          [ngClass]="{'pi-lock-open':!closedLock && !closed,'pi-lock':closedLock && !closed}"
@@ -13,14 +13,45 @@
     <!--Dashboard-->
     <li>
       <div class="icon-link">
-        <a [routerLink]="['/']">
+        <a [routerLink]="['/rrhh/home-rrhh']">
           <i class="pi pi-home"></i>
-          <span class="link_name">Dashboard</span>
+          <span class="link_name" >Home</span>
         </a>
       </div>
     </li>
-
-    <!--Menus-->
+    <li>
+      <div class="icon-link">
+        <a [routerLink]="['/rrhh/home-rrhh']">
+          <i class="pi pi-file"></i>
+          <span class="link_name" >Formulario</span>
+        </a>
+      </div>
+    </li>
+    <li>
+      <div class="icon-link">
+        <a [routerLink]="['/rrhh/home-rrhh']">
+          <i class="pi pi-folder-open"></i>
+          <span class="link_name" >Proyecto</span>
+        </a>
+      </div>
+    </li>
+    <li>
+      <div class="icon-link">
+        <a [routerLink]="['/rrhh/home-rrhh']">
+          <i class="pi pi-calendar-plus"></i>
+          <span class="link_name" >Vacaciones</span>
+        </a>
+      </div>
+    </li>
+    <li>
+      <div class="icon-link">
+        <a [routerLink]="['/rrhh/home-rrhh']">
+          <i class="pi pi-users"></i>
+          <span class="link_name" >Vacaciones</span>
+        </a>
+      </div>
+    </li>
+    <!-- Menus
     <li [id]="index" *ngFor="let item of menus,let index = index" [ngClass]="{'showMenu':showedMenu}">
       <div class="icon-link">
         <a [routerLink]="item.routerLink">
@@ -35,7 +66,7 @@
           <a *ngFor="let subItem of item.children" [routerLink]="subItem.routerLink">{{subItem.label}}</a>
         </li>
       </ul>
-    </li>
+    </li> -->
 
     <!--Profile-->
     <li>

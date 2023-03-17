@@ -14,7 +14,7 @@ import {InputTextModule} from "primeng/inputtext";
 import {PasswordModule} from "primeng/password";
 import {RippleModule} from "primeng/ripple";
 import {ReactiveFormsModule} from "@angular/forms";
-
+import { ToolbarModule } from 'primeng/toolbar';
 
 @NgModule({
   declarations: [LoginComponent, PasswordChangeComponent, PasswordResetComponent],
@@ -23,6 +23,7 @@ import {ReactiveFormsModule} from "@angular/forms";
     CommonModule,
     AuthenticationRoutingModule,
     ReactiveFormsModule,
+    ToolbarModule,
     SharedModule,
     ButtonModule,
     CardModule,

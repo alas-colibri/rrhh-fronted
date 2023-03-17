@@ -7,6 +7,11 @@ const routes: Routes = [
     loadChildren: () =>
       import('./event/event.module').then((m) => m.EventModule),
   },
+  {
+    path: 'home-rrhh',
+    loadChildren: () =>
+      import('./home-rrhh/home-rrhh.module').then((m) => m.HomeRrhhModule),
+  },
 ];
 
 @NgModule({
