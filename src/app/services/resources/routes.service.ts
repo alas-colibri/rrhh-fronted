@@ -5,6 +5,7 @@ export enum AppRoutesEnum {
   CORE = '/core',
   AUTH = '/auth',
   COMMON = '/common',
+  RRHH = '/rrhh'
 }
 
 @Injectable({
@@ -41,5 +42,9 @@ export class RoutesService {
 
   dashboard() {
     this.router.navigateByUrl(`/`);
+  }
+
+  home() {
+    this.router.navigateByUrl(`${AppRoutesEnum.RRHH}./events`);
   }
 }

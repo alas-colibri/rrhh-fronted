@@ -2,8 +2,7 @@
 <div class="container" id="container">
 	<div [formGroup]="formLogin" (ngSubmit)="onSubmit()" class="form-container sign-in-container">
 		<form action="#">
-			<h1>Vinculacion</h1>
-			<span>Inicia Sesión</span>
+			<h1>SISTEMA</h1>
 			<!-- <input type="email" placeholder="Usuario" /> -->
       <div class="field text-center">
         <label for="username" appLabel label="Usuario:"
@@ -34,8 +33,8 @@
 				 <button routerLink="/dashboard/solicitud" class = "btn btn-primary">Ingresar</button>
 			</a> -->
       <p-divider></p-divider>
-        <div class="field col-12">
-          <button *ngIf="!isPasswordReset" pButton pRipple label="Continuar"
+        <div class="field text-center">
+          <button *ngIf="!isPasswordReset" pButton label="Iniciar sesión"
                   icon="pi pi-sign-in"></button>
         </div>
 		</form>
@@ -43,8 +42,9 @@
 	<div class="overlay-container">
 		<div class="overlay">
 			<div class="overlay-panel overlay-right">
-				<h1>Alas de Colibrí</h1>
-				<p>Este sistema ayuda a la comunidad de yavirac seguir el proceso de vinculación</p>
+				<h1>Bienvenidos y bienvenidas a la fundación Alas de Colibrí</h1>
+        <img src="../../../../../assets/images/fundation.png" class="shadow" alt="Image" width="235">
+				<!-- <p>Este sistema ayuda a la comunidad de yavirac seguir el proceso de vinculación</p> -->
 			</div>
 		</div>
 	</div>

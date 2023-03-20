@@ -1,6 +1,6 @@
 @media(min-width: 1000px) {
   .loginForm {
-    margin-right: 0%;
+    margin-right: 30%;
     margin-left: 30%;
   }
 }
@@ -8,7 +8,7 @@
 @media(min-width: 1000px) {
   .loginImage {
     margin-right: 15%;
-    margin-left: 15%;
+    margin-left: 20%;
   }
 }
 
@@ -64,12 +64,12 @@ input {
   //background-image: url(".../") ;
 }
 
-// .form-container {
-// 	position: absolute;
-// 	top: 0;
-// 	height: 100%;
-// 	transition: all 0.6s ease-in-out;
-// }
+.form-container {
+	position: absolute;
+	top: 0;
+	height: 100%;
+	transition: all 0.6s ease-in-out;
+}
 
 .sign-in-container {
 	left: 0;
@@ -124,8 +124,8 @@ input {
 
 .overlay {
 	background: #FF416C;
-	background: -webkit-linear-gradient(to right, #f3cb17, #f1b138);
-	background: linear-gradient(to right, #f3cb17, #f1b138);
+	background: -webkit-linear-gradient(to right, #6F3882, #b870cf);
+	background: linear-gradient(to right, #c07ed6, #6F3882);
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-position: 0 0;
