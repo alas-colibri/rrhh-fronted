@@ -31,6 +31,7 @@ import {BadgeModule} from 'primeng/badge';
 import { FileUploadModule } from 'primeng/fileupload';
 import { HomeComponent } from './home/home.component';
 import { HomeRrhhComponent } from './home-rrhh.component';
+import {ImageModule} from 'primeng/image';
 @NgModule({
   declarations: [
     HomeRrhhComponent,
@@ -44,6 +45,7 @@ import { HomeRrhhComponent } from './home-rrhh.component';
     SharedModule,
     //PrimeNg
     BadgeModule,
+    ImageModule,
     FileUploadModule,
     ButtonModule,
     CardModule,

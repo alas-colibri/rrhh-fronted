@@ -15,6 +15,7 @@ import {PasswordModule} from "primeng/password";
 import {RippleModule} from "primeng/ripple";
 import {ReactiveFormsModule} from "@angular/forms";
 import { ToolbarModule } from 'primeng/toolbar';
+import {ImageModule} from 'primeng/image';
 
 @NgModule({
   declarations: [LoginComponent, PasswordChangeComponent, PasswordResetComponent],
@@ -32,6 +33,7 @@ import { ToolbarModule } from 'primeng/toolbar';
     InputTextModule,
     PasswordModule,
     RippleModule,
+    ImageModule,
   ]
 })
 export class AuthenticationModule {
