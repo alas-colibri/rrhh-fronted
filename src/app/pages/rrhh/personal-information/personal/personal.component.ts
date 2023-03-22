@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { PersonModel } from '@models/rrhh/person.model';
 import { AuthHttpService, AuthService } from '@services/auth';
 import { BreadcrumbService, CoreService, MessageService } from '@services/resources';
 import { RoutesService } from '@services/resources/routes.service';
+import { PersonalInformationService } from '@services/rrhh';
 import { DateValidators } from '@shared/validators';
 
 @Component({
@@ -29,6 +31,7 @@ export class PersonalComponent implements OnInit {
     public messageService: MessageService,
     private formBuilder: UntypedFormBuilder,
     private router: Router,
+    private personalInformationService: PersonalInformationService,
 
   ) {
     this.breadcrumbService.setItems([
@@ -64,16 +67,24 @@ export class PersonalComponent implements OnInit {
 
   onSubmit(): void {
     if (this.form.valid) {
-      console.log(this.form.value)
+     
       if (this.id != '') {
         //update
       } else {
-        //create
+        this.create(this.form.value);
       }
     } else {
       this.form.markAllAsTouched();
       this.messageService.errorsFields.then();
     }
+  }
+
+
+  create(person: PersonModel): void {
+    this.personalInformationService.create(person).subscribe(person => {
+      this.form.reset(person);
+      this.back();
+    });
   }
 
 
