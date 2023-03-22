@@ -24,6 +24,7 @@ constructor(
 
  create(payload: PersonModel): Observable<PersonModel> {
   const url = `${this.API_URL}`;
+  console.log(url)
 
   this.coreService.showLoad();
   return this.httpClient.post<ServerResponse>(url, payload).pipe(

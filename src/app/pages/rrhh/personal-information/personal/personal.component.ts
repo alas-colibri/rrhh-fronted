@@ -66,12 +66,16 @@ export class PersonalComponent implements OnInit {
 
 
   onSubmit(): void {
+
     if (this.form.valid) {
-     
+
+      this.create(this.form.value);
+      console.log(this.form.value)
       if (this.id != '') {
         //update
       } else {
-        this.create(this.form.value);
+
+
       }
     } else {
       this.form.markAllAsTouched();
@@ -82,6 +86,7 @@ export class PersonalComponent implements OnInit {
 
   create(person: PersonModel): void {
     this.personalInformationService.create(person).subscribe(person => {
+      console.log(person)
       this.form.reset(person);
       this.back();
     });
