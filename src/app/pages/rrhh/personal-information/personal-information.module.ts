@@ -34,6 +34,7 @@ import { FileUploadModule } from 'primeng/fileupload';
 import {ImageModule} from 'primeng/image';
 import { PersonalComponent } from './personal/personal.component';
 
+
 @NgModule({
   declarations: [
 PersonalInformationComponent,

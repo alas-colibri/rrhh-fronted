@@ -45,4 +45,8 @@
   font-weight: bolder;
 }
 
-
+.panel-heading .panel-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
