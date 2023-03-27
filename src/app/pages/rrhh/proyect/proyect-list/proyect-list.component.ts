@@ -37,8 +37,8 @@ export class ProyectListComponent implements OnInit {
     private route: ActivatedRoute,
   ) {
     this.breadcrumbService.setItems([
-      {label: 'Convocatorias', routerLink: ['/rrhh/proyect']},
-      {label: 'Asignacion de fases'}
+      {label: 'Home estudiante', routerLink: ['/rrhh/proyect']},
+      {label: 'Asignacion de proyecto'}
     ]);
     this.columns = this.getColumns();
     this.actionButtons = this.getActionButtons();
@@ -62,7 +62,7 @@ export class ProyectListComponent implements OnInit {
 
   getColumns(): ColumnModel[] {
     return [
-      {field: 'sort', header: 'Orden'},
+      {field: 'sort', header: 'Nombre del proyecto'},
       {field: 'startDate', header: 'Fecha de inicio'},
       {field: 'endDate', header: 'Fecha fin'},
       {field: 'isEnable', header: 'Estado'},
