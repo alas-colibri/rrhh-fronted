@@ -1,7 +1,7 @@
 <!--<p-card>-->
 <p-toolbar>
   <div class="p-toolbar-group-left">
-    <button pButton type="button" label="Agregar Fase"
+    <button pButton type="button" label="Agregar proyecto"
             class="p-button-success mr-2"
             icon="pi pi-plus"
             (click)="redirectCreateForm()"></button>
@@ -9,7 +9,7 @@
             class="p-button-info mr-2"
             icon="pi pi-refresh"
             (click)="ngOnInit()"></button>
-    <button *ngIf="selectedProyects.length>0" pButton type="button" label="Eliminar Fase"
+    <button *ngIf="selectedProyects.length>0" pButton type="button" label="Eliminar proyecto"
             class="p-button-danger"
             icon="pi pi-trash"
             (click)="removeAll()"></button>
