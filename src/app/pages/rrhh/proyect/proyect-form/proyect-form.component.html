@@ -13,6 +13,25 @@
   <p-divider></p-divider>
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <div class="formgrid grid">
+
+      <div class="field xl:col-6 lg:col-6 md:col-6 sm:col-10">
+        <label appLabel for="sort" label="Cedula: " [required]="sortField"></label>
+        <input pInputText type="text" id="sort" formControlName="sort"/>
+      </div>
+
+      <div class="field xl:col-6 lg:col-6 md:col-6 sm:col-10">
+        <label appLabel for="sort" label="Nombre del trabajador " [required]="sortField"></label>
+        <input pInputText type="text" id="sort" formControlName="sort"/>
+      </div>
+      <div class="field xl:col-6 lg:col-6 md:col-6 sm:col-10">
+        <label appLabel for="sort" label="Proyecto asignado: " [required]="sortField"></label>
+        <input pInputText type="text" id="sort" formControlName="sort"/>
+      </div>
+      <div class="field xl:col-6 lg:col-6 md:col-6 sm:col-10">
+        <label appLabel for="sort" label="Tipo de proyecto " [required]="sortField"></label>
+        <p-dropdown [options]="" optionLabel="name"></p-dropdown>
+
+      </div>
       <div class="field xl:col-6 lg:col-6 md:col-6 sm:col-12">
         <label appLabel for="startDate" label="Fecha de inicio:" [required]="startDateField"></label>
         <p-calendar formControlName="startDate" id="startDate" dateFormat="dd/mm/yy"></p-calendar>
@@ -22,6 +41,8 @@
                [dirty]="startDateField.dirty">
         </small>
       </div>
+
+
 
       <div class="field xl:col-6 lg:col-6 md:col-6 sm:col-12">
         <label appLabel for="endDate" label="Fecha de fin:" [required]="endDateField"></label>
@@ -36,16 +57,6 @@
     </div>
 
     <div class="formgrid grid">
-
-      <div class="field xl:col-6 lg:col-6 md:col-6 sm:col-12">
-        <label appLabel for="sort" label="Orden:" [required]="sortField"></label>
-        <input pInputText type="number" id="sort" formControlName="sort"/>
-        <small appErrorMessage
-               [errors]="sortField.errors"
-               [touched]="sortField.touched"
-               [dirty]="sortField.dirty">
-        </small>
-      </div>
 
       <div class="field xl:col-6 lg:col-6 md:col-6 sm:col-12">
         <label appLabel for="isEnable" label="Estado:" [required]="isEnableField"></label>
@@ -63,7 +74,7 @@
       <div class="field xl:col-6 lg:col-6 md:col-6 sm:col-12">
         <button pButton pRipple id="btnBack" type="button"
                 label="Cancelar"
-                class="p-button-info p-button-outlined"
+                class="p-button-outlined p-button-warning"
                 icon="pi pi-arrow-left"
                 [loading]="(loaded$|async)!"
                 (click)="back()"></button>
@@ -71,6 +82,7 @@
       <div class="field xl:col-6 lg:col-6 md:col-6 sm:col-12">
         <button pButton pRipple id="submit" type="submit"
                 label="Guardar"
+                class="p-button-raised p-button-warning"
                 icon="pi pi-save"
                 [loading]="(loaded$|async)!"></button>
       </div>

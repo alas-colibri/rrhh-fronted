@@ -25,7 +25,7 @@ import { CreateProyectDto, UpdateProyectDto } from '@models/rrhh/proyect.model';
 export class ProyectFormComponent implements OnInit, OnExitInterface {
   id: string = '';
   form: UntypedFormGroup = this.newForm;
-  panelHeader: string = 'Crear fase';
+  panelHeader: string = 'Crear proyecto';
   isChangePassword: UntypedFormControl = new UntypedFormControl(false);
   isLoadingSkeleton: boolean = false;
   loaded$ = this.coreService.loaded$;
@@ -41,12 +41,12 @@ export class ProyectFormComponent implements OnInit, OnExitInterface {
     private proyectHttpService: ProyectHttpService,
   ) {
     this.breadcrumbService.setItems([
-      {label: 'Convocatorias', routerLink: ['/rrhh/proyect']},
-      {label: 'Nueva fase'},
+      {label: 'Agregar proyecto', routerLink: ['/rrhh/proyect']},
+      {label: 'Nuevo proyecto'},
     ]);
     if (activatedRoute.snapshot.params['id'] !== 'new') {
       this.id = activatedRoute.snapshot.params['id'];
-      this.panelHeader = 'Guardar Modalidad';
+      this.panelHeader = 'Guardar proyecto';
     }
   }
 
