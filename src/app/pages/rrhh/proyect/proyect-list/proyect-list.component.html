@@ -1,18 +1,12 @@
 <!--<p-card>-->
 <p-toolbar>
   <div class="p-toolbar-group-left">
-    <button pButton type="button" label="Agregar proyecto"
-            class="p-button-success mr-2"
-            icon="pi pi-plus"
-            (click)="redirectCreateForm()"></button>
-    <button pButton type="button" label="Refrescar"
-            class="p-button-info mr-2"
-            icon="pi pi-refresh"
-            (click)="ngOnInit()"></button>
-    <button *ngIf="selectedProyects.length>0" pButton type="button" label="Eliminar proyecto"
-            class="p-button-danger"
-            icon="pi pi-trash"
-            (click)="removeAll()"></button>
+    <button pButton type="button" label="Agregar proyecto" class="p-button-success mr-2" icon="pi pi-plus"
+      (click)="redirectCreateForm()"></button>
+    <button pButton type="button" label="Refrescar" class="p-button-info mr-2" icon="pi pi-refresh"
+      (click)="ngOnInit()"></button>
+    <button *ngIf="selectedProyects.length>0" pButton type="button" label="Eliminar proyecto" class="p-button-danger"
+      icon="pi pi-trash" (click)="removeAll()"></button>
   </div>
   <div class="p-toolbar-group-right">
     <div class="p-input-icon-right">
@@ -21,19 +15,10 @@
     </div>
   </div>
 </p-toolbar>
-<p-paginator
-  [rows]="paginator.limit"
-  [totalRecords]="paginator.totalItems"
+<p-paginator [rows]="paginator.limit" [totalRecords]="paginator.totalItems"
   (onPageChange)="paginate($event)"></p-paginator>
-<p-table
-  dataKey="id"
-  styleClass="p-datatable-striped"
-  [value]="proyect"
-  [columns]="columns"
-  [sortField]="'sort'"
-  [loading]="(loaded$|async)!"
-  [(selection)]="selectedProyects"
-  [responsive]="true">
+<p-table dataKey="id" styleClass="p-datatable-striped" [value]="proyect" [columns]="columns" [sortField]="'sort'"
+  [loading]="(loaded$|async)!" [(selection)]="selectedProyects" [responsive]="true">
   <ng-template pTemplate="header" let-columns>
     <tr>
       <th style="width: 3rem">
@@ -45,7 +30,7 @@
       </th>
       <th class="text-center">
         <button pButton pRipple type="button" class="p-button-help p-button-outlined p-button-rounded"
-                icon="pi pi-cog"></button>
+          icon="pi pi-cog"></button>
       </th>
     </tr>
   </ng-template>
@@ -57,7 +42,7 @@
 
       <td *ngFor="let col of columns">
 
-         <!-- Objects
+        <!-- Objects
          <div *ngIf="rowData[col.field]?.id" [ngSwitch]="col.field">
           <div *ngSwitchCase="'catalogue'">
             {{rowData[col.field].name}}
@@ -76,8 +61,7 @@
             {{rowData[col.field]|date}}
           </div>
           <div *ngSwitchCase="'isEnable'">
-            <p-tag
-              [value]="rowData['isEnable']?'disponible':'no disponible'"
+            <p-tag [value]="rowData['isEnable']?'disponible':'no disponible'"
               [pTooltip]="rowData['maxAttempts']===0?'Exceeded the maximum number of attempts allowed':''"
               [severity]="checkState(rowData)"></p-tag>
           </div>
@@ -89,9 +73,8 @@
       <td class="text-center">
         <div *ngIf="rowData['id']!==authService.auth.id; then thenBlock else elseBlock"></div>
         <ng-template #thenBlock>
-          <p-splitButton icon="pi pi-ellipsis-v"
-                         [model]="actionButtons"
-                         (onDropdownClick)="selectProyect(rowData)"></p-splitButton>
+          <p-splitButton icon="pi pi-ellipsis-v" [model]="actionButtons"
+            (onDropdownClick)="selectProyect(rowData)"></p-splitButton>
         </ng-template>
         <ng-template #elseBlock>Current Event</ng-template>
       </td>

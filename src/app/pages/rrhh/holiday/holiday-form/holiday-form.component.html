@@ -1,0 +1,78 @@
+<app-skeleton *ngIf="isLoadingSkeleton" [type]="'card'"></app-skeleton>
+<p-panel *ngIf="!isLoadingSkeleton" class="p-fluid" collapseIcon="pi pi-times" [toggleable]="true"
+  (collapsedChange)="back()">
+  <ng-template pTemplate="header">
+    <i *ngIf="id===''" class="pi pi-user-plus mr-2"></i>
+    <i *ngIf="id!=''" class="pi pi-user-edit mr-2"></i>
+    <h2 class="panel-header">{{panelHeader}}</h2>
+  </ng-template>
+  <small [innerHTML]="this.messageService.requiredFields"></small>
+  <p-divider></p-divider>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+    <div class="formgrid grid">
+      <div class="field xl:col-6 lg:col-6 md:col-6 sm:col-12">
+        <label htmlFor="username">Nombre del Trabajador:</label>
+        <input pInputText id="username" aria-describedby="username-help"/>
+        <small id="username-help">Aquí aparecera el nombre del trabajador</small>
+      </div>
+
+      <div class="field xl:col-6 lg:col-6 md:col-6 sm:col-12">
+        <label htmlFor="username">Cedula del Trabajador:</label>
+        <input pInputText id="username" aria-describedby="username-help"/>
+        <small id="username-help">Ingresé el numero de cedula del trabajador</small>
+      </div>
+    </div>
+
+    <div class="formgrid grid">
+      <div class="field xl:col-6 lg:col-6 md:col-6 sm:col-12">
+        <label htmlFor="username">Proyecto Asignado:</label>
+        <input pInputText id="username" aria-describedby="username-help"/>
+        <small id="username-help">Aquí aparecerá el proyecto que fue asignado el trabajador</small>
+      </div>
+
+      <div class="field xl:col-6 lg:col-6 md:col-6 sm:col-12">
+        <label appLabel for="endDate" label="Tipo de Vacaciones:" [required]="endDateField"></label>
+        <span class="p-float-label">
+          <p-dropdown  placeholder="Seleccione Vacación" optionLabel="name" inputId="float-label"></p-dropdown>
+          <label for="float-label">Seleccione Vacación</label>
+          <!--(para conectar a la bd)[options]="cities" [(ngModel)]="selectedCity"-->
+      </span>
+      </div>
+    </div>
+
+    <!--incio de fechas-->
+    <div class="formgrid grid">
+      <div class="field xl:col-6 lg:col-6 md:col-6 sm:col-12">
+        <label appLabel for="startDate" label="Fecha de inicio:" [required]="startDateField"></label>
+        <p-calendar formControlName="startDate" id="startDate" dateFormat="dd/mm/yy"></p-calendar>
+        <small appErrorMessage [errors]="startDateField.errors" [touched]="startDateField.touched"
+          [dirty]="startDateField.dirty">
+        </small>
+      </div>
+
+      <div class="field xl:col-6 lg:col-6 md:col-6 sm:col-12">
+        <label appLabel for="endDate" label="Fecha de fin:" [required]="endDateField"></label>
+        <p-calendar formControlName="endDate" id="endDate" dateFormat="dd/mm/yy"></p-calendar>
+        <small appErrorMessage [errors]="endDateField.errors" [touched]="endDateField.touched"
+          [dirty]="endDateField.dirty">
+        </small>
+        <div *ngIf="endDateField.touched && endDateField.errors?.['dateRange']">{{endDateField.errors?.['dateRange']}}
+        </div>
+      </div>
+    </div>
+
+
+    <div class="formgrid grid">
+      <div class="field xl:col-6 lg:col-6 md:col-6 sm:col-12">
+        <button pButton pRipple id="btnBack" type="button" label="Cancelar" class="p-button-info p-button-outlined"
+          icon="pi pi-arrow-left" [loading]="(loaded$|async)!" (click)="back()"></button>
+      </div>
+      <div class="field xl:col-6 lg:col-6 md:col-6 sm:col-12">
+        <button pButton pRipple id="submit" type="submit" label="Guardar" icon="pi pi-save"
+          [loading]="(loaded$|async)!"></button>
+      </div>
+    </div>
+
+  </form>
+</p-panel>
