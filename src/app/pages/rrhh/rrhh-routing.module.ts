@@ -13,6 +13,14 @@ const routes: Routes = [
       import('./home-rrhh/home-rrhh.module').then((m) => m.HomeRrhhModule),
 
   },
+  {
+    path: 'personal-info',
+    loadChildren: () =>
+      import('./personal-information/personal-information.module').then((m) => m.PersonalInformationModule),
+
+  },
+
+
 
   {
     path: 'proyect',
@@ -27,6 +35,7 @@ const routes: Routes = [
       import('./holiday/holiday.module').then((m) => m.HolidayModule),
 
   },
+
 
 
 ];
