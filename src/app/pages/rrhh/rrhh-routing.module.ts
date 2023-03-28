@@ -21,6 +21,23 @@ const routes: Routes = [
   },
 
 
+
+  {
+    path: 'proyect',
+    loadChildren: () =>
+      import('./proyect/proyect.module').then((m) => m.ProyectModule),
+
+  },
+
+  {
+    path: 'holiday',
+    loadChildren: () =>
+      import('./holiday/holiday.module').then((m) => m.HolidayModule),
+
+  },
+
+
+
 ];
 
 @NgModule({
