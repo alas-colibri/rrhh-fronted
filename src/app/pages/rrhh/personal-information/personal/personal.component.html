@@ -1,0 +1,348 @@
+<p-panel class="p-fluid">
+  <h1 class="panel-header text-center">Datos Personales</h1>
+  <p-divider></p-divider>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="formgrid grid">
+      <div class="field xl:col-3 lg:col-3 md:col-3 sm:col-3"></div>
+      <div class="field xl:col-8 lg:col-8 md:col-8 sm:col-8">
+        <div class="formgrid grid">
+          <div class="field xl:col-8 lg:col-8 md:col-8 sm:col-12">
+            <label
+              appLabel
+              for="names"
+              label="Nombres Completos:"
+              [required]="namesField"
+            ></label>
+            <input pInputText type="text" id="names" formControlName="names" />
+            <small
+              appErrorMessage
+              [errors]="namesField.errors"
+              [touched]="namesField.touched"
+              [dirty]="namesField.dirty"
+            >
+            </small>
+          </div>
+
+          <div class="field xl:col-8 lg:col-8 md:col-8 sm:col-12">
+            <label
+              appLabel
+              for="lastNames"
+              label="Apellidos completos:"
+              [required]="lastNamesField"
+            ></label>
+            <input
+              pInputText
+              type="text"
+              id="lastNames"
+              formControlName="lastNames"
+            />
+            <small
+              appErrorMessage
+              [errors]="lastNamesField.errors"
+              [touched]="lastNamesField.touched"
+              [dirty]="lastNamesField.dirty"
+            >
+            </small>
+          </div>
+        </div>
+
+        <div class="field xl:col-8 lg:col-8 md:col-8 sm:col-12">
+          <label
+            appLabel
+            for="identificationCode"
+            label="Cédula de Identidad:"
+            [required]="identificationCodeField"
+          ></label>
+          <input
+            pInputText
+            type="text"
+            id="identificationCode"
+            formControlName="identificationCode"
+          />
+          <small
+            appErrorMessage
+            [errors]="identificationCodeField.errors"
+            [touched]="identificationCodeField.touched"
+            [dirty]="identificationCodeField.dirty"
+          >
+          </small>
+        </div>
+
+        <div class="formgrid grid">
+          <div class="field xl:col-4 lg:col-4 md:col-4 sm:col-12">
+            <label
+              appLabel
+              for="civilStatus"
+              label="Estado Civil:"
+              [required]="civilStatusField"
+            ></label>
+
+            <p-dropdown
+              [options]="cities"
+              [(ngModel)]="selectedCity"
+              optionLabel="name"
+              optionValue="code"
+              formControlName="civilStatus"
+            ></p-dropdown>
+
+            <small
+              appErrorMessage
+              [errors]="civilStatusField.errors"
+              [touched]="civilStatusField.touched"
+              [dirty]="civilStatusField.dirty"
+            >
+            </small>
+          </div>
+
+          <div class="field xl:col-4 lg:col-4 md:col-4 sm:col-12">
+            <label
+              appLabel
+              for="gender"
+              label="Género:"
+              [required]="genderField"
+            ></label>
+
+            <p-dropdown
+              [options]="cities"
+              [(ngModel)]="selectedCity"
+              optionLabel="name"
+              optionValue="code"
+              formControlName="gender"
+            ></p-dropdown>
+
+            <small
+              appErrorMessage
+              [errors]="genderField.errors"
+              [touched]="genderField.touched"
+              [dirty]="genderField.dirty"
+            >
+            </small>
+          </div>
+        </div>
+
+        <div class="field xl:col-6 lg:col-6 md:col-6 sm:col-12">
+          <label
+            appLabel
+            for="birthdate"
+            label="Fecha de Nacimiento:"
+            [required]="birthdateField"
+          ></label>
+          <p-calendar
+            formControlName="birthdate"
+            id="birthdate"
+            dateFormat="dd/mm/yy"
+          ></p-calendar>
+          <small
+            appErrorMessage
+            [errors]="birthdateField.errors"
+            [touched]="birthdateField.touched"
+            [dirty]="birthdateField.dirty"
+          >
+          </small>
+        </div>
+
+        <div class="formgrid grid">
+          <div class="field xl:col-4 lg:col-4 md:col-4 sm:col-12">
+            <label
+              appLabel
+              for="phone"
+              label="Teléfono:"
+              [required]="phoneField"
+            ></label>
+            <input pInputText type="text" id="phone" formControlName="phone" />
+            <small
+              appErrorMessage
+              [errors]="phoneField.errors"
+              [touched]="phoneField.touched"
+              [dirty]="phoneField.dirty"
+            >
+            </small>
+          </div>
+
+          <div class="field xl:col-4 lg:col-4 md:col-4 sm:col-12">
+            <label
+              appLabel
+              for="city"
+              label="Ciudad:"
+              [required]="cityField"
+            ></label>
+
+            <p-dropdown
+              [options]="cities"
+              [(ngModel)]="selectedCity"
+              optionLabel="name"
+              optionValue="code"
+              formControlName="city"
+            ></p-dropdown>
+
+            <small
+              appErrorMessage
+              [errors]="cityField.errors"
+              [touched]="cityField.touched"
+              [dirty]="cityField.dirty"
+            >
+            </small>
+          </div>
+        </div>
+
+        <div class="formgrid grid">
+          <div class="field xl:col-4 lg:col-4 md:col-4 sm:col-12">
+            <label
+              appLabel
+              for="profession"
+              label="Profesión:"
+              [required]="professionField"
+            ></label>
+            <input
+              pInputText
+              type="text"
+              id="profession"
+              formControlName="profession"
+            />
+            <small
+              appErrorMessage
+              [errors]="professionField.errors"
+              [touched]="professionField.touched"
+              [dirty]="professionField.dirty"
+            >
+            </small>
+          </div>
+
+          <div class="field xl:col-4 lg:col-4 md:col-4 sm:col-12">
+            <label
+              appLabel
+              for="typeContract"
+              label="Tipo de Contrato:"
+              [required]="typeContractField"
+            ></label>
+
+            <p-dropdown
+              [options]="cities"
+              [(ngModel)]="selectedCity"
+              optionLabel="name"
+              optionValue="code"
+              formControlName="typeContract"
+            ></p-dropdown>
+
+            <small
+              appErrorMessage
+              [errors]="typeContractField.errors"
+              [touched]="typeContractField.touched"
+              [dirty]="typeContractField.dirty"
+            >
+            </small>
+          </div>
+        </div>
+        <div class="field xl:col-8 lg:col-8 md:col-8 sm:col-12">
+          <label
+            appLabel
+            for="typeContract"
+            label="Proyectos:"
+            [required]="projectsField"
+          ></label>
+
+          <p-dropdown
+            [options]="cities"
+            [(ngModel)]="selectedCity"
+            optionLabel="name"
+            optionValue="code"
+            formControlName="projects"
+          ></p-dropdown>
+
+          <small
+            appErrorMessage
+            [errors]="projectsField.errors"
+            [touched]="projectsField.touched"
+            [dirty]="projectsField.dirty"
+          >
+          </small>
+        </div>
+
+        <div class="formgrid grid">
+          <div class="field xl:col-4 lg:col-4 md:col-4 sm:col-12">
+            <button pButton pRipple id="btnBack" type="button"
+                    label="Cancelar"
+                    class="p-button-info p-button-outlined"
+                    icon="pi pi-arrow-left"
+                    [loading]="(loaded$|async)!"
+                    (click)="back()"></button>
+          </div>
+          <div class="field xl:col-4 lg:col-4 md:col-4 sm:col-12">
+            <button pButton pRipple id="submit" type="submit"
+                    label="Guardar"
+                    icon="pi pi-save"
+                    [loading]="(loaded$|async)!"></button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </form>
+  <!--   <div class="formgrid grid">
+      <div class="field xl:col-6 lg:col-6 md:col-6 sm:col-12">
+        <label appLabel for="startDate" label="Fecha de inicio:" [required]="startDateField"></label>
+        <p-calendar formControlName="startDate" id="startDate" dateFormat="dd/mm/yy"></p-calendar>
+        <small appErrorMessage
+               [errors]="startDateField.errors"
+               [touched]="startDateField.touched"
+               [dirty]="startDateField.dirty">
+        </small>
+      </div>
+
+      <div class="field xl:col-6 lg:col-6 md:col-6 sm:col-12">
+        <label appLabel for="endDate" label="Fecha de fin:" [required]="endDateField"></label>
+        <p-calendar formControlName="endDate" id="endDate" dateFormat="dd/mm/yy"></p-calendar>
+        <small appErrorMessage
+               [errors]="endDateField.errors"
+               [touched]="endDateField.touched"
+               [dirty]="endDateField.dirty">
+        </small>
+        <div *ngIf="endDateField.touched && endDateField.errors?.['dateRange']">{{endDateField.errors?.['dateRange']}}</div>
+       </div>
+    </div>
+
+    <div class="formgrid grid">
+
+      <div class="field xl:col-6 lg:col-6 md:col-6 sm:col-12">
+        <label appLabel for="sort" label="Orden:" [required]="sortField"></label>
+        <input pInputText type="number" id="sort" formControlName="sort"/>
+        <small appErrorMessage
+               [errors]="sortField.errors"
+               [touched]="sortField.touched"
+               [dirty]="sortField.dirty">
+        </small>
+      </div>
+
+      <div class="field xl:col-6 lg:col-6 md:col-6 sm:col-12">
+        <label appLabel for="isEnable" label="Estado:" [required]="isEnableField"></label>
+        <p><p-inputSwitch formControlName="isEnable"></p-inputSwitch></p>
+        <small appErrorMessage
+               [errors]="isEnableField.errors"
+               [touched]="isEnableField.touched"
+               [dirty]="isEnableField.dirty">
+        </small>
+      </div>
+
+    </div>
+
+    <div class="formgrid grid">
+      <div class="field xl:col-6 lg:col-6 md:col-6 sm:col-12">
+        <button pButton pRipple id="btnBack" type="button"
+                label="Cancelar"
+                class="p-button-info p-button-outlined"
+                icon="pi pi-arrow-left"
+                [loading]="(loaded$|async)!"
+                (click)="back()"></button>
+      </div>
+      <div class="field xl:col-6 lg:col-6 md:col-6 sm:col-12">
+        <button pButton pRipple id="submit" type="submit"
+                label="Guardar"
+                icon="pi pi-save"
+                [loading]="(loaded$|async)!"></button>
+      </div>
+    </div>
+
+  </form>-->
+</p-panel>
