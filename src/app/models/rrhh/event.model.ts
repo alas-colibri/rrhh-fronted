@@ -1,9 +1,7 @@
 export interface EventModel {
   id: string;
-  endDate: Date;
-  isEnable: boolean;
-  sort: number;
-  startDate: Date;
+  question: string;
+  active: boolean;
 }
 
 export interface CreateEventDto extends Omit<EventModel, 'id'> {

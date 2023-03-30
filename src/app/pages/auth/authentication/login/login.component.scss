@@ -12,6 +12,14 @@
   }
 }
 
+@media(min-width: 2000px) {
+  .ptoolbar {
+    margin-right: 15%;
+    margin-left: 15%;
+    top: 1000%;
+  }
+}
+
 
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
 
@@ -25,11 +33,8 @@ body {
 	justify-content: center;
 	align-items: center;
 	flex-direction: column;
-
 	height: 100vh;
-
 }
-
 
 form {
 	background-color: #ffffff;
@@ -45,9 +50,8 @@ form {
 input {
 	background-color: rgb(255, 255, 255);
 
-	padding: 12px 15px;
-
-	width: 100%;
+	padding: 3px 3px;
+	//width: 100%;
 }
 
 
@@ -57,55 +61,55 @@ input {
 			;
 	position: relative;
 	overflow: hidden;
-	width: 768px;
-  top: 60px;
-	max-width: 120%;
-	min-height: 420px;
+	//width: 768px;
+  top: 85px;
+	//max-width: 120%;
+	min-height: 390px;
   //background-image: url(".../") ;
 }
 
 .form-container {
 	position: absolute;
-	top: 0;
-	height: 100%;
-	transition: all 0.6s ease-in-out;
+	top: 3;
+	//height: 100%;
+	//transition: all 0.6s ease-in-out;
 }
 
 .sign-in-container {
-	left: 0;
+	left: 1;
 	width: 50%;
-	z-index: 2;
+	//z-index: 100;
 }
 
-.container.right-panel-active .sign-in-container {
-	transform: translateX(100%);
-}
+// .container.right-panel-active .sign-in-container {
+// 	transform: translateX(100%);
+// }
 
-.sign-up-container {
-	left: 0;
-	width: 70%;
-	opacity: 0;
-	z-index: 1;
-}
+// .sign-up-container {
+// 	left: 100;
+// 	//width: 70%;
+// 	opacity: 100;
+// 	z-index: 1;
+// }
 
-.container.right-panel-active .sign-up-container {
-	transform: translateX(200%);
-	opacity: 1;
-	z-index: 5;
-	animation: show 0.6s;
-}
+// .container.right-panel-active .sign-up-container {
+// 	transform: translateX(200%);
+// 	opacity: 1;
+// 	z-index: 5;
+// 	animation: show 0.6s;
+// }
 
-@keyframes show {
-	0%, 49.99% {
-		opacity: 0;
-		z-index: 1;
-	}
+// @keyframes show {
+// 	0%, 49.99% {
+// 		opacity: 0;
+// 		z-index: 1;
+// 	}
 
-	50%, 100% {
-		opacity: 1;
-		z-index: 5;
-	}
-}
+// 	50%, 100% {
+// 		opacity: 1;
+// 		z-index: 5;
+// 	}
+// }
 
 .overlay-container {
 	position: absolute;
@@ -118,9 +122,9 @@ input {
 	z-index: 100;
 }
 
-.container.right-panel-active .overlay-container{
-	transform: translateX(-100%);
-}
+// .container.right-panel-active .overlay-container{
+// 	transform: translateX(-100%);
+// }
 
 .overlay {
 	background: #FF416C;
@@ -138,9 +142,9 @@ input {
 	transition: transform 0.6s ease-in-out;
 }
 
-.container.right-panel-active .overlay {
-  	transform: translateX(50%);
-}
+// .container.right-panel-active .overlay {
+//   	transform: translateX(50%);
+// }
 
 .overlay-panel {
 	position: absolute;

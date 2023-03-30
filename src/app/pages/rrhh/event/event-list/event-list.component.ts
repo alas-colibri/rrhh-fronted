@@ -35,8 +35,8 @@ export class EventListComponent implements OnInit {
     private route: ActivatedRoute,
   ) {
     this.breadcrumbService.setItems([
-      {label: 'Convocatorias', routerLink: ['/rrhh/events']},
-      {label: 'Asignacion de fases'}
+      {label: 'Lista', routerLink: ['/rrhh/questions']},
+      {label: 'Listado de preguntas'}
     ]);
     this.columns = this.getColumns();
     this.actionButtons = this.getActionButtons();
@@ -49,7 +49,7 @@ export class EventListComponent implements OnInit {
   }
 
   checkState(event: EventModel): string {
-    if (event.isEnable) return 'success';
+    if (event.active) return 'success';
 
   return 'danger';
   }
@@ -60,10 +60,8 @@ export class EventListComponent implements OnInit {
 
   getColumns(): ColumnModel[] {
     return [
-      {field: 'sort', header: 'Orden'},
-      {field: 'startDate', header: 'Fecha de inicio'},
-      {field: 'endDate', header: 'Fecha fin'},
-      {field: 'isEnable', header: 'Estado'},
+      {field: 'question', header: 'Preguntas'},
+      {field: 'active', header: 'Estado'},
     ]
   }
 
@@ -93,11 +91,11 @@ export class EventListComponent implements OnInit {
   }
 
   redirectCreateForm() {
-    this.router.navigate(['/rrhh/events', 'new']);
+    this.router.navigate(['/rrhh/questions', 'new']);
   }
 
   redirectEditForm(id: string) {
-    this.router.navigate(['/rrhh/events', id]);
+    this.router.navigate(['/rrhh/questions', id]);
   }
 
   remove(id: string) {

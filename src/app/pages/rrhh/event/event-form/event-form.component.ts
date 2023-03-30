@@ -25,7 +25,7 @@ import { DateValidators } from '@shared/validators';
 export class EventFormComponent implements OnInit, OnExitInterface {
   id: string = '';
   form: UntypedFormGroup = this.newForm;
-  panelHeader: string = 'Crear fase';
+  panelHeader: string = 'Añadir Pregunta';
   isChangePassword: UntypedFormControl = new UntypedFormControl(false);
   isLoadingSkeleton: boolean = false;
   loaded$ = this.coreService.loaded$;
@@ -41,12 +41,12 @@ export class EventFormComponent implements OnInit, OnExitInterface {
     private eventsHttpService: EventsHttpService,
   ) {
     this.breadcrumbService.setItems([
-      {label: 'Convocatorias', routerLink: ['/rrhh/events']},
-      {label: 'Nueva fase'},
+      {label: 'Preguntas', routerLink: ['/rrhh/questions']},
+      {label: 'Añadir Pregunta'},
     ]);
     if (activatedRoute.snapshot.params['id'] !== 'new') {
       this.id = activatedRoute.snapshot.params['id'];
-      this.panelHeader = 'Guardar Modalidad';
+      this.panelHeader = 'Actualizar Pregunta';
     }
   }
 
@@ -58,16 +58,14 @@ export class EventFormComponent implements OnInit, OnExitInterface {
   }
 
   ngOnInit(): void {
-    this.getEvent();
+    //this.getEvent();
   }
 
 
   get newForm(): UntypedFormGroup {
     return this.formBuilder.group({
-      endDate: [null, [Validators.required,DateValidators.min(new Date())]],
-      startDate: [null, [DateValidators.min(new Date())]],
-      isEnable: [false, [Validators.required]],
-      sort: [null, [Validators.required]],
+      question: [null, [Validators.required]],
+      active: [null, [Validators.required]],
     });
   }
 
@@ -85,7 +83,7 @@ export class EventFormComponent implements OnInit, OnExitInterface {
   }
 
   back(): void {
-    this.router.navigate(['/rrhh/events']);
+    this.router.navigate(['/rrhh/questions']);
   }
 
   create(event: CreateEventDto): void {
@@ -113,20 +111,11 @@ export class EventFormComponent implements OnInit, OnExitInterface {
 
   // Getters
 
-  get startDateField() {
-    return this.form.controls['startDate'];
+  get questionField() {
+    return this.form.controls['question'];
   }
 
-  get endDateField() {
-    return this.form.controls['endDate'];
+  get activeField() {
+    return this.form.controls['active'];
   }
-
-  get isEnableField() {
-    return this.form.controls['isEnable'];
-  }
-
-  get sortField() {
-    return this.form.controls['sort'];
-  }
-
 }
