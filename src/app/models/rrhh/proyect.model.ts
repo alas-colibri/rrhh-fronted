@@ -3,9 +3,8 @@ export interface ProyectModel {
   endDate: Date;
   isEnable: boolean;
   startDate: Date;
-  cedula: number;
-  nameTrabajador: string;
-  proyectAsignado: string ;
+  nameProyect: string;
+  descripcionProyect: string ;
   tipodeProyect: string ;
 }
 
