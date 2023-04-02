@@ -1,9 +1,10 @@
 <div class="loginImage">
 <div class="container" id="container">
-	<div [formGroup]="formLogin" (ngSubmit)="onSubmit()" class="form-container sign-in-container">
+	<div [formGroup]="formLogin" (ngSubmit)="onSubmit()" class="p-fluid  form-container sign-in-container">
 		<form action="#">
-			<h1>SISTEMA</h1>
+			<img src="../../../../../assets/images/alas.png" class="shadow" alt="Image" width="140">
 			<!-- <input type="email" placeholder="Usuario" /> -->
+      <p-divider></p-divider>
       <div class="field text-center">
         <label for="username" appLabel label="Usuario:"
                [required]="usernameField">
@@ -32,9 +33,9 @@
 				ingresar
 				 <button routerLink="/dashboard/solicitud" class = "btn btn-primary">Ingresar</button>
 			</a> -->
-      <p-divider></p-divider>
         <div class="field text-center">
           <button *ngIf="!isPasswordReset" pButton label="Iniciar sesión"
+          class="p-button-help p-button-help"
                   icon="pi pi-sign-in"></button>
         </div>
 		</form>
@@ -43,7 +44,7 @@
 		<div class="overlay">
 			<div class="overlay-panel overlay-right">
 				<h1>Bienvenidos y bienvenidas a la fundación Alas de Colibrí</h1>
-        <img src="../../../../../assets/images/fundation.png" class="shadow" alt="Image" width="235">
+        <!-- <img src="../../../../../assets/images/fundation.png" class="shadow" alt="Image" width="235"> -->
 				<!-- <p>Este sistema ayuda a la comunidad de yavirac seguir el proceso de vinculación</p> -->
 			</div>
 		</div>
