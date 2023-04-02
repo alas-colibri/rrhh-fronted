@@ -2,8 +2,11 @@ export interface ProyectModel {
   id: string;
   endDate: Date;
   isEnable: boolean;
-  sort: number;
   startDate: Date;
+  cedula: number;
+  nameTrabajador: string;
+  proyectAsignado: string ;
+  tipodeProyect: string ;
 }
 
 export interface CreateProyectDto extends Omit<ProyectModel, 'id'> {
