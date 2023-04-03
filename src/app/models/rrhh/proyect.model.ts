@@ -4,8 +4,8 @@ export interface ProyectModel {
   isEnable: boolean;
   startDate: Date;
   nameProyect: string;
-  descripcionProyect: string ;
-  tipodeProyect: string ;
+  descripcionProyect: string;
+  tipodeProyect: string;
 }
 
 export interface CreateProyectDto extends Omit<ProyectModel, 'id'> {

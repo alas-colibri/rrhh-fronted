@@ -58,7 +58,7 @@ export class ProyectFormComponent implements OnInit, OnExitInterface {
   }
 
   ngOnInit(): void {
-   // this.getProyect();
+    this.getProyect();
   }
 
 
@@ -67,7 +67,9 @@ export class ProyectFormComponent implements OnInit, OnExitInterface {
       endDate: [null, [Validators.required,DateValidators.min(new Date())]],
       startDate: [null, [DateValidators.min(new Date())]],
       isEnable: [false, [Validators.required]],
-      sort: [null, [Validators.required]],
+      nameProyect: [null, [Validators.required]],
+      descripcionProyect: [''],
+      tipodeProyect: [null, [Validators.required]],
     });
   }
 
@@ -125,8 +127,16 @@ export class ProyectFormComponent implements OnInit, OnExitInterface {
     return this.form.controls['isEnable'];
   }
 
-  get sortField() {
-    return this.form.controls['sort'];
+  get nameProyectField() {
+    return this.form.controls['nameProyect'];
+  }
+
+  get descripcionProyectField() {
+    return this.form.controls['descripcionProyect'];
+  }
+
+  get tipodeProyectField() {
+    return this.form.controls['tipodeProyect'];
   }
 
 }
