@@ -19,25 +19,24 @@ const routes: Routes = [
       import('./personal-information/personal-information.module').then((m) => m.PersonalInformationModule),
 
   },
-
-
-
   {
     path: 'proyect',
     loadChildren: () =>
       import('./proyect/proyect.module').then((m) => m.ProyectModule),
 
   },
-
   {
     path: 'holiday',
     loadChildren: () =>
       import('./holiday/holiday.module').then((m) => m.HolidayModule),
 
   },
+  {
+    path: 'evaluation',
+    loadChildren: () =>
+      import('./evaluation/evaluation.module').then((m) => m.EvaluationModule),
 
-
-
+  },
 ];
 
 @NgModule({
