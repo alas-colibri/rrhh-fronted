@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AbstractControl, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CatalogueModel, CatalogueTypeModel } from '@models/resources';
-import { PersonModel, UpdatePersonDto } from '@models/rrhh/person.model';
+import { CreatePersonDto, PersonModel, UpdatePersonDto } from '@models/rrhh/person.model';
 import { AuthHttpService, AuthService } from '@services/auth';
 import { BreadcrumbService, CatalogueTypesHttpService, CoreService, MessageService } from '@services/resources';
 import { CataloguesHttpService } from '@services/resources/catalogues-http.service';
@@ -29,9 +29,10 @@ export class PersonalComponent implements OnInit {
   selectedTypeContractField: any;
   isLoadingSkeleton: boolean = false;
   form: UntypedFormGroup = this.newForm;
-  genders: CatalogueTypeModel[] = [];
+  typeContract: any;
+  genders: any;
   identificationTypes: CatalogueTypeModel[] = [];
-  maritalStatus: CatalogueTypeModel[] = [];
+  maritalStatus: any;
   sexes: CatalogueTypeModel[] = [];
 
   constructor(
@@ -50,15 +51,31 @@ export class PersonalComponent implements OnInit {
     this.breadcrumbService.setItems([
       { label: 'Ficha Personal' },
     ]);
-    this.loadGenders();
-    this.loadMaritalStatus();
-    this.loadTypeContract();
+    //this.loadGenders();
+    //this.loadTypeContract();
+
+    this.typeContract = [
+      { name: 'Temporal', code: 'Tem' },
+      { name: 'Indefinido', code: 'Ind' }
+    ];
+
+    this.maritalStatus = [
+      { name: 'Soltero/a', code: 'Solt' },
+      { name: 'Casado/a', code: 'Cas' },
+      { name: 'Divorciado/a', code: 'Div' },
+      { name: 'Union Libre', code: 'ULR' }
+    ];
+
     this.cities = [
-      { name: 'New York', code: 'NY' },
-      { name: 'Rome', code: 'RM' },
-      { name: 'London', code: 'LDN' },
-      { name: 'Istanbul', code: 'IST' },
-      { name: 'Paris', code: 'PRS' }
+      { name: 'Quito', code: 'UIO' },
+      { name: 'Ibarra', code: 'IBR' },
+      { name: 'Guayaquil', code: 'GUA' }
+    ];
+
+    this.genders = [
+      { name: 'Masculino', code: 'M' },
+      { name: 'Femenino', code: 'F' },
+      { name: 'Prefiero no decirlo', code: 'PNC' }
     ];
     if (activatedRoute.snapshot.params['id'] !== 'new') {
       this.id = activatedRoute.snapshot.params['id'];
@@ -89,23 +106,15 @@ export class PersonalComponent implements OnInit {
 
     console.log(this.form.value)
     if (this.form.valid) {
-      if (this.id != '') {
-        this.update(this.form.value)
-      } else {
+      if (this.id = 'new') {
         this.create(this.form.value);
+      } else {
+       this.update(this.form.value);
       }
     } else {
       this.form.markAllAsTouched();
       this.messageService.errorsFields.then();
     }
-  }
-
-
-  create(person: PersonModel): void {
-    this.personalInformationService.create(person).subscribe(person => {
-      this.form.reset(person);
-      this.back();
-    });
   }
 
 
@@ -121,17 +130,17 @@ export class PersonalComponent implements OnInit {
     this.router.navigate(['/uic/student-informations/complexivo', 'new']);
   }
 
-  loadGenders(): void {
-    this.catalogueService.catalogueType(CatalogueTypeEnum.GENERO).subscribe((genders) => this.genders = genders);
-  }
+ // loadGenders(): void {
+   // this.catalogueService.catalogueType(CatalogueTypeEnum.GENDER).subscribe((genders) => this.genders = genders);
+ // }
 
-  loadMaritalStatus(): void {
-    this.catalogueService.catalogueType(CatalogueTypeEnum.MARITAL_STATUS).subscribe((maritalStatus) => this.maritalStatus = maritalStatus);
-  }
+ // loadMaritalStatus(): void {
+ //   this.catalogueService.catalogueType(CatalogueTypeEnum.MARITAL_STATUS).subscribe((maritalStatus) => this.maritalStatus = maritalStatus);
+ // }
 
-  loadTypeContract(): void {
-    this.catalogueService.catalogueType(CatalogueTypeEnum.SEX).subscribe((sexes) => this.sexes = sexes);
-  }
+ // loadTypeContract(): void {
+ //   this.catalogueService.catalogueType(CatalogueTypeEnum.SEX).subscribe((sexes) => this.sexes = sexes);
+ // }
 
   redirectEditForm(id: string) {
     this.router.navigate(['/uic/student-informations', id]);
@@ -189,6 +198,14 @@ export class PersonalComponent implements OnInit {
       this.form.patchValue(person);
     });
   }
+
+  create(person: CreatePersonDto): void {
+    this.personService.create(person).subscribe(person => {
+      this.form.reset(person);
+      this.back();
+    });
+  }
+
   update(person: UpdatePersonDto): void {
     this.personService.update(this.id, person).subscribe((person) => {
       this.form.reset(person);

@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { environment } from '@env/environment';
 import {map} from 'rxjs/operators';
 import { ServerResponse } from '@models/http-response';
-import { PersonModel, UpdatePersonDto } from '@models/rrhh/person.model';
+import { CreatePersonDto, PersonModel, UpdatePersonDto } from '@models/rrhh/person.model';
 import { CoreService, MessageService } from '@services/resources';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { PaginatorModel } from '@models/resources';
@@ -25,13 +25,26 @@ constructor(
 
  }
 
- create(payload: PersonModel): Observable<PersonModel> {
+ create(payload: CreatePersonDto): Observable<PersonModel> {
   const url = `${this.API_URL}`;
   console.log(url)
 
   this.coreService.showLoad();
   return this.httpClient.post<ServerResponse>(url, payload).pipe(
     map((response) => {
+      this.coreService.hideLoad();
+      this.messageService.success(response).then();
+      return response.data;
+    })
+  );
+}
+
+update(id: string, payload: UpdatePersonDto): Observable<PersonModel> {
+  const url = `${this.API_URL}/${id}`;
+
+  this.coreService.showLoad();
+  return this.httpClient.put<ServerResponse>(url, payload).pipe(
+    map(response => {
       this.coreService.hideLoad();
       this.messageService.success(response).then();
       return response.data;
@@ -85,19 +98,6 @@ removeAll(person: PersonModel[]): Observable<PersonModel[]> {
   );
 }
 
-
-update(id: string, payload: UpdatePersonDto): Observable<PersonModel> {
-  const url = `${this.API_URL}/${id}`;
-
-  this.coreService.showLoad();
-  return this.httpClient.put<ServerResponse>(url, payload).pipe(
-    map(response => {
-      this.coreService.hideLoad();
-      this.messageService.success(response).then();
-      return response.data;
-    })
-  );
-}
 
 findOne(id: string): Observable<PersonModel> {
   const url = `${this.API_URL}/${id}`;

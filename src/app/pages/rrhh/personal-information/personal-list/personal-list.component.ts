@@ -36,7 +36,7 @@ export class PersonalListComponent implements OnInit {
   ) {
 
     this.breadcrumbService.setItems([
-      {label: 'Home Información Personal', routerLink: ['/rrhh/personal-info']},
+      {label: 'Información Personal', routerLink: ['/rrhh/personal-info']},
       {label: 'Datos Personales'}
     ]);
     this.columns = this.getColumns();
