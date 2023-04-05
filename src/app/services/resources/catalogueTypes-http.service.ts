@@ -43,7 +43,7 @@ export class CatalogueTypesHttpService {
     );
   }
 
-  catalogue(type: CatalogueTypeEnum): Observable<CatalogueModel[]> {
+  catalogue(type: CatalogueTypeEnum): Observable<CatalogueTypeModel[]> {
     const url = `${this.API_URL}/catalogue`;
     const params = new HttpParams().append('type', type);
     this.coreService.showLoad();

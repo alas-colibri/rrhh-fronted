@@ -79,8 +79,8 @@
             ></label>
 
             <p-dropdown
-              [options]="cities"
-              [(ngModel)]="selectedCity"
+              [options]="maritalStatus"
+              [(ngModel)]="selectedmaritalStatus"
               optionLabel="name"
               optionValue="code"
               formControlName="civilStatus"
@@ -104,8 +104,8 @@
             ></label>
 
             <p-dropdown
-              [options]="cities"
-              [(ngModel)]="selectedCity"
+              [options]="genders"
+              [(ngModel)]="selectedGenders"
               optionLabel="name"
               optionValue="code"
               formControlName="gender"
@@ -219,7 +219,7 @@
 
             <p-dropdown
               [options]="cities"
-              [(ngModel)]="selectedCity"
+              [(ngModel)]="selectedTypeContractField"
               optionLabel="name"
               optionValue="code"
               formControlName="typeContract"
@@ -233,30 +233,6 @@
             >
             </small>
           </div>
-        </div>
-        <div class="field xl:col-8 lg:col-8 md:col-8 sm:col-12">
-          <label
-            appLabel
-            for="typeContract"
-            label="Proyectos:"
-            [required]="projectsField"
-          ></label>
-
-          <p-dropdown
-            [options]="cities"
-            [(ngModel)]="selectedCity"
-            optionLabel="name"
-            optionValue="code"
-            formControlName="projects"
-          ></p-dropdown>
-
-          <small
-            appErrorMessage
-            [errors]="projectsField.errors"
-            [touched]="projectsField.touched"
-            [dirty]="projectsField.dirty"
-          >
-          </small>
         </div>
 
         <div class="formgrid grid">

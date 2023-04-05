@@ -46,6 +46,7 @@ export class ProyectHttpService {
       .append('search', search);
 
     this.coreService.showLoad();
+    console.log(url);
     return this.httpClient.get<ServerResponse>(url, {headers, params}).pipe(
       map((response) => {
         this.coreService.hideLoad();
