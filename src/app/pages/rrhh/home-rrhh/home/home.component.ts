@@ -24,7 +24,7 @@ export class HomeComponent implements OnInit {
     private router: Router,
   ) {
     this.breadcrumbService.setItems([
-      { label: 'Home Estudiante' },
+      { label: 'Menú Colibrí' },
     ]);
   }
 

@@ -79,8 +79,6 @@ export class PersonalComponent implements OnInit {
       city: [null, [Validators.required]],
       profession: [null, [Validators.required]],
       typeContract: [null, [Validators.required]],
-
-
     });
   }
 
