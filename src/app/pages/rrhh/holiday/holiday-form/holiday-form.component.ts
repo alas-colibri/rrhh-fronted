@@ -5,6 +5,8 @@ import { CreateHolidayDto, UpdateHolidayDto } from '@models/rrhh';
 import { ProjectAssignmentModel } from '@models/rrhh/projectAssignment';
 import { BreadcrumbService, CoreService, MessageService } from '@services/resources';
 import { HolidayHttpService } from '@services/rrhh';
+import { ProjectAssignmentHttpService } from '@services/rrhh/projectAssignment-http.service';
+import { CatalogueStateEnum, CatalogueTypeEnum } from '@shared/enums';
 import { DateValidators } from '@shared/validators';
 
 @Component({
@@ -32,6 +34,7 @@ export class HolidayFormComponent implements OnInit {
     public messageService: MessageService,
     private router: Router,
     private holidayHttpService: HolidayHttpService,
+    private proyectAsHttpService: ProjectAssignmentHttpService,
   ) {
     this.breadcrumbService.setItems([
       {label: 'Convocatorias', routerLink: ['/rrhh/holiday']},
@@ -51,7 +54,8 @@ export class HolidayFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
-   // this.getHoliday();
+    this.getHolidayname();
+    this.getHoliday();
   }
 
 
@@ -98,7 +102,11 @@ export class HolidayFormComponent implements OnInit {
   }
 
   getHolidayname(): void{
-    
+    this.isLoadingSkeleton = true;
+    this.proyectAsHttpService.projectAssignment(CatalogueTypeEnum.PROYECT_ASSIGNMENT).subscribe((names) => {
+        this.isLoadingSkeleton=false;
+        this.names = names;
+    })
   }
 
   update(holiday:UpdateHolidayDto): void {
@@ -118,12 +126,9 @@ export class HolidayFormComponent implements OnInit {
     return this.form.controls['endDate'];
   }
 
-  get isEnableField() {
-    return this.form.controls['isEnable'];
+  get nameField() {
+    return this.form.controls['name'];
   }
 
-  get sortField() {
-    return this.form.controls['sort'];
-  }
 
 }
