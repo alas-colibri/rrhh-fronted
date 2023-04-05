@@ -33,12 +33,14 @@ import {BadgeModule} from 'primeng/badge';
 import { FileUploadModule } from 'primeng/fileupload';
 import {ImageModule} from 'primeng/image';
 import { PersonalComponent } from './personal/personal.component';
+import { PersonalListComponent } from './personal-list/personal-list.component';
 
 
 @NgModule({
   declarations: [
 PersonalInformationComponent,
-PersonalComponent
+PersonalComponent,
+PersonalListComponent
   ],
   imports: [
     PersonalInformationRoutingModule,
