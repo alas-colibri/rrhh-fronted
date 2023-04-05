@@ -40,7 +40,8 @@ export enum CatalogueTypeEnum {
   YEAR = 'year',
   INSCRIPTION = 'inscription',
   APPROVAL_REQUEST_NAMES = "APPROVAL_REQUEST_NAMES",
-  GENERO = "GENERO"
+  GENERO = "GENERO",
+  PROYECT_ASSIGNMENT = "PROYECT_ASSIGNMENT",
 
 }
 
