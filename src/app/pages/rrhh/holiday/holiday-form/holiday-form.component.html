@@ -12,14 +12,26 @@
 
     <div class="formgrid grid">
       <div class="field xl:col-6 lg:col-6 md:col-6 sm:col-12">
-        <label htmlFor="username">Nombre del Trabajador:</label>
-        <input pInputText id="username" aria-describedby="username-help"/>
-        <small id="username-help">Aquí aparecera el nombre del trabajador</small>
+        <label appLabel for="name" label="Nombre del Trabajador:" [required]="nameField"></label>
+        <p-dropdown id="name" formControlName="name" dataKey="id" [options]="names" optionLabel="availableProjects" [filter]="true"
+          filterBy="availableProjects" placeholder="Seleccionar carrera">
+          <ng-template pTemplate="selectedItem">
+            <div *ngIf="nameField.value">
+              <div>{{nameField.value.availableProjects}}</div>
+            </div>
+          </ng-template>
+          <ng-template pTemplate="item" let-item>
+            {{item.availableProjects}}
+          </ng-template>
+        </p-dropdown>
+        <small appErrorMessage [errors]="nameField.errors" [touched]="nameField.touched" [dirty]="nameField.dirty">
+        </small>
       </div>
+
 
       <div class="field xl:col-6 lg:col-6 md:col-6 sm:col-12">
         <label htmlFor="username">Cedula del Trabajador:</label>
-        <input pInputText id="username" aria-describedby="username-help"/>
+        <input pInputText id="username" aria-describedby="username-help" />
         <small id="username-help">Ingresé el numero de cedula del trabajador</small>
       </div>
     </div>
@@ -27,17 +39,17 @@
     <div class="formgrid grid">
       <div class="field xl:col-6 lg:col-6 md:col-6 sm:col-12">
         <label htmlFor="username">Proyecto Asignado:</label>
-        <input pInputText id="username" aria-describedby="username-help"/>
+        <input pInputText id="username" aria-describedby="username-help" />
         <small id="username-help">Aquí aparecerá el proyecto que fue asignado el trabajador</small>
       </div>
 
       <div class="field xl:col-6 lg:col-6 md:col-6 sm:col-12">
         <label appLabel for="endDate" label="Tipo de Vacaciones:" [required]="endDateField"></label>
         <span class="p-float-label">
-          <p-dropdown  placeholder="Seleccione Vacación" optionLabel="name" inputId="float-label"></p-dropdown>
+          <p-dropdown placeholder="Seleccione Vacación" optionLabel="name" inputId="float-label"></p-dropdown>
           <label for="float-label">Seleccione Vacación</label>
           <!--(para conectar a la bd)[options]="cities" [(ngModel)]="selectedCity"-->
-      </span>
+        </span>
       </div>
     </div>
 

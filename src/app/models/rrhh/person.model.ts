@@ -12,6 +12,9 @@ export interface PersonModel{
   typeContract?:string;
   isEnable: boolean;
 }
+export interface CreatePersonDto extends Omit<PersonModel, 'id'> {
+}
+
 export interface SelectPersonDto extends Partial<PersonModel> {
 }
 
