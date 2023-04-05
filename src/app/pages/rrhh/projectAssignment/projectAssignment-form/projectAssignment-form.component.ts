@@ -120,6 +120,10 @@ export class ProjectAssignmentFormComponent implements OnInit, OnExitInterface {
 
   // Getters
 
+  get namePersonField() {
+    return this.form.controls['namePerson'];
+  }
+
   get departureDateProjectField() {
     return this.form.controls['departureDateProject'];
   }

@@ -32,7 +32,7 @@ const routes: Routes = [
       import('./holiday/holiday.module').then((m) => m.HolidayModule),
   },
   {
-    path: 'ProjectAssignment',
+    path: 'projectAssignment',
     loadChildren: () =>
       import('./projectAssignment/projectAssignment.module').then((m) => m.ProjectAssignmentModule),
   },
