@@ -2,6 +2,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CreateHolidayDto, UpdateHolidayDto } from '@models/rrhh';
+import { ProjectAssignmentModel } from '@models/rrhh/projectAssignment';
 import { BreadcrumbService, CoreService, MessageService } from '@services/resources';
 import { HolidayHttpService } from '@services/rrhh';
 import { DateValidators } from '@shared/validators';
@@ -21,6 +22,7 @@ export class HolidayFormComponent implements OnInit {
   isLoadingSkeleton: boolean = false;
   loaded$ = this.coreService.loaded$;
   checked: boolean = true;
+  names: ProjectAssignmentModel[]=[];
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -57,8 +59,8 @@ export class HolidayFormComponent implements OnInit {
     return this.formBuilder.group({
       endDate: [null, [Validators.required,DateValidators.min(new Date())]],
       startDate: [null, [DateValidators.min(new Date())]],
-      isEnable: [false, [Validators.required]],
-      sort: [null, [Validators.required]],
+      name: [null, [Validators.required]],
+
     });
   }
 
@@ -93,6 +95,10 @@ export class HolidayFormComponent implements OnInit {
       this.isLoadingSkeleton = false;
       this.form.patchValue(holiday);
     });
+  }
+
+  getHolidayname(): void{
+    
   }
 
   update(holiday:UpdateHolidayDto): void {

@@ -1,6 +1,8 @@
+import { ProjectAssignmentModel } from "./projectAssignment";
+
 export interface HolidayModel {
   id: string;
-  name: string;
+  names: ProjectAssignmentModel[];
   cedula: string;
   assigProject: string;
   typeHoliday: string;
