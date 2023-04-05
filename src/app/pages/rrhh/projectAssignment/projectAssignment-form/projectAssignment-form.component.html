@@ -15,44 +15,91 @@
   <p-divider></p-divider>
 
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
     <div class="formgrid grid">
-      
       <div class="field xl:col-6 lg:col-6 md:col-6 sm:col-12">
-        <label appLabel for="name" label="Nombre del Trabajador:" [required]="namePersonField"></label>
-        <p-dropdown id="name" formControlName="name" dataKey="id" [options]="" optionLabel="availableProjects" [filter]="true"
-          filterBy="availableProjects" placeholder="Seleccionar carrera">
-          <ng-template pTemplate="selectedItem">
-            <div *ngIf="namePersonField.value">
-              <div>{{namePersonField.value.availableProjects}}</div>
-            </div>
-          </ng-template>
-          <ng-template pTemplate="item" let-item>
-            {{item.availableProjects}}
-          </ng-template>
-        </p-dropdown>
-        <small appErrorMessage [errors]="namePersonField.errors" [touched]="namePersonField.touched" [dirty]="namePersonField.dirty">
-        </small>
-      </div>
-
-      <div class="field xl:col-6 lg:col-6 md:col-6 sm:col-12">
-        <label appLabel for="name" label="Proyecto Disponible:" [required]="availableProjectsField"></label>
-        <p-dropdown id="name" formControlName="name" dataKey="id" [options]="" optionLabel="availableProjects" [filter]="true"
-          filterBy="availableProjects" placeholder="Seleccionar carrera">
-          <ng-template pTemplate="selectedItem">
-            <div *ngIf="availableProjectsField.value">
-              <div>{{availableProjectsField.value.availableProjects}}</div>
-            </div>
-          </ng-template>
-          <ng-template pTemplate="item" let-item>
-            {{item.availableProjects}}
-          </ng-template>
-        </p-dropdown>
-        <small appErrorMessage [errors]="availableProjectsField.errors" [touched]="availableProjectsField.touched" [dirty]="availableProjectsField.dirty">
-        </small>
+        <label htmlFor="username">Nombre del trabajador</label>
+        <span class="p-float-label">
+          <p-dropdown placeholder="Seleccione Nombre" optionLabel="name" inputId="float-label"></p-dropdown>
+          <label for="float-label">Seleccione Nombre</label>
+        </span>
       </div>
 
 
+      <div class="field xl:col-6 lg:col-6 md:col-6 sm:col-12">
+        <label appLabel for="endDate" label="Proyecto asignado:" [required]="availableProjectsField"></label>
+        <span class="p-float-label">
+          <p-dropdown placeholder="Seleccione Proyecto" optionLabel="name" inputId="float-label"></p-dropdown>
+          <label for="float-label">Seleccione Proyecto</label>
+
+        </span>
+      </div>
     </div>
+    <div class="formgrid grid">
+      <div class="field xl:col-6 lg:col-6 md:col-6 sm:col-12">
+        <label htmlFor="username">Cargo de Proyecto</label>
+        <span class="p-float-label">
+          <p-dropdown placeholder="Seleccione Cargo" optionLabel="name" inputId="float-label"></p-dropdown>
+          <label for="float-label">Seleccione Cargo</label>
+        </span>
+      </div>
+
+      <div class="field xl:col-6 lg:col-6 md:col-6 sm:col-12">
+        <label appLabel for="dateEntryFoundation" label="Fecha de ingreso a la fundacion:" [required]="dateEntryFoundationField"></label>
+        <p-calendar formControlName="dateEntryFoundation" id="dateEntryFoundation" dateFormat="dd/mm/yy"></p-calendar>
+        <small appErrorMessage [errors]="dateEntryFoundationField.errors" [touched]="dateEntryFoundationField.touched"
+          [dirty]="dateEntryFoundationField.dirty">
+        </small>
+      </div>
+    </div>
+
+    <div class="formgrid grid">
+      <div class="field xl:col-6 lg:col-6 md:col-6 sm:col-12">
+        <label appLabel for="dateEntryProject" label="Fecha de ingreso al Proyecto:" [required]="dateEntryProjectField"></label>
+        <p-calendar formControlName="dateEntryProject" id="dateEntryProject" dateFormat="dd/mm/yy"></p-calendar>
+        <small appErrorMessage [errors]="dateEntryProjectField.errors" [touched]="dateEntryProjectField.touched"
+          [dirty]="dateEntryProjectField.dirty">
+        </small>
+      </div>
+
+      <div class="field xl:col-6 lg:col-6 md:col-6 sm:col-12">
+        <label appLabel for="departureDateProject" label="Fecha de salida la Proyecto:" [required]="departureDateProjectField"></label>
+        <p-calendar formControlName="departureDateProject" id="departureDateProject" dateFormat="dd/mm/yy"></p-calendar>
+        <small appErrorMessage [errors]="departureDateProjectField.errors" [touched]="departureDateProjectField.touched"
+          [dirty]="departureDateProjectField.dirty">
+        </small>
+      </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
   </form>
