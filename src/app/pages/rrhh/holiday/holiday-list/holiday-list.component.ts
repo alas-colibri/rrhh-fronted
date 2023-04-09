@@ -37,7 +37,7 @@ export class HolidayListComponent implements OnInit {
     private route: ActivatedRoute,
   ) {
     this.breadcrumbService.setItems([
-      {label: 'Home estudiante', routerLink: ['/rrhh/holiday']},
+      {label: 'Home', routerLink: ['/rrhh/holiday']},
       {label: 'Asignacion de vacaciones'}
     ]);
     this.columns = this.getColumns();
