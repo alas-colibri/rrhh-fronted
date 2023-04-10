@@ -21,16 +21,13 @@ import { ProjectAssignmentHttpService } from '@services/rrhh/projectAssignment-h
 export class ProjectAssignmentListComponent implements OnInit {
   columns: ColumnModel[];
   loaded$ = this.coreService.loaded$;
-  pagination$ = this.projectAssignmentHttpService.pagination$;
+  pagination$ = this.eventsHttpService.pagination$;
   paginator: PaginatorModel = this.coreService.paginator;
   search: UntypedFormControl = new UntypedFormControl('');
-  selectedprojectAssignments: ProjectAssignmentModel[] = [];
-  selectedprojectAssignment: SelectProjectAssignmentDto = {};
-  projectAssignment: ProjectAssignmentModel[] = [];
+  selectedEvents: EventModel[] = [];
+  selectedEvent: SelectEventDto = {};
+  events: EventModel[] = [];
   actionButtons: MenuItem[] = [];
-  /*projectAssignmentHttpService: any;*/
-  selectedProjectAssignment: any;
-
 
   constructor(
     public authService: AuthService,
@@ -38,12 +35,12 @@ export class ProjectAssignmentListComponent implements OnInit {
     private breadcrumbService: BreadcrumbService,
     public messageService: MessageService,
     private router: Router,
-    private projectAssignmentHttpService: ProjectAssignmentHttpService,
+    private eventsHttpService: EventsHttpService,
     private route: ActivatedRoute,
   ) {
     this.breadcrumbService.setItems([
-      {label: 'Home estudiante', routerLink: ['/rrhh/projectAssignment']},
-      {label: 'Asignacion de proyecto'}
+      {label: 'Lista', routerLink: ['/rrhh/questions']},
+      {label: 'Listado de preguntas'}
     ]);
     this.columns = this.getColumns();
     this.actionButtons = this.getActionButtons();
@@ -54,24 +51,21 @@ export class ProjectAssignmentListComponent implements OnInit {
   ngOnInit(): void {
     this.findAll();
   }
-/*
-  checkState(projectAssignment: ProjectAssignmentModel): string {
-    if (projectAssignment.isEnable) return 'success';
+
+  checkState(event: EventModel): string {
+    if (event.active) return 'success';
 
   return 'danger';
-  }*/
+  }
 
   findAll(page: number = 0) {
-    this.projectAssignmentHttpService.findAll(page, this.search.value).subscribe((projectAssignment: ProjectAssignmentModel[]) => this.projectAssignment = projectAssignment);
+    this.eventsHttpService.findAll(page, this.search.value).subscribe((events) => this.events = events);
   }
 
   getColumns(): ColumnModel[] {
     return [
-      {field: 'availableProjects', header: 'Proyecto Disponibles'},
-      {field: 'projectCharge', header: 'Cargo de Proyecto'},
-      {field: 'dateEntryFoundation', header: 'Fecha de ingreso a la fundacion'},
-      {field: 'dateEntryProject', header: 'Fecha de ingreso al proyecto'},
-      {field: 'departureDateProject', header: 'Fecha de salida al proyecto'},
+      {field: 'question', header: 'Preguntas'},
+      {field: 'active', header: 'Estado'},
     ]
   }
 
@@ -81,29 +75,28 @@ export class ProjectAssignmentListComponent implements OnInit {
         label: 'Update',
         icon: 'pi pi-pencil',
         command: () => {
-          if (this.selectedProjectAssignment.id)
-            this.redirectEditForm(this.selectedProjectAssignment.id);
+          if (this.selectedEvent.id)
+            this.redirectEditForm(this.selectedEvent.id);
         },
       },
       {
         label: 'Delete',
         icon: 'pi pi-trash',
         command: () => {
-          if (this.selectedProjectAssignment.id)
-            this.remove(this.selectedProjectAssignment.id);
+          if (this.selectedEvent.id)
+            this.remove(this.selectedEvent.id);
         },
       },
     ];
   }
 
-  paginate(projectAssignment: any) {
-    this.findAll(projectAssignment.page);
+  paginate(event: any) {
+    this.findAll(event.page);
   }
 
   redirectCreateForm() {
     this.router.navigate(['/rrhh/projectAssignment', 'new']);
   }
-
   redirectEditForm(id: string) {
     this.router.navigate(['/rrhh/projectAssignment', id]);
   }
@@ -112,8 +105,8 @@ export class ProjectAssignmentListComponent implements OnInit {
     this.messageService.questionDelete()
       .then((result) => {
         if (result.isConfirmed) {
-          this.projectAssignmentHttpService.remove(id).subscribe((projectAssignment) => {
-            this.projectAssignment = this.projectAssignment.filter(item => item.id !== projectAssignment.id);
+          this.eventsHttpService.remove(id).subscribe((event) => {
+            this.events = this.events.filter(item => item.id !== event.id);
             this.paginator.totalItems--;
           });
         }
@@ -123,18 +116,18 @@ export class ProjectAssignmentListComponent implements OnInit {
   removeAll() {
     this.messageService.questionDelete().then((result) => {
       if (result.isConfirmed) {
-        this.projectAssignmentHttpService.removeAll(this.selectedProjectAssignment).subscribe((projectAssignment) => {
-          this.selectedProjectAssignment.forEach((projectAssignmentDeleted: { id: string; }) => {
-            this.projectAssignment = this.projectAssignment.filter(event => event.id !== projectAssignmentDeleted.id);
+        this.eventsHttpService.removeAll(this.selectedEvents).subscribe((events) => {
+          this.selectedEvents.forEach(eventDeleted => {
+            this.events = this.events.filter(event => event.id !== eventDeleted.id);
             this.paginator.totalItems--;
           });
-          this.selectedProjectAssignment = [];
+          this.selectedEvents = [];
         });
       }
     });
   }
 
-  selectProjectAssignment(projectAssignment: ProjectAssignmentModel) {
-    this.selectedProjectAssignment = projectAssignment;
+  selectEvent(event: EventModel) {
+    this.selectedEvent = event;
   }
 }
