@@ -1,13 +1,15 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
-import {UntypedFormControl} from "@angular/forms";
+import {UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute,Router} from '@angular/router';
 import {debounceTime} from "rxjs";
 import {ColumnModel, PaginatorModel} from '@models/resources';
-import {EventsHttpService} from '@services/rrhh';
+import {EvaluationsHttpService, EventsHttpService} from '@services/rrhh';
 import {BreadcrumbService, CoreService, MessageService} from '@services/resources';
 import {MenuItem} from "primeng/api";
-import { EventModel, SelectEventDto } from '@models/rrhh';
+import { CreateEventDto, EventModel, SelectEventDto } from '@models/rrhh';
 import { AuthService } from '@services/auth';
+import { CreateEvaluationDto, UpdateEvaluationDto } from '@models/rrhh/evaluation.model';
+import { CalificacionModel } from '@models/rrhh/calificacion.model';
 
 @Component({
   selector: 'app-evaluation-list',
@@ -15,7 +17,9 @@ import { AuthService } from '@services/auth';
   styleUrls: ['./evaluation-list.component.scss'],
 })
 export class EvaluationListComponent implements OnInit {
+  id: string = '';
   columns: ColumnModel[];
+  form: UntypedFormGroup = this.newForm;
   loaded$ = this.coreService.loaded$;
   pagination$ = this.eventsHttpService.pagination$;
   paginator: PaginatorModel = this.coreService.paginator;
@@ -25,14 +29,18 @@ export class EvaluationListComponent implements OnInit {
   events: EventModel[] = [];
   actionButtons: MenuItem[] = [];
   questions: EventModel[] = [];
+  calificacion: CalificacionModel[] = [];
+  selectedCali: any;
 
   constructor(
     public authService: AuthService,
     private coreService: CoreService,
     private breadcrumbService: BreadcrumbService,
+    private formBuilder: UntypedFormBuilder,
     public messageService: MessageService,
     private router: Router,
     private eventsHttpService: EventsHttpService,
+    private evaluationsHttpService: EvaluationsHttpService,
     private route: ActivatedRoute,
   ) {
     this.breadcrumbService.setItems([
@@ -42,6 +50,12 @@ export class EvaluationListComponent implements OnInit {
     this.actionButtons = this.getActionButtons();
     this.pagination$.subscribe((pagination) => this.paginator = pagination);
     this.search.valueChanges.pipe(debounceTime(500)).subscribe((_) => this.findAll());
+    this.calificacion = [
+      { name: '20-40', code: 'Tem' },
+      { name: '40-60', code: 'Ind' },
+      { name: '60-80', code: 'Irnd' },
+      { name: '80-100', code: 'Inyd' }
+    ];
   }
 
   ngOnInit(): void {
@@ -63,6 +77,12 @@ export class EvaluationListComponent implements OnInit {
     this.eventsHttpService
     .findAll(page, this.search.value)
     .subscribe((events) => this.events = events.filter((events)=>events.active==true));
+  }
+
+  get newForm(): UntypedFormGroup {
+    return this.formBuilder.group({
+      results: [null, [Validators.required]],
+    });
   }
 
   getColumns(): ColumnModel[] {
@@ -90,6 +110,33 @@ export class EvaluationListComponent implements OnInit {
         },
       },
     ];
+  }
+
+  onSubmit(): void {
+    if (this.form.valid) {
+      if (this.id != '') {
+        this.update(this.form.value);
+      } else {
+        this.create(this.form.value);
+      }
+    } else {
+      this.form.markAllAsTouched();
+      this.messageService.errorsFields.then();
+    }
+  }
+
+  create(evaluation: CreateEvaluationDto): void {
+    this.evaluationsHttpService.create(evaluation).subscribe(evaluation => {
+      this.form.reset(evaluation);
+      this.back();
+    });
+  }
+
+  update(evaluation:UpdateEvaluationDto): void {
+    this.evaluationsHttpService.update(this.id, evaluation).subscribe((evaluation) => {
+      this.form.reset(evaluation);
+      this.back()
+    });
   }
 
   paginate(event: any) {
@@ -135,5 +182,13 @@ export class EvaluationListComponent implements OnInit {
 
   selectEvent(event: EventModel) {
     this.selectedEvent = event;
+  }
+  /////
+  get resultsField() {
+    return this.form.controls['results'];
+  }
+
+  get forField() {
+    return this.form.controls['for'];
   }
 }

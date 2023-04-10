@@ -41,19 +41,23 @@
       </td>
 
       <td *ngFor="let col of columns">
+        
         <!--Fields-->
         <div *ngIf="!rowData[col.field]?.id" [ngSwitch]="col.field">
-          <div *ngSwitchCase="'name'">
-            {{rowData[col.field].availableProjects}}
-          </div>
+          
+        </div>
+        <div *ngIf="!rowData[col.field]?.id" [ngSwitch]="col.field">
           <div *ngSwitchCase="'startDate'">
             {{rowData[col.field]|date}}
           </div>
           <div *ngSwitchCase="'endDate'">
             {{rowData[col.field]|date}}
           </div>
-          <div *ngSwitchDefault>{{rowData[col.field]}}</div>
-        </div>
+          <div *ngSwitchCase="'availableProjects'">
+            {{rowData['name'].availableProjects}}
+          </div>
+        <div *ngSwitchDefault>{{rowData[col.field]}}</div>
+      </div>
       </td>
       <td class="text-center">
         <div *ngIf="rowData['id']!==authService.auth.id; then thenBlock else elseBlock"></div>

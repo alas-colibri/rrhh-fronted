@@ -64,7 +64,6 @@ export class HolidayFormComponent implements OnInit {
       endDate: [null, [Validators.required,DateValidators.min(new Date())]],
       startDate: [null, [DateValidators.min(new Date())]],
       name: [null, [Validators.required]],
-
     });
   }
 

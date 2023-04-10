@@ -68,25 +68,23 @@
                <td class="text-center">
                 <div *ngIf="rowData['id']!==authService.auth.id; then thenBlock else elseBlock"></div>
                 <ng-template #thenBlock>
-                  <div class="text-center">
-                    <!-- <div class="flex flex-wrap gap-3">
-                      <div class="flex align-items-center">
-                        <p-radioButton name="pizza" value="Mushroom" inputId="Regular"></p-radioButton>
-                        <label for="ingredient2" class="ml-2">Regular</label>
-                      </div>
-
-                      <div class="flex align-items-center">
-                        <p-radioButton name="pizza" value="Pepper" inputId="Bueno"></p-radioButton>
-                        <label for="ingredient3" class="ml-2">Bueno</label>
-                      </div>
-
-                      <div class="flex align-items-center">
-                        <p-radioButton name="pizza" value="Onion" inputId="Muy Bueno"></p-radioButton>
-                        <label for="ingredient4" class="ml-2">Muy Bueno</label>
-                      </div>
-                    </div> -->
-                    <input pInputText type="text" id="names" formControlName="names" />
+                  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+                  <div>
+                    <label appLabel for="results" label="Nota:" [required]="resultsField"></label>
+                    <p-dropdown formControlName="results" [options]="calificacion" optionLabel="name" placeholder="Seleccionar Nota">
+                      <ng-template pTemplate="selectedItem">
+                        <div *ngIf="resultsField.value">
+                          <div>{{resultsField.value.name}}</div>
+                        </div>
+                      </ng-template>
+                      <ng-template pTemplate="item" let-item>
+                        {{item.name}}
+                      </ng-template>
+                    </p-dropdown>
+                    <small appErrorMessage [errors]="resultsField.errors" [touched]="resultsField.touched" [dirty]="resultsField.dirty">
+                    </small>
                   </div>
+                </form>
                 </ng-template>
                 <ng-template #elseBlock>Current Event</ng-template>
               </td>
