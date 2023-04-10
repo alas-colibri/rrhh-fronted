@@ -5,6 +5,7 @@ import { ServerResponse } from "@models/http-response";
 import { PaginatorModel } from "@models/resources";
 import { CreateProjectAssignmentDto, ProjectAssignmentModel, ReadProjectAssignmentDto, UpdateProjectAssignmentDto } from "@models/rrhh/projectAssignment";
 import { CoreService, MessageService } from "@services/resources";
+import { CatalogueTypeEnum } from "@shared/enums";
 import { BehaviorSubject, Observable, map } from "rxjs";
 
 @Injectable({
@@ -54,6 +55,7 @@ export class ProjectAssignmentHttpService {
       })
     );
   }
+
 /*
   findByPlanning( page: number = 0, search: string = '',planningId: string): Obser
     const url = `${this.API_URL}/plannings/${planningId}`;
@@ -75,13 +77,30 @@ export class ProjectAssignmentHttpService {
       })
     );
   }*/
+
+  projectAssignment(type: CatalogueTypeEnum): Observable<ProjectAssignmentModel[]> {
+    const url = `${this.API_URL}/catalogue`;
+    const params = new HttpParams().append('type', type);
+    this.coreService.showLoad();
+    return this.httpClient.get<ServerResponse>(url, {params}).pipe(
+      map(response => {
+        this.coreService.hideLoad();
+        return response.data
+      })
+    );
+  }
+
+  /*
   get projectAssignment (): ReadProjectAssignmentDto{
     return this.selectedprojectAssignment;
   }
 
   set projectAssignment (value: ReadProjectAssignmentDto) {
      this.selectedprojectAssignment = value ;
+
   }
+  }*/
+
   /*findByPlanningTimeline( page: number = 0, search: string = '',planningId: string
     const url = `${this.API_URL}/timeline/${planningId}`;
 

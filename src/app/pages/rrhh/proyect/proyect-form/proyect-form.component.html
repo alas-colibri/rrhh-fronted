@@ -12,44 +12,34 @@
     <div class="formgrid grid">
 
       <div class="field xl:col-6 lg:col-6 md:col-6 sm:col-10">
-        <label appLabel for="sort" label="Cedula: " [required]="sortField"></label>
-        <input pInputText type="text" id="sort" formControlName="sort"/>
-      </div>
-
-      <div class="field xl:col-6 lg:col-6 md:col-6 sm:col-10">
-        <label appLabel for="sort" label="Nombre del trabajador " [required]="sortField"></label>
-        <input pInputText type="text" id="sort" formControlName="sort"/>
+        <label appLabel for="nameProyect" label="Nombre del proyecto " [required]="nameProyectField"></label>
+        <input pInputText type="text" id="nameProyect" formControlName="nameProyect"/>
       </div>
       <div class="field xl:col-6 lg:col-6 md:col-6 sm:col-10">
-        <label appLabel for="sort" label="Proyecto asignado: " [required]="sortField"></label>
-        <input pInputText type="text" id="sort" formControlName="sort"/>
+        <label appLabel for="tipodeProyect" label="Tipo de proyecto " [required]="tipodeProyectField"></label>
+        <input pInputText type="text" id="tipodeProyect" formControlName="tipodeProyect"/>
       </div>
-      <div class="field xl:col-6 lg:col-6 md:col-6 sm:col-10">
-        <label appLabel for="sort" label="Tipo de proyecto " [required]="sortField"></label>
-        <p-dropdown [options]="" optionLabel="name"></p-dropdown>
-
+    </div>
+      <div class="field">
+        <label appLabel for="descripcionProyect" label="Descripcion del proyecto " [required]="descripcionProyectField"></label>
+        <input pInputText type="text" id="descripcionProyect" formControlName="descripcionProyect"/>
       </div>
+      <div class="formgrid grid">
       <div class="field xl:col-6 lg:col-6 md:col-6 sm:col-12">
         <label appLabel for="startDate" label="Fecha de inicio:" [required]="startDateField"></label>
-        <p-calendar formControlName="startDate" id="startDate" dateFormat="dd/mm/yy"></p-calendar>
+        <p-calendar formControlName="startDate"  id="startDate" dateFormat="dd/mm/yy"></p-calendar>
         <small appErrorMessage [errors]="startDateField.errors" [touched]="startDateField.touched"
           [dirty]="startDateField.dirty">
         </small>
       </div>
-
-
-
       <div class="field xl:col-6 lg:col-6 md:col-6 sm:col-12">
         <label appLabel for="endDate" label="Fecha de fin:" [required]="endDateField"></label>
         <p-calendar formControlName="endDate" id="endDate" dateFormat="dd/mm/yy"></p-calendar>
         <small appErrorMessage [errors]="endDateField.errors" [touched]="endDateField.touched"
           [dirty]="endDateField.dirty">
         </small>
-        <div *ngIf="endDateField.touched && endDateField.errors?.['dateRange']">{{endDateField.errors?.['dateRange']}}
-        </div>
       </div>
     </div>
-
     <div class="formgrid grid">
       <div class="field xl:col-6 lg:col-6 md:col-6 sm:col-12">
         <label appLabel for="isEnable" label="Estado:" [required]="isEnableField"></label>
@@ -58,9 +48,7 @@
           [dirty]="isEnableField.dirty">
         </small>
       </div>
-
     </div>
-
     <div class="formgrid grid">
       <div class="field xl:col-6 lg:col-6 md:col-6 sm:col-12">
         <button pButton pRipple id="btnBack" type="button"

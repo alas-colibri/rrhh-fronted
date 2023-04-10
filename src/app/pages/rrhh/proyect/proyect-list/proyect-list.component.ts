@@ -62,7 +62,7 @@ export class ProyectListComponent implements OnInit {
 
   getColumns(): ColumnModel[] {
     return [
-      {field: 'sort', header: 'Nombre del proyecto'},
+      {field: 'nameProyect', header: 'Nombre del proyecto'},
       {field: 'startDate', header: 'Fecha de inicio'},
       {field: 'endDate', header: 'Fecha fin'},
       {field: 'isEnable', header: 'Estado'},

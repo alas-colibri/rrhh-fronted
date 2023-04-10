@@ -10,26 +10,27 @@ import {
 import {ActivatedRoute, Router} from '@angular/router';
 import {BreadcrumbService, CoreService, MessageService} from '@services/resources';
 import {OnExitInterface} from '@shared/interfaces';
-import { ProyectHttpService } from '@services/rrhh';
+import { EventsHttpService } from '@services/rrhh';
+import { CreateEventDto, EventModel, UpdateEventDto } from '@models/rrhh';
 import { CatalogueTypeEnum } from '@shared/enums';
 import { format } from 'date-fns';
 import { DateValidators } from '@shared/validators';
-import { CreateProyectDto, UpdateProyectDto } from '@models/rrhh/proyect.model';
 
 @Component({
-  selector: 'app-proyect-form',
-  templateUrl: './proyect-form.component.html',
-  styleUrls: ['./proyect-form.component.scss'],
+  selector: 'app-evaluation-form',
+  templateUrl: './evaluation-form.component.html',
+  styleUrls: ['./evaluation-form.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class ProyectFormComponent implements OnInit, OnExitInterface {
+export class EvaluationFormComponent implements OnInit, OnExitInterface {
   id: string = '';
   form: UntypedFormGroup = this.newForm;
-  panelHeader: string = 'Crear proyecto';
+  panelHeader: string = 'Evaluación de Desempeño';
   isChangePassword: UntypedFormControl = new UntypedFormControl(false);
   isLoadingSkeleton: boolean = false;
   loaded$ = this.coreService.loaded$;
   checked: boolean = true;
+  questions: EventModel[] = [];
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -38,15 +39,15 @@ export class ProyectFormComponent implements OnInit, OnExitInterface {
     private formBuilder: UntypedFormBuilder,
     public messageService: MessageService,
     private router: Router,
-    private proyectHttpService: ProyectHttpService,
+    private eventsHttpService: EventsHttpService,
   ) {
     this.breadcrumbService.setItems([
-      {label: 'Agregar proyecto', routerLink: ['/rrhh/proyect']},
-      {label: 'Nuevo proyecto'},
+      {label: 'Preguntas', routerLink: ['/rrhh/questions']},
+      {label: 'Añadir Pregunta'},
     ]);
     if (activatedRoute.snapshot.params['id'] !== 'new') {
       this.id = activatedRoute.snapshot.params['id'];
-      this.panelHeader = 'Guardar proyecto';
+      this.panelHeader = 'Actualizar Pregunta';
     }
   }
 
@@ -58,18 +59,14 @@ export class ProyectFormComponent implements OnInit, OnExitInterface {
   }
 
   ngOnInit(): void {
-    this.getProyect();
+    //this.getEvent();
   }
 
 
   get newForm(): UntypedFormGroup {
     return this.formBuilder.group({
-      endDate: [null, [Validators.required,DateValidators.min(new Date())]],
-      startDate: [null, [DateValidators.min(new Date())]],
-      isEnable: [false, [Validators.required]],
-      nameProyect: [null, [Validators.required]],
-      descripcionProyect: [''],
-      tipodeProyect: [null, [Validators.required]],
+      question: [null, [Validators.required]],
+      active: [null, [Validators.required]],
     });
   }
 
@@ -87,56 +84,39 @@ export class ProyectFormComponent implements OnInit, OnExitInterface {
   }
 
   back(): void {
-    this.router.navigate(['/rrhh/proyect']);
+    this.router.navigate(['/rrhh/questions']);
   }
 
-  create(proyect: CreateProyectDto): void {
-    this.proyectHttpService.create(proyect).subscribe(proyect => {
-      this.form.reset(proyect);
+  create(event: CreateEventDto): void {
+    this.eventsHttpService.create(event).subscribe(event => {
+      this.form.reset(event);
       this.back();
     });
   }
 
 
-  getProyect(): void {
+  getEvent(): void {
     this.isLoadingSkeleton = true;
-    this.proyectHttpService.findOne(this.id).subscribe((proyect) => {
+    this.eventsHttpService.findOne(this.id).subscribe((event) => {
       this.isLoadingSkeleton = false;
-      this.form.patchValue(proyect);
+      this.form.patchValue(event);
     });
   }
 
-  update(proyect:UpdateProyectDto): void {
-    this.proyectHttpService.update(this.id, proyect).subscribe((proyect) => {
-      this.form.reset(proyect);
+  update(event:UpdateEventDto): void {
+    this.eventsHttpService.update(this.id, event).subscribe((event) => {
+      this.form.reset(event);
       this.back()
     });
   }
 
   // Getters
 
-  get startDateField() {
-    return this.form.controls['startDate'];
+  get questionField() {
+    return this.form.controls['question'];
   }
 
-  get endDateField() {
-    return this.form.controls['endDate'];
+  get activeField() {
+    return this.form.controls['active'];
   }
-
-  get isEnableField() {
-    return this.form.controls['isEnable'];
-  }
-
-  get nameProyectField() {
-    return this.form.controls['nameProyect'];
-  }
-
-  get descripcionProyectField() {
-    return this.form.controls['descripcionProyect'];
-  }
-
-  get tipodeProyectField() {
-    return this.form.controls['tipodeProyect'];
-  }
-
 }

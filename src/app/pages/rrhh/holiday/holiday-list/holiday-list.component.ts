@@ -6,7 +6,6 @@ import { HolidayModel, SelectHolidayDto } from '@models/rrhh/holiday.model';
 import { AuthService } from '@services/auth';
 import { BreadcrumbService, CoreService, MessageService } from '@services/resources';
 import { HolidayHttpService } from '@services/rrhh/holiday-http.service';
-
 import { MenuItem} from 'primeng/api';
 import { debounceTime } from 'rxjs';
 
@@ -37,7 +36,7 @@ export class HolidayListComponent implements OnInit {
     private route: ActivatedRoute,
   ) {
     this.breadcrumbService.setItems([
-      {label: 'Home estudiante', routerLink: ['/rrhh/holiday']},
+      {label: 'Home', routerLink: ['/rrhh/holiday']},
       {label: 'Asignacion de vacaciones'}
     ]);
     this.columns = this.getColumns();
@@ -62,9 +61,9 @@ export class HolidayListComponent implements OnInit {
 
   getColumns(): ColumnModel[] {
     return [
-      {field: 'name', header: 'Nombre del Trabajador'},
-      {field: 'Cedula', header: 'Cedula del trabajdor'},
-      {field: 'assigProject', header: 'Proyecto Asignado'},
+      {field: 'availableProjects', header: 'Nombre del Trabajador'},
+      {field: 'names', header: 'Cedula del trabajdor'},
+      {field: 'names', header: 'Proyecto Asignado'},
       {field: 'typeHoliday', header: 'Tipo de Vacaciones'},
       {field: 'startDate', header: 'Fecha de Inicio'},
       {field: 'endDate', header: 'Fecha Fin'},

@@ -1,14 +1,15 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { PersonalInformationComponent } from './personal-information.component';
-import { PersonalInformationRoutingModule } from './personal-information-routing.module';
-import {CommonModule as NgCommonModule} from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule, CommonModule as NgCommonModule} from '@angular/common';
 import {ReactiveFormsModule} from '@angular/forms';
+import {EvaluationRoutingModule} from './evaluation-routing.module';
 import {ButtonModule} from "primeng/button";
 import {CheckboxModule} from 'primeng/checkbox';
 import {RippleModule} from "primeng/ripple";
 import {TableModule} from 'primeng/table';
 import {MessageModule} from "primeng/message";
+import {EvaluationComponent} from './evaluation.component';
+import {EvaluationListComponent} from './evaluation-list/evaluation-list.component';
+import {EvaluationFormComponent} from './evaluation-form/evaluation-form.component';
 import {ToolbarModule} from 'primeng/toolbar';
 import {TooltipModule} from 'primeng/tooltip';
 import {InputTextModule} from 'primeng/inputtext';
@@ -21,6 +22,7 @@ import {ToastModule} from "primeng/toast";
 import {PaginatorModule} from "primeng/paginator";
 import {KeyFilterModule} from "primeng/keyfilter";
 import {DialogModule} from "primeng/dialog";
+import {RrhhModule} from "../rrhh.module";
 import {InputSwitchModule} from "primeng/inputswitch";
 import {PanelModule} from "primeng/panel";
 import {MenuModule} from 'primeng/menu';
@@ -30,27 +32,23 @@ import {AccordionModule} from "primeng/accordion";
 import {MultiSelectModule} from "primeng/multiselect";
 import {SplitButtonModule} from "primeng/splitbutton";
 import {BadgeModule} from 'primeng/badge';
-import { FileUploadModule } from 'primeng/fileupload';
-import {ImageModule} from 'primeng/image';
-import { PersonalComponent } from './personal/personal.component';
-import { PersonalListComponent } from './personal-list/personal-list.component';
-
+import { RadioButtonModule } from 'primeng/radiobutton';
+//import {AuthenticationModule} from "../authentication/authentication.module";
 
 @NgModule({
   declarations: [
-PersonalInformationComponent,
-PersonalComponent,
-PersonalListComponent
+    EvaluationComponent,
+    EvaluationFormComponent,
+    EvaluationListComponent,
   ],
   imports: [
-    PersonalInformationRoutingModule,
     NgCommonModule,
+    CommonModule,
+    EvaluationRoutingModule,
     ReactiveFormsModule,
     SharedModule,
     //PrimeNg
     BadgeModule,
-    ImageModule,
-    FileUploadModule,
     ButtonModule,
     CardModule,
     CalendarModule,
@@ -65,6 +63,7 @@ PersonalListComponent
     PaginatorModule,
     PanelModule,
     PasswordModule,
+    RadioButtonModule,
     RippleModule,
     TableModule,
     TagModule,
@@ -77,4 +76,5 @@ PersonalListComponent
     SplitButtonModule,
   ]
 })
-export class PersonalInformationModule { }
+export class EvaluationModule {
+}

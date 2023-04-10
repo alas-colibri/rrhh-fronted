@@ -4,19 +4,18 @@ import {environment} from '@env/environment';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {ServerResponse} from '@models/http-response';
-import { CreateEventDto, EventModel, ReadEventDto,  UpdateEventDto } from '@models/rrhh';
 import { CoreService, MessageService } from '@services/resources';
 import { PaginatorModel } from '@models/resources';
-import { CreateProyectDto, ProyectModel, ReadProyectDto, UpdateProyectDto } from '@models/rrhh/proyect.model';
+import { CreateEvaluationDto, EvaluationModel, ReadEvaluationDto, UpdateEvaluationDto } from '@models/rrhh/evaluation.model';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ProyectHttpService {
-  API_URL = `${environment.API_URL}/proyect`;
+export class EvaluationsHttpService {
+  API_URL = `${environment.API_URL}/evaluation`;
   private pagination = new BehaviorSubject<PaginatorModel>(this.coreService.paginator);
   public pagination$ = this.pagination.asObservable();
-  selectedproyect:ReadProyectDto = {};
+  selectedEvaluation:ReadEvaluationDto = {};
   constructor(
     private coreService: CoreService,
     private httpClient: HttpClient,
@@ -24,7 +23,7 @@ export class ProyectHttpService {
   ) {
   }
 
-  create(payload: CreateProyectDto): Observable<ProyectModel> {
+  create(payload: CreateEvaluationDto): Observable<EvaluationModel> {
     const url = `${this.API_URL}`;
 
     this.coreService.showLoad();
@@ -37,7 +36,7 @@ export class ProyectHttpService {
     );
   }
 
-  findAll(page: number = 0, search: string = ''): Observable<ProyectModel[]> {
+  findAll(page: number = 0, search: string = ''): Observable<EvaluationModel[]> {
     const url = this.API_URL;
 
     const headers = new HttpHeaders().append('pagination', 'true');
@@ -46,7 +45,6 @@ export class ProyectHttpService {
       .append('search', search);
 
     this.coreService.showLoad();
-    console.log(url);
     return this.httpClient.get<ServerResponse>(url, {headers, params}).pipe(
       map((response) => {
         this.coreService.hideLoad();
@@ -58,7 +56,7 @@ export class ProyectHttpService {
     );
   }
 
-  findByPlanning( page: number = 0, search: string = '',planningId: string): Observable<ProyectModel[]> {
+  findByPlanning( page: number = 0, search: string = '',planningId: string): Observable<EvaluationModel[]> {
     const url = `${this.API_URL}/plannings/${planningId}`;
 
     const headers = new HttpHeaders().append('pagination', 'true');
@@ -78,14 +76,14 @@ export class ProyectHttpService {
       })
     );
   }
-  get proyect  (): ReadProyectDto{
-    return this.selectedproyect;
+  get evaluations  (): ReadEvaluationDto{
+    return this.selectedEvaluation;
   }
 
-  set proyect (value: ReadProyectDto) {
-     this.selectedproyect = value ;
+  set evaluations  (value: ReadEvaluationDto) {
+     this.selectedEvaluation = value ;
   }
-  findByPlanningTimeline( page: number = 0, search: string = '',planningId: string): Observable<ProyectModel[]> {
+  findByPlanningTimeline( page: number = 0, search: string = '',planningId: string): Observable<EvaluationModel[]> {
     const url = `${this.API_URL}/timeline/${planningId}`;
 
     const headers = new HttpHeaders().append('pagination', 'true');
@@ -106,7 +104,7 @@ export class ProyectHttpService {
     );
   }
 
-  findOne(id: string): Observable<ProyectModel> {
+  findOne(id: string): Observable<EvaluationModel> {
     const url = `${this.API_URL}/${id}`;
 
     this.coreService.showLoad();
@@ -118,7 +116,7 @@ export class ProyectHttpService {
     );
   }
 
-  update(id: string, payload: UpdateProyectDto): Observable<ProyectModel> {
+  update(id: string, payload: UpdateEvaluationDto): Observable<EvaluationModel> {
     const url = `${this.API_URL}/${id}`;
 
     this.coreService.showLoad();
@@ -132,7 +130,7 @@ export class ProyectHttpService {
   }
 
 
-  remove(id: string): Observable<ProyectModel> {
+  remove(id: string): Observable<EvaluationModel> {
     const url = `${this.API_URL}/${id}`;
 
     this.coreService.showLoad();
@@ -145,11 +143,11 @@ export class ProyectHttpService {
     );
   }
 
-  removeAll(proyect: ProyectModel[]): Observable<ProyectModel[]> {
+  removeAll(evaluations: EvaluationModel[]): Observable<EvaluationModel[]> {
     const url = `${this.API_URL}/remove-all`;
 
     this.coreService.showLoad();
-    return this.httpClient.patch<ServerResponse>(url, proyect).pipe(
+    return this.httpClient.patch<ServerResponse>(url, evaluations).pipe(
       map((response) => {
         this.coreService.hideLoad();
         this.messageService.success(response).then();

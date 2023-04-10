@@ -25,16 +25,23 @@ const routes: Routes = [
     loadChildren: () =>
       import('./proyect/proyect.module').then((m) => m.ProyectModule),
   },
-
   {
     path: 'holiday',
     loadChildren: () =>
       import('./holiday/holiday.module').then((m) => m.HolidayModule),
   },
   {
+
     path: 'projectAssignment',
     loadChildren: () =>
       import('./projectAssignment/projectAssignment.module').then((m) => m.ProjectAssignmentModule),
+ },
+ 
+ {
+    path: 'evaluation',
+    loadChildren: () =>
+      import('./evaluation/evaluation.module').then((m) => m.EvaluationModule),
+
   },
 ];
 

@@ -10,5 +10,13 @@ export interface PersonModel{
   city?:string;
   profession?:string;
   typeContract?:string;
-  projects?:string;
+  isEnable: boolean;
+}
+export interface CreatePersonDto extends Omit<PersonModel, 'id'> {
+}
+
+export interface SelectPersonDto extends Partial<PersonModel> {
+}
+
+export interface UpdatePersonDto extends Partial<Omit<PersonModel, 'id'>> {
 }
