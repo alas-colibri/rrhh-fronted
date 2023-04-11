@@ -52,7 +52,6 @@ export class PersonalComponent implements OnInit {
       { label: 'Ficha Personal' },
     ]);
     //this.loadGenders();
-    //this.loadTypeContract();
 
     this.typeContract = [
       { name: 'Temporal', code: 'Tem' },
@@ -136,9 +135,6 @@ export class PersonalComponent implements OnInit {
  //   this.catalogueService.catalogueType(CatalogueTypeEnum.MARITAL_STATUS).subscribe((maritalStatus) => this.maritalStatus = maritalStatus);
  // }
 
- // loadTypeContract(): void {
- //   this.catalogueService.catalogueType(CatalogueTypeEnum.SEX).subscribe((sexes) => this.sexes = sexes);
- // }
 
   redirectEditForm(id: string) {
     this.router.navigate(['/uic/student-informations', id]);

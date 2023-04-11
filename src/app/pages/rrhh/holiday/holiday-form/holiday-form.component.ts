@@ -6,7 +6,7 @@ import { ProjectAssignmentModel } from '@models/rrhh/projectAssignment';
 import { BreadcrumbService, CoreService, MessageService } from '@services/resources';
 import { HolidayHttpService } from '@services/rrhh';
 import { ProjectAssignmentHttpService } from '@services/rrhh/projectAssignment-http.service';
-import { CatalogueStateEnum, CatalogueTypeEnum } from '@shared/enums';
+import { CatalogueTypeEnum } from '@shared/enums';
 import { DateValidators } from '@shared/validators';
 
 @Component({
@@ -25,6 +25,8 @@ export class HolidayFormComponent implements OnInit {
   loaded$ = this.coreService.loaded$;
   checked: boolean = true;
   names: ProjectAssignmentModel[]=[];
+  typeHoliday: any;
+  selectedTypeHolidayField: any;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -40,6 +42,12 @@ export class HolidayFormComponent implements OnInit {
       {label: 'Convocatorias', routerLink: ['/rrhh/holiday']},
       {label: 'Nueva fase'},
     ]);
+
+    this.typeHoliday = [
+      { name: 'Dependencia', code: 'Dep'},
+      { name: 'Contrato', code: 'Con' }
+    ]
+
     if (activatedRoute.snapshot.params['id'] !== 'new') {
       this.id = activatedRoute.snapshot.params['id'];
       this.panelHeader = 'Guardar Modalidad';
@@ -64,6 +72,7 @@ export class HolidayFormComponent implements OnInit {
       endDate: [null, [Validators.required,DateValidators.min(new Date())]],
       startDate: [null, [DateValidators.min(new Date())]],
       name: [null, [Validators.required]],
+      typeHoliday: [null, [Validators.required]],
     });
   }
 
@@ -91,6 +100,13 @@ export class HolidayFormComponent implements OnInit {
     });
   }
 
+  update(holiday:UpdateHolidayDto): void {
+    this.holidayHttpService.update(this.id, holiday).subscribe((holiday) => {
+      this.form.reset(holiday);
+      this.back()
+    });
+  }
+
 
   getHoliday(): void {
     this.isLoadingSkeleton = true;
@@ -108,13 +124,6 @@ export class HolidayFormComponent implements OnInit {
     })
   }
 
-  update(holiday:UpdateHolidayDto): void {
-    this.holidayHttpService.update(this.id, holiday).subscribe((holiday) => {
-      this.form.reset(holiday);
-      this.back()
-    });
-  }
-
   // Getters
 
   get startDateField() {
@@ -127,6 +136,10 @@ export class HolidayFormComponent implements OnInit {
 
   get nameField() {
     return this.form.controls['name'];
+  }
+
+  get typeHolidayField() {
+    return this.form.controls['typeHoliday'];
   }
 
 

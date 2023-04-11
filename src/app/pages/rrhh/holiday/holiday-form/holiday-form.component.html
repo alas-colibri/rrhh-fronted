@@ -44,12 +44,10 @@
       </div>
 
       <div class="field xl:col-6 lg:col-6 md:col-6 sm:col-12">
-        <label appLabel for="endDate" label="Tipo de Vacaciones:" [required]="endDateField"></label>
-        <span class="p-float-label">
-          <p-dropdown placeholder="Seleccione Vacación" optionLabel="name" inputId="float-label"></p-dropdown>
-          <label for="float-label">Seleccione Vacación</label>
-          <!--(para conectar a la bd)[options]="cities" [(ngModel)]="selectedCity"-->
-        </span>
+        <label appLabel for="typeHoliday" label="Tipo de Vacaciones:" [required]="typeHolidayField"></label>
+          <p-dropdown [options]="typeHoliday" [(ngModel)]="selectedTypeHolidayField"  optionLabel="name"
+            optionValue="name" formControlName="typeHoliday"></p-dropdown>
+          <small appErrorMessage [errors]="typeHolidayField.errors" [touched]="typeHolidayField.touched" [dirty]="typeHolidayField.dirty"></small>
       </div>
     </div>
 
