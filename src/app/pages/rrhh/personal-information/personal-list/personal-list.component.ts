@@ -74,7 +74,7 @@ export class PersonalListComponent implements OnInit {
   getActionButtons(): MenuItem[] {
     return [
       {
-        label: 'Update',
+        label: 'Actualizar',
         icon: 'pi pi-pencil',
         command: () => {
           if (this.selectedPerson.id)
@@ -82,7 +82,7 @@ export class PersonalListComponent implements OnInit {
         },
       },
       {
-        label: 'Delete',
+        label: 'Eliminar',
         icon: 'pi pi-trash',
         command: () => {
           if (this.selectedPerson.id)
