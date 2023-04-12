@@ -103,10 +103,10 @@ export class PersonalComponent implements OnInit {
 
     console.log(this.form.value)
     if (this.form.valid) {
-      if (this.id = 'new') {
-        this.create(this.form.value);
+      if (this.id != 'new ') {
+        this.update(this.form.value);
       } else {
-       this.update(this.form.value);
+       this.create(this.form.value);
       }
     } else {
       this.form.markAllAsTouched();
@@ -121,10 +121,6 @@ export class PersonalComponent implements OnInit {
 
   redirectCreateForm() {
     this.router.navigate(['/uic/student-informations', 'new']);
-  }
-
-  redirectCreateForme() {
-    this.router.navigate(['/uic/student-informations/complexivo', 'new']);
   }
 
  // loadGenders(): void {
