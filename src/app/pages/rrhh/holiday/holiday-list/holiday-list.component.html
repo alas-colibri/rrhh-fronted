@@ -41,10 +41,8 @@
       </td>
 
       <td *ngFor="let col of columns">
-        
         <!--Fields-->
         <div *ngIf="!rowData[col.field]?.id" [ngSwitch]="col.field">
-          
         </div>
         <div *ngIf="!rowData[col.field]?.id" [ngSwitch]="col.field">
           <div *ngSwitchCase="'startDate'">

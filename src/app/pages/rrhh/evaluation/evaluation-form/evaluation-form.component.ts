@@ -10,11 +10,13 @@ import {
 import {ActivatedRoute, Router} from '@angular/router';
 import {BreadcrumbService, CoreService, MessageService} from '@services/resources';
 import {OnExitInterface} from '@shared/interfaces';
-import { EventsHttpService } from '@services/rrhh';
-import { CreateEventDto, EventModel, UpdateEventDto } from '@models/rrhh';
+import { EvaluationsHttpService } from '@services/rrhh';
 import { CatalogueTypeEnum } from '@shared/enums';
 import { format } from 'date-fns';
 import { DateValidators } from '@shared/validators';
+import { ProjectAssignmentModel } from '@models/rrhh/projectAssignment';
+import { ProjectAssignmentHttpService } from '@services/rrhh/projectAssignment-http.service';
+import { CreateEvaluationDto, UpdateEvaluationDto } from '@models/rrhh/evaluation.model';
 
 @Component({
   selector: 'app-evaluation-form',
@@ -30,7 +32,14 @@ export class EvaluationFormComponent implements OnInit, OnExitInterface {
   isLoadingSkeleton: boolean = false;
   loaded$ = this.coreService.loaded$;
   checked: boolean = true;
-  questions: EventModel[] = [];
+  names: ProjectAssignmentModel[]=[];
+  calificacion: any;
+  selected1: any;
+  selected2: any;
+  selected3: any;
+  selected4: any;
+  selected5: any;
+  selectedCalif: any;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -39,7 +48,8 @@ export class EvaluationFormComponent implements OnInit, OnExitInterface {
     private formBuilder: UntypedFormBuilder,
     public messageService: MessageService,
     private router: Router,
-    private eventsHttpService: EventsHttpService,
+    private proyectAsHttpService: ProjectAssignmentHttpService,
+    private evaluationsHttpService: EvaluationsHttpService,
   ) {
     this.breadcrumbService.setItems([
       {label: 'Preguntas', routerLink: ['/rrhh/questions']},
@@ -49,6 +59,13 @@ export class EvaluationFormComponent implements OnInit, OnExitInterface {
       this.id = activatedRoute.snapshot.params['id'];
       this.panelHeader = 'Actualizar Pregunta';
     }
+    this.calificacion = [
+      { name: '0-10', code: 'Trrem' },
+      { name: '20-40', code: 'Temr' },
+      { name: '40-60', code: 'Indr' },
+      { name: '60-80', code: 'Irnd' },
+      { name: '80-100', code: 'Iyd' }
+    ];
   }
 
   async onExit(): Promise<boolean> {
@@ -59,14 +76,25 @@ export class EvaluationFormComponent implements OnInit, OnExitInterface {
   }
 
   ngOnInit(): void {
-    //this.getEvent();
+    this.getEvaluation();
+    this.getHolidayname();
   }
-
 
   get newForm(): UntypedFormGroup {
     return this.formBuilder.group({
-      question: [null, [Validators.required]],
-      active: [null, [Validators.required]],
+      name: [null, [Validators.required]],
+      question1: [null, [Validators.required]],
+      question2: [null, [Validators.required]],
+      question3: [null, [Validators.required]],
+      question4: [null],
+      question5: [null],
+      note1: [null, [Validators.required]],
+      note2: [null, [Validators.required]],
+      note3: [null, [Validators.required]],
+      note4: [null],
+      note5: [null],
+      observation: [null, [Validators.required]],
+      noteF: [null, [Validators.required]],
     });
   }
 
@@ -84,39 +112,91 @@ export class EvaluationFormComponent implements OnInit, OnExitInterface {
   }
 
   back(): void {
-    this.router.navigate(['/rrhh/questions']);
+    this.router.navigate(['/rrhh/evaluation']);
   }
 
-  create(event: CreateEventDto): void {
-    this.eventsHttpService.create(event).subscribe(event => {
-      this.form.reset(event);
+  create(evaluation: CreateEvaluationDto): void {
+    this.evaluationsHttpService.create(evaluation).subscribe(evaluation => {
+      this.form.reset(evaluation);
       this.back();
     });
   }
 
 
-  getEvent(): void {
+  getEvaluation(): void {
     this.isLoadingSkeleton = true;
-    this.eventsHttpService.findOne(this.id).subscribe((event) => {
+    this.evaluationsHttpService.findOne(this.id).subscribe((evaluation) => {
       this.isLoadingSkeleton = false;
-      this.form.patchValue(event);
+      this.form.patchValue(evaluation);
     });
   }
 
-  update(event:UpdateEventDto): void {
-    this.eventsHttpService.update(this.id, event).subscribe((event) => {
-      this.form.reset(event);
+  update(evaluation:UpdateEvaluationDto): void {
+    this.evaluationsHttpService.update(this.id, evaluation).subscribe((evaluation) => {
+      this.form.reset(evaluation);
       this.back()
     });
   }
 
-  // Getters
-
-  get questionField() {
-    return this.form.controls['question'];
+  getHolidayname(): void{
+    this.isLoadingSkeleton = true;
+    this.proyectAsHttpService.projectAssignment(CatalogueTypeEnum.PROYECT_ASSIGNMENT).subscribe((names) => {
+        this.isLoadingSkeleton=false;
+        this.names = names;
+    })
   }
 
-  get activeField() {
-    return this.form.controls['active'];
+  // Getters
+
+  get nameField() {
+    return this.form.controls['name'];
+  }
+
+  get question1Field() {
+    return this.form.controls['question1'];
+  }
+
+  get question2Field() {
+    return this.form.controls['question2'];
+  }
+
+  get question3Field() {
+    return this.form.controls['question3'];
+  }
+
+  get question4Field() {
+    return this.form.controls['question4'];
+  }
+
+  get question5Field() {
+    return this.form.controls['question5'];
+  }
+
+  get note1Field() {
+    return this.form.controls['note1'];
+  }
+
+  get note2Field() {
+    return this.form.controls['note2'];
+  }
+
+  get note3Field() {
+    return this.form.controls['note3'];
+  }
+
+  get note4Field() {
+    return this.form.controls['note4'];
+  }
+
+  get note5Field() {
+    return this.form.controls['note5'];
+  }
+
+  get observationField() {
+    return this.form.controls['observation'];
+  }
+
+  get noteFField() {
+    return this.form.controls['noteF'];
   }
 }

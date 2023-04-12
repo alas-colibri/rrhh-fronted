@@ -1,17 +1,6 @@
-<div class="field xl:col-4 lg:col-4 md:col-4 sm:col-12" *ngFor="let question of questions">
-    <p-card header="{{question.question}}" subheader=" Modalidad" [style]="{width: '360px'}" styleClass="p-card-shadow">
-      <ng-template pTemplate="header">
-          <img alt="Card" src="https://yavirac.edu.ec/img/slider/instalacion1-1.png">
-      </ng-template>
-      <p>{{question.question}}</p>
-    </p-card>
-  </div>
-<!-- <app-skeleton *ngIf="isLoadingSkeleton" [type]="'card'"></app-skeleton>
-<p-panel *ngIf="!isLoadingSkeleton"
-         class="p-fluid"
-         collapseIcon="pi pi-times"
-         [toggleable]="true"
-         (collapsedChange)="back()">
+<app-skeleton *ngIf="isLoadingSkeleton" [type]="'card'"></app-skeleton>
+<p-panel *ngIf="!isLoadingSkeleton" class="p-fluid" collapseIcon="pi pi-times" [toggleable]="true"
+  (collapsedChange)="back()">
   <ng-template pTemplate="header">
     <i *ngIf="id===''" class="pi pi-user-plus mr-2"></i>
     <i *ngIf="id!=''" class="pi pi-user-edit mr-2"></i>
@@ -20,35 +9,112 @@
   <small [innerHTML]="this.messageService.requiredFields"></small>
   <p-divider></p-divider>
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
-
-    <div class="formgrid grid">
-
-      <div class="field xl:col-6 lg:col-6 md:col-6 sm:col-12">
-        <label appLabel for="question" label="Pregunta:" [required]="questionField"></label>
-        <input pInputText type="question" id="question" formControlName="question"/>
-        <small appErrorMessage
-               [errors]="questionField.errors"
-               [touched]="questionField.touched"
-               [dirty]="questionField.dirty">
+  
+      <div class="field xl:col-10 lg:col-10 md:col-10 sm:col-12">
+        <label appLabel for="name" label="Seleccionar empleado:" [required]="nameField"></label>
+        <p-dropdown id="name" formControlName="name" dataKey="id" [options]="names" optionLabel="availableProjects" [filter]="true"
+          filterBy="availableProjects" placeholder="Nombre del empleado">
+          <ng-template pTemplate="selectedItem">
+            <div *ngIf="nameField.value">
+              <div>{{nameField.value.availableProjects}}</div>
+            </div>
+          </ng-template>
+          <ng-template pTemplate="item" let-item>
+            {{item.availableProjects}}
+          </ng-template>
+        </p-dropdown>
+        <small appErrorMessage [errors]="nameField.errors" [touched]="nameField.touched" [dirty]="nameField.dirty">
         </small>
       </div>
-
-       <div class="field xl:col-6 lg:col-6 md:col-6 sm:col-12">
-        <label appLabel for="active" label="Estado:" [required]="activeField"></label>
-        <p><p-inputSwitch formControlName="active"></p-inputSwitch></p>
-        <small appErrorMessage
-               [errors]="activeField.errors"
-               [touched]="activeField.touched"
-               [dirty]="activeField.dirty">
+      <!-- pregunta1 -->
+      <div class="formgrid grid">
+      <div class="field xl:col-7 lg:col-7 md:col-7 sm:col-10">
+        <label appLabel for="question1" label="Coloque la Pregunta " [required]="question1Field"></label>
+        <input pInputText type="text" id="question1" formControlName="question1"/>
+      </div>
+      <div class="field xl:col-4 lg:col-4 md:col-4 sm:col-12">
+        <label appLabel for="note1" label="Coloque la nota" [required]="note1Field"></label>
+        <p-dropdown [options]="calificacion" [(ngModel)]="selected1" optionLabel="name" optionValue="name"
+          formControlName="note1"></p-dropdown>
+        <small appErrorMessage [errors]="note1Field.errors" [touched]="note1Field.touched" [dirty]="note1Field.dirty">
         </small>
-      </div> 
-
+      </div>
+    </div>
+    <!-- pregunta2 -->
+    <div class="formgrid grid">
+      <div class="field xl:col-7 lg:col-7 md:col-7 sm:col-10">
+        <label appLabel for="question2" label="Coloque la Pregunta " [required]="question2Field"></label>
+        <input pInputText type="text" id="question2" formControlName="question2"/>
+      </div>
+      <div class="field xl:col-4 lg:col-4 md:col-4 sm:col-12">
+        <label appLabel for="note2" label="Coloque la nota" [required]="note2Field"></label>
+        <p-dropdown [options]="calificacion" [(ngModel)]="selected2" optionLabel="name" optionValue="name"
+          formControlName="note2"></p-dropdown>
+        <small appErrorMessage [errors]="note2Field.errors" [touched]="note2Field.touched" [dirty]="note2Field.dirty">
+        </small>
+      </div>
+    </div>
+    <!-- pregunta3 -->
+    <div class="formgrid grid">
+      <div class="field xl:col-7 lg:col-7 md:col-7 sm:col-10">
+        <label appLabel for="question3" label="Coloque la Pregunta " [required]="question3Field"></label>
+        <input pInputText type="text" id="question3" formControlName="question3"/>
+      </div>
+      <div class="field xl:col-4 lg:col-4 md:col-4 sm:col-12">
+        <label appLabel for="note3" label="Coloque la nota" [required]="note1Field"></label>
+        <p-dropdown [options]="calificacion" [(ngModel)]="selected3" optionLabel="name" optionValue="name"
+          formControlName="note3"></p-dropdown>
+        <small appErrorMessage [errors]="note3Field.errors" [touched]="note3Field.touched" [dirty]="note3Field.dirty">
+        </small>
+      </div>
+    </div>
+    <!-- pregunta4 -->
+    <div class="formgrid grid">
+      <div class="field xl:col-7 lg:col-7 md:col-7 sm:col-10">
+        <label appLabel for="question4" label="Coloque la Pregunta " [required]="question4Field"></label>
+        <input pInputText type="text" id="question4" formControlName="question4"/>
+      </div>
+      <div class="field xl:col-4 lg:col-4 md:col-4 sm:col-12">
+        <label appLabel for="note4" label="Coloque la nota" [required]="note4Field"></label>
+        <p-dropdown [options]="calificacion" [(ngModel)]="selected4" optionLabel="name" optionValue="name"
+          formControlName="note4"></p-dropdown>
+        <small appErrorMessage [errors]="note4Field.errors" [touched]="note4Field.touched" [dirty]="note4Field.dirty">
+        </small>
+      </div>
+    </div>
+    <!-- pregunta5 -->
+    <div class="formgrid grid">
+      <div class="field xl:col-7 lg:col-7 md:col-7 sm:col-10">
+        <label appLabel for="question5" label="Coloque la Pregunta " [required]="question5Field"></label>
+        <input pInputText type="text" id="question5" formControlName="question5"/>
+      </div>
+      <div class="field xl:col-4 lg:col-4 md:col-4 sm:col-12">
+        <label appLabel for="note5" label="Coloque la nota" [required]="note5Field"></label>
+        <p-dropdown [options]="calificacion" [(ngModel)]="selected5" optionLabel="name" optionValue="name"
+          formControlName="note5"></p-dropdown>
+        <small appErrorMessage [errors]="note5Field.errors" [touched]="note5Field.touched" [dirty]="note5Field.dirty">
+        </small>
+      </div>
+    </div>
+    <!-- final -->
+    <div class="formgrid grid">
+      <div class="field xl:col-7 lg:col-7 md:col-7 sm:col-10">
+        <label appLabel for="observation" label="Coloque la observación" [required]="observationField"></label>
+        <input pInputText type="text" id="observation" formControlName="observation"/>
+      </div>
+      <div class="field xl:col-4 lg:col-4 md:col-4 sm:col-12">
+        <label appLabel for="noteF" label="Coloque la nota final:" [required]="noteFField"></label>
+        <p-dropdown [options]="calificacion" [(ngModel)]="selectedCalif" optionLabel="name" optionValue="name"
+          formControlName="noteF"></p-dropdown>
+        <small appErrorMessage [errors]="noteFField.errors" [touched]="noteFField.touched" [dirty]="noteFField.dirty">
+        </small>
+      </div>
     </div>
     <div class="formgrid grid">
       <div class="field xl:col-6 lg:col-6 md:col-6 sm:col-12">
         <button pButton pRipple id="btnBack" type="button"
                 label="Cancelar"
-                class="p-button-info p-button-outlined"
+                class="p-button-outlined p-button-warning"
                 icon="pi pi-arrow-left"
                 [loading]="(loaded$|async)!"
                 (click)="back()"></button>
@@ -56,9 +122,11 @@
       <div class="field xl:col-6 lg:col-6 md:col-6 sm:col-12">
         <button pButton pRipple id="submit" type="submit"
                 label="Guardar"
+                class="p-button-raised p-button-warning"
                 icon="pi pi-save"
                 [loading]="(loaded$|async)!"></button>
       </div>
     </div>
+
   </form>
-</p-panel> -->
+</p-panel>
