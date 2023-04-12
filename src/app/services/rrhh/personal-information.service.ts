@@ -7,6 +7,7 @@ import { CreatePersonDto, PersonModel, UpdatePersonDto } from '@models/rrhh/pers
 import { CoreService, MessageService } from '@services/resources';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { PaginatorModel } from '@models/resources';
+import { CatalogueTypeEnum } from '@shared/enums';
 
 @Injectable({
   providedIn: 'root'
@@ -35,6 +36,18 @@ constructor(
       this.coreService.hideLoad();
       this.messageService.success(response).then();
       return response.data;
+    })
+  );
+}
+
+person(type: CatalogueTypeEnum): Observable<PersonModel[]> {
+  const url = `${this.API_URL}/catalogue`;
+  const params = new HttpParams().append('type', type);
+  this.coreService.showLoad();
+  return this.httpClient.get<ServerResponse>(url, {params}).pipe(
+    map(response => {
+      this.coreService.hideLoad();
+      return response.data
     })
   );
 }

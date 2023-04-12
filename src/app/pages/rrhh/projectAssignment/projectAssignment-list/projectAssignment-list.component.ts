@@ -73,12 +73,10 @@ export class ProjectAssignmentListComponent implements OnInit {
   getColumns(): ColumnModel[] {
     return [
       { field: 'namePerson', header: 'Nombre del Trabajador' },
-      { field: 'availableProjects', header: 'Proyectos Disponibles' },
+      { field: 'availableProjects', header: 'Proyecto Asignado' },
       { field: 'projectCharge', header: 'Cargo del Proyecto' },
-      { field: 'dateEntryFoundation', header: 'Fecha de ingreso a la fundacion' },
       { field: 'dateEntryProject', header: 'Fecha de ingreso al proyecto' },
       { field: 'departureDateProject', header: 'Fecha de salida al proyecto' },
-      { field: 'isEnable', header: 'Estado' },
     ];
   }
 
