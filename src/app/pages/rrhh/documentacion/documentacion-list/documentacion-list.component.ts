@@ -10,7 +10,7 @@ import { CreateEventDto, EventModel, SelectEventDto } from '@models/rrhh';
 import { AuthService } from '@services/auth';
 import { CreateEvaluationDto, UpdateEvaluationDto } from '@models/rrhh/evaluation.model';
 import { CalificacionModel } from '@models/rrhh/calificacion.model';
-import { UpdateDocumentacionDto } from '@models/rrhh/documentacion.models';
+import { CreateDocumentacionDto, UpdateDocumentacionDto } from '@models/rrhh/documentacion.models';
 import { DocumentacionHttpService } from '@services/rrhh/documentacion-http.service';
 
 @Component({
@@ -127,7 +127,7 @@ export class DocumentacionListComponent implements OnInit {
     }
   }
 
-  create(documentacion: CreateEvaluationDto): void {
+  create(documentacion: CreateDocumentacionDto): void {
     this.documentacionHttpService.create(documentacion).subscribe(documentacion => {
       this.form.reset(documentacion);
       this.back();

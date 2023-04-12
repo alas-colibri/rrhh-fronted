@@ -1,9 +1,9 @@
 <div class="field xl:col-4 lg:col-4 md:col-4 sm:col-12" *ngFor="let documents of documentacion">
-  <p-card header="{{documents.active}}" subheader=" Modalidad" [style]="{width: '360px'}" styleClass="p-card-shadow">
+  <p-card header="{{documents.documents}}" subheader=" Modalidad" [style]="{width: '360px'}" styleClass="p-card-shadow">
     <ng-template pTemplate="header">
         <img alt="Card" src="https://yavirac.edu.ec/img/slider/instalacion1-1.png">
     </ng-template>
-    <p>{{documents.active}}</p>
+    <p>{{documents.documents}}</p>
   </p-card>
 </div>
 <!-- <app-skeleton *ngIf="isLoadingSkeleton" [type]="'card'"></app-skeleton>
