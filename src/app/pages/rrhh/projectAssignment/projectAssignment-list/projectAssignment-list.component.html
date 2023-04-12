@@ -5,20 +5,20 @@
       icon="pi pi-plus" (click)="redirectCreateForm()"></button>
     <button pButton type="button" label="Refrescar" class="p-button-info mr-2" icon="pi pi-refresh"
       (click)="ngOnInit()"></button>
-    <button *ngIf="selectedEvents.length>0" pButton type="button" label="Eliminar Pregunta" class="p-button-danger"
+    <button *ngIf="selectedProjectAssignments.length>0" pButton type="button" label="Eliminar Proyecto" class="p-button-danger"
       icon="pi pi-trash" (click)="removeAll()"></button>
   </div>
   <div class="p-toolbar-group-right">
     <div class="p-input-icon-right">
-      <input type="text" pInputText [formControl]="search" placeholder="Busqueda por nombre">
+      <input type="text" pInputText [formControl]="search" placeholder="Busqueda por proyecto">
       <i class="pi pi-search" [ngClass]="{'pi-spin pi-spinner':(loaded$|async)}"></i>
     </div>
   </div>
 </p-toolbar>
 <p-paginator [rows]="paginator.limit" [totalRecords]="paginator.totalItems"
   (onPageChange)="paginate($event)"></p-paginator>
-<p-table dataKey="id" styleClass="p-datatable-striped" [value]="events" [columns]="columns" [sortField]="'sort'"
-  [loading]="(loaded$|async)!" [(selection)]="selectedEvents" [responsive]="true">
+<p-table dataKey="id" styleClass="p-datatable-striped" [value]="" [columns]="columns" [sortField]="'sort'"
+  [loading]="(loaded$|async)!" [(selection)]="selectedProjectAssignments" [responsive]="true">
   <ng-template pTemplate="header" let-columns>
     <tr>
       <th style="width: 3rem">
@@ -59,9 +59,19 @@
               [pTooltip]="rowData['maxAttempts']===0?'Exceeded the maximum number of attempts allowed':''"
               [severity]="checkState(rowData)"></p-tag>
           </div>
-          <div *ngSwitchCase="'endDate'">
+          <div *ngSwitchCase="'dateEntryFoundation'">
             {{rowData[col.field]|date}}
           </div>
+
+          <div *ngSwitchCase="'dateEntryProject'">
+            {{rowData[col.field]|date}}
+          </div>
+
+          <div *ngSwitchCase="'departureDateProject'">
+            {{rowData[col.field]|date}}
+          </div>
+
+
           <div *ngSwitchCase="'isEnable'">
             <p-tag [value]="rowData['isEnable']?'disponible':'no disponible'"
               [pTooltip]="rowData['maxAttempts']===0?'Exceeded the maximum number of attempts allowed':''"
@@ -76,9 +86,9 @@
         <div *ngIf="rowData['id']!==authService.auth.id; then thenBlock else elseBlock"></div>
         <ng-template #thenBlock>
           <p-splitButton icon="pi pi-ellipsis-v" [model]="actionButtons"
-            (onDropdownClick)="selectEvent(rowData)"></p-splitButton>
+            (onDropdownClick)="selectProjectAssignment(rowData)"></p-splitButton>
         </ng-template>
-        <ng-template #elseBlock>Current Event</ng-template>
+        <ng-template #elseBlock>Current Project Assignment</ng-template>
       </td>
     </tr>
   </ng-template>
