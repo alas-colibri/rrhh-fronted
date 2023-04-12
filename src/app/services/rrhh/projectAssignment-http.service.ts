@@ -18,7 +18,7 @@ export class ProjectAssignmentHttpService {
   selectedprojectAssignment:ReadProjectAssignmentDto = {};
   constructor(
     private coreService: CoreService,
-    private httpClient: HttpClient,
+    private httpClient: HttpClient, 
     private messageService: MessageService,
   ) {
   }
@@ -56,6 +56,28 @@ export class ProjectAssignmentHttpService {
     );
   }
 
+/*
+  findByPlanning( page: number = 0, search: string = '',planningId: string): Obser
+    const url = `${this.API_URL}/plannings/${planningId}`;
+
+    const headers = new HttpHeaders().append('pagination', 'true');
+    const params = new HttpParams()
+      .append('page', page)
+      .append('search', search)
+      .append('planningId', planningId);
+
+    this.coreService.showLoad();
+    return this.httpClient.get<ServerResponse>(url, {headers, params}).pipe(
+      map((response) => {
+        this.coreService.hideLoad();
+        if (response.pagination) {
+          this.pagination.next(response.pagination);
+        }
+        return response.data;
+      })
+    );
+  }*/
+
   projectAssignment(type: CatalogueTypeEnum): Observable<ProjectAssignmentModel[]> {
     const url = `${this.API_URL}/catalogue`;
     const params = new HttpParams().append('type', type);
@@ -75,7 +97,10 @@ export class ProjectAssignmentHttpService {
 
   set projectAssignment (value: ReadProjectAssignmentDto) {
      this.selectedprojectAssignment = value ;
+
+  }
   }*/
+
   /*findByPlanningTimeline( page: number = 0, search: string = '',planningId: string
     const url = `${this.API_URL}/timeline/${planningId}`;
 

@@ -1,0 +1,127 @@
+<app-skeleton *ngIf="isLoadingSkeleton" [type]="'card'"></app-skeleton>
+<p-panel
+  *ngIf="!isLoadingSkeleton"
+  class="p-fluid"
+  collapseIcon="pi pi-times"
+  [toggleable]="true"
+  (collapsedChange)="back()"
+>
+  <ng-template pTemplate="header">
+    <i *ngIf="id === ''" class="pi pi-user-plus mr-2"></i>
+    <i *ngIf="id != ''" class="pi pi-user-edit mr-2"></i>
+    <h2 class="panel-header">{{ panelHeader }}</h2>
+  </ng-template>
+  <small [innerHTML]="this.messageService.requiredFields"></small>
+  <p-divider></p-divider>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+    <div class="formgrid grid">
+      <div class="field xl:col-6 lg:col-6 md:col-6 sm:col-12">
+        <label htmlFor="username">Nombre del trabajador</label>
+        <span class="p-float-label">
+          <p-dropdown placeholder="Seleccione Nombre" optionLabel="name" inputId="float-label"></p-dropdown>
+          <label for="float-label">Seleccione Nombre</label>
+        </span>
+      </div>
+
+
+      <div class="field xl:col-6 lg:col-6 md:col-6 sm:col-12">
+        <label appLabel for="endDate" label="Proyecto asignado:" [required]="availableProjectsField"></label>
+        <span class="p-float-label">
+          <p-dropdown placeholder="Seleccione Proyecto" optionLabel="name" inputId="float-label"></p-dropdown>
+          <label for="float-label">Seleccione Proyecto</label>
+
+        </span>
+      </div>
+    </div>
+    <div class="formgrid grid">
+      <div class="field xl:col-6 lg:col-6 md:col-6 sm:col-12">
+        <label htmlFor="username">Cargo de Proyecto</label>
+        <span class="p-float-label">
+          <p-dropdown placeholder="Seleccione Cargo" optionLabel="name" inputId="float-label"></p-dropdown>
+          <label for="float-label">Seleccione Cargo</label>
+        </span>
+      </div>
+
+      <div class="field xl:col-6 lg:col-6 md:col-6 sm:col-12">
+        <label appLabel for="dateEntryFoundation" label="Fecha de ingreso a la fundacion:" [required]="dateEntryFoundationField"></label>
+        <p-calendar formControlName="dateEntryFoundation" id="dateEntryFoundation" dateFormat="dd/mm/yy"></p-calendar>
+        <small appErrorMessage [errors]="dateEntryFoundationField.errors" [touched]="dateEntryFoundationField.touched"
+          [dirty]="dateEntryFoundationField.dirty">
+        </small>
+      </div>
+    </div>
+
+    <div class="formgrid grid">
+      <div class="field xl:col-6 lg:col-6 md:col-6 sm:col-12">
+        <label appLabel for="dateEntryProject" label="Fecha de ingreso al Proyecto:" [required]="dateEntryProjectField"></label>
+        <p-calendar formControlName="dateEntryProject" id="dateEntryProject" dateFormat="dd/mm/yy"></p-calendar>
+        <small appErrorMessage [errors]="dateEntryProjectField.errors" [touched]="dateEntryProjectField.touched"
+          [dirty]="dateEntryProjectField.dirty">
+        </small>
+      </div>
+
+      <div class="field xl:col-6 lg:col-6 md:col-6 sm:col-12">
+        <label appLabel for="departureDateProject" label="Fecha de salida la Proyecto:" [required]="departureDateProjectField"></label>
+        <p-calendar formControlName="departureDateProject" id="departureDateProject" dateFormat="dd/mm/yy"></p-calendar>
+        <small appErrorMessage [errors]="departureDateProjectField.errors" [touched]="departureDateProjectField.touched"
+          [dirty]="departureDateProjectField.dirty">
+        </small>
+      </div>
+    </div>
+
+    <div class="formgrid grid">
+      <div class="field xl:col-6 lg:col-6 md:col-6 sm:col-12">
+        <button pButton pRipple id="btnBack" type="button"
+                label="Cancelar"
+                class="p-button-outlined p-button-warning"
+                icon="pi pi-arrow-left"
+                [loading]="(loaded$|async)!"
+                (click)="back()"></button>
+      </div>
+      <div class="field xl:col-6 lg:col-6 md:col-6 sm:col-12">
+        <button pButton pRipple id="submit" type="submit"
+                label="Guardar"
+                class="p-button-raised p-button-warning"
+                icon="pi pi-save"
+                [loading]="(loaded$|async)!"></button>
+      </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </form>
+</p-panel>

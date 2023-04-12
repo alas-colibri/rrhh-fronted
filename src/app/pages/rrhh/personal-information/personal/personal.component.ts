@@ -52,7 +52,6 @@ export class PersonalComponent implements OnInit {
       { label: 'Ficha Personal' },
     ]);
     //this.loadGenders();
-    //this.loadTypeContract();
 
     this.typeContract = [
       { name: 'Temporal', code: 'Tem' },
@@ -104,10 +103,10 @@ export class PersonalComponent implements OnInit {
 
     console.log(this.form.value)
     if (this.form.valid) {
-      if (this.id = 'new') {
-        this.create(this.form.value);
+      if (this.id != 'new ') {
+        this.update(this.form.value);
       } else {
-       this.update(this.form.value);
+       this.create(this.form.value);
       }
     } else {
       this.form.markAllAsTouched();
@@ -124,10 +123,6 @@ export class PersonalComponent implements OnInit {
     this.router.navigate(['/uic/student-informations', 'new']);
   }
 
-  redirectCreateForme() {
-    this.router.navigate(['/uic/student-informations/complexivo', 'new']);
-  }
-
  // loadGenders(): void {
    // this.catalogueService.catalogueType(CatalogueTypeEnum.GENDER).subscribe((genders) => this.genders = genders);
  // }
@@ -136,9 +131,6 @@ export class PersonalComponent implements OnInit {
  //   this.catalogueService.catalogueType(CatalogueTypeEnum.MARITAL_STATUS).subscribe((maritalStatus) => this.maritalStatus = maritalStatus);
  // }
 
- // loadTypeContract(): void {
- //   this.catalogueService.catalogueType(CatalogueTypeEnum.SEX).subscribe((sexes) => this.sexes = sexes);
- // }
 
   redirectEditForm(id: string) {
     this.router.navigate(['/uic/student-informations', id]);
