@@ -18,7 +18,7 @@ export class ProjectAssignmentHttpService {
   selectedprojectAssignment:ReadProjectAssignmentDto = {};
   constructor(
     private coreService: CoreService,
-    private httpClient: HttpClient,
+    private httpClient: HttpClient, 
     private messageService: MessageService,
   ) {
   }

@@ -61,17 +61,17 @@ export class ProjectAssignmentFormComponent implements OnInit, OnExitInterface {
   }
 
   ngOnInit(): void {
-    this.getProjectAssignment();
+  //  this.getProjectAssignment();
   }
 
 
   get newForm(): UntypedFormGroup {
     return this.formBuilder.group({
-      availableProjects: [null, [Validators.required]],
-      projectCharge: [null, [Validators.required]],
-      dateEntryFoundation: [null, [Validators.required, DateValidators.min(new Date())]],
-      dateEntryProject: [null, [Validators.required, DateValidators.min(new Date())]],
-      departureDateProject: [null, [Validators.required, DateValidators.min(new Date())]],
+      availableProjects: [null ],
+      projectCharge: [null],
+      dateEntryFoundation: [null],
+      dateEntryProject: [null],
+      departureDateProject: [null],
 
 
 
