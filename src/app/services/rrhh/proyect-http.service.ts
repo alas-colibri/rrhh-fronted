@@ -8,6 +8,7 @@ import { CreateEventDto, EventModel, ReadEventDto,  UpdateEventDto } from '@mode
 import { CoreService, MessageService } from '@services/resources';
 import { PaginatorModel } from '@models/resources';
 import { CreateProyectDto, ProyectModel, ReadProyectDto, UpdateProyectDto } from '@models/rrhh/proyect.model';
+import { CatalogueTypeEnum } from '@shared/enums';
 
 @Injectable({
   providedIn: 'root'
@@ -58,50 +59,14 @@ export class ProyectHttpService {
     );
   }
 
-  findByPlanning( page: number = 0, search: string = '',planningId: string): Observable<ProyectModel[]> {
-    const url = `${this.API_URL}/plannings/${planningId}`;
-
-    const headers = new HttpHeaders().append('pagination', 'true');
-    const params = new HttpParams()
-      .append('page', page)
-      .append('search', search)
-      .append('planningId', planningId);
-
+  proyect(type: CatalogueTypeEnum): Observable<ProyectModel[]> {
+    const url = `${this.API_URL}/catalogue`;
+    const params = new HttpParams().append('type', type);
     this.coreService.showLoad();
-    return this.httpClient.get<ServerResponse>(url, {headers, params}).pipe(
-      map((response) => {
+    return this.httpClient.get<ServerResponse>(url, {params}).pipe(
+      map(response => {
         this.coreService.hideLoad();
-        if (response.pagination) {
-          this.pagination.next(response.pagination);
-        }
-        return response.data;
-      })
-    );
-  }
-  get proyect  (): ReadProyectDto{
-    return this.selectedproyect;
-  }
-
-  set proyect (value: ReadProyectDto) {
-     this.selectedproyect = value ;
-  }
-  findByPlanningTimeline( page: number = 0, search: string = '',planningId: string): Observable<ProyectModel[]> {
-    const url = `${this.API_URL}/timeline/${planningId}`;
-
-    const headers = new HttpHeaders().append('pagination', 'true');
-    const params = new HttpParams()
-      .append('page', page)
-      .append('search', search)
-      .append('planningId', planningId);
-
-    this.coreService.showLoad();
-    return this.httpClient.get<ServerResponse>(url, {headers, params}).pipe(
-      map((response) => {
-        this.coreService.hideLoad();
-        if (response.pagination) {
-          this.pagination.next(response.pagination);
-        }
-        return response.data;
+        return response.data
       })
     );
   }
