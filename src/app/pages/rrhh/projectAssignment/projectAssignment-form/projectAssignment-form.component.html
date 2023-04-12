@@ -18,30 +18,47 @@
 
     <div class="formgrid grid">
       <div class="field xl:col-6 lg:col-6 md:col-6 sm:col-12">
-        <label htmlFor="username">Nombre del trabajador</label>
-        <span class="p-float-label">
-          <p-dropdown placeholder="Seleccione Nombre" optionLabel="name" inputId="float-label"></p-dropdown>
-          <label for="float-label">Seleccione Nombre</label>
-        </span>
+        <label appLabel for="person" label="Nombre del Trabajador:" [required]="personField"></label>
+        <p-dropdown id="person" formControlName="person" dataKey="id" [options]="persons" optionLabel="names" [filter]="true"
+          filterBy="names" placeholder="Seleccionar empleado">
+          <ng-template pTemplate="selectedItem">
+            <div *ngIf="personField.value">
+              <div>{{personField.value.names}}</div>
+            </div>
+          </ng-template>
+          <ng-template pTemplate="item" let-item>
+            {{item.names}}
+          </ng-template>
+        </p-dropdown>
+        <small appErrorMessage [errors]="personField.errors" [touched]="personField.touched" [dirty]="personField.dirty">
+        </small>
       </div>
 
 
       <div class="field xl:col-6 lg:col-6 md:col-6 sm:col-12">
-        <label appLabel for="endDate" label="Proyecto asignado:" [required]="availableProjectsField"></label>
-        <span class="p-float-label">
-          <p-dropdown placeholder="Seleccione Proyecto" optionLabel="name" inputId="float-label"></p-dropdown>
-          <label for="float-label">Seleccione Proyecto</label>
-
-        </span>
+        <label appLabel for="availableProject" label="Proyectos:" [required]="availableProjectField"></label>
+        <p-dropdown id="availableProject" formControlName="availableProject" dataKey="id" [options]="availableProjects" optionLabel="nameProyect" [filter]="true"
+          filterBy="nameProyect" placeholder="Seleccionar carrera">
+          <ng-template pTemplate="selectedItem">
+            <div *ngIf="availableProjectField.value">
+              <div>{{availableProjectField.value.nameProyect}}</div>
+            </div>
+          </ng-template>
+          <ng-template pTemplate="item" let-item>
+            {{item.nameProyect}}
+          </ng-template>
+        </p-dropdown>
+        <small appErrorMessage [errors]="availableProjectField.errors" [touched]="availableProjectField.touched" [dirty]="availableProjectField.dirty">
+        </small>
       </div>
     </div>
     <div class="formgrid grid">
       <div class="field xl:col-6 lg:col-6 md:col-6 sm:col-12">
-        <label htmlFor="username">Cargo de Proyecto</label>
-        <span class="p-float-label">
-          <p-dropdown placeholder="Seleccione Cargo" optionLabel="name" inputId="float-label"></p-dropdown>
-          <label for="float-label">Seleccione Cargo</label>
-        </span>
+        <label appLabel for="city" label="Cargo del proyecto:" [required]="projectChargeField"></label>
+        <p-dropdown [options]="cargo" [(ngModel)]="selectcargo" optionLabel="name" optionValue="name"
+          formControlName="city"></p-dropdown>
+        <small appErrorMessage [errors]="projectChargeField.errors" [touched]="projectChargeField.touched" [dirty]="projectChargeField.dirty">
+        </small>
       </div>
 
       <div class="field xl:col-6 lg:col-6 md:col-6 sm:col-12">
