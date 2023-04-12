@@ -23,7 +23,7 @@ export class HolidayListComponent implements OnInit {
   search: UntypedFormControl = new UntypedFormControl('');
   selectedHolidays: HolidayModel[] = [];
   selectedHoliday: SelectHolidayDto = {};
-  holiday: HolidayModel[] = [];
+  holidays: HolidayModel[] = [];
   actionButtons: MenuItem[] = [];
 
   constructor(
@@ -56,7 +56,7 @@ export class HolidayListComponent implements OnInit {
   }*/
 
   findAll(page: number = 0) {
-    this.holidayHttpService.findAll(page, this.search.value).subscribe((holiday) => this.holiday = holiday);
+    this.holidayHttpService.findAll(page, this.search.value).subscribe((holiday) => this.holidays = holiday);
   }
 
   getColumns(): ColumnModel[] {
@@ -73,7 +73,7 @@ export class HolidayListComponent implements OnInit {
   getActionButtons(): MenuItem[] {
     return [
       {
-        label: 'Update',
+        label: 'Actualizar',
         icon: 'pi pi-pencil',
         command: () => {
           if (this.selectedHoliday.id)
@@ -81,7 +81,7 @@ export class HolidayListComponent implements OnInit {
         },
       },
       {
-        label: 'Delete',
+        label: 'Eliminar',
         icon: 'pi pi-trash',
         command: () => {
           if (this.selectedHoliday.id)
@@ -108,7 +108,7 @@ export class HolidayListComponent implements OnInit {
       .then((result) => {
         if (result.isConfirmed) {
           this.holidayHttpService.remove(id).subscribe((holiday) => {
-            this.holiday = this.holiday.filter(item => item.id !== holiday.id);
+            this.holidays = this.holidays.filter(item => item.id !== holiday.id);
             this.paginator.totalItems--;
           });
         }
@@ -120,7 +120,7 @@ export class HolidayListComponent implements OnInit {
       if (result.isConfirmed) {
         this.holidayHttpService.removeAll(this.selectedHolidays).subscribe((holiday) => {
           this.selectedHolidays.forEach(holidayDeleted => {
-            this.holiday = this.holiday.filter(event => event.id !== holidayDeleted.id);
+            this.holidays = this.holidays.filter(event => event.id !== holidayDeleted.id);
             this.paginator.totalItems--;
           });
           this.selectedHolidays = [];
