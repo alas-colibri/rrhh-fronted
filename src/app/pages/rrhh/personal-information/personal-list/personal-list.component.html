@@ -1,9 +1,9 @@
 <!--<p-card>-->
   <p-toolbar>
     <div class="p-toolbar-group-left">
-      <button pButton type="button" label="Agregar Persona" class="p-button-success mr-2" icon="pi pi-plus"
+      <button pButton type="button" label="Agregar Persona" class="p-button-raised p-button-warning mr-2" icon="pi pi-plus"
         (click)="redirectCreateForm()"></button>
-      <button pButton type="button" label="Refrescar" class="p-button-info mr-2" icon="pi pi-refresh"
+      <button pButton type="button" label="Refrescar" class="p-button-raised p-button-help mr-2" icon="pi pi-refresh"
         (click)="ngOnInit()"></button>
       <button *ngIf="selectedPersons.length>0" pButton type="button" label="Eliminar persona" class="p-button-danger"
         icon="pi pi-trash" (click)="removeAll()"></button>
