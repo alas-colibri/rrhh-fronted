@@ -1,6 +1,12 @@
 <p-toolbar>
+  <div class="p-toolbar-group-left">
+  <button pButton type="button" label="Asignar proyecto" class="p-button-raised p-button-warning mr-2" icon="pi pi-plus"
+      (click)="redirectCreateForm()"></button>
   <button pButton type="button" label="Refrescar" class="p-button-info mr-2" icon="pi pi-refresh"
     (click)="ngOnInit()"></button>
+    <button *ngIf="selectedEvaluations.length>0" pButton type="button" label="Eliminar proyecto" class="p-button-danger"
+      icon="pi pi-trash" (click)="removeAll()"></button>
+  </div>
   <div class="p-toolbar-group-right">
     <div class="p-input-icon-right">
       <input type="text" pInputText [formControl]="search" placeholder="Busqueda por nombre">
@@ -9,10 +15,10 @@
   </div>
 </p-toolbar>
 <p-divider></p-divider>
-<h1 class="panel-header text-center">Resultados evaluación de desempeño</h1>
+<h1 class="panel-header text-center">Proyectos asignados</h1>
 <p-divider></p-divider>
 <p-table dataKey="id" styleClass="p-datatable-gridlines" [value]="evaluations" [columns]="columns" [sortField]="'sort'"
-  [loading]="(loaded$|async)!" [(selection)]="selectedEvaluations" [responsive]="true">
+  [loading]="(loaded$|async)!" [(selection)]="selectedEvaluation" [responsive]="true">
   <ng-template pTemplate="header" let-columns>
     <tr>
       <th style="width: 3rem">
@@ -36,17 +42,26 @@
       <td *ngFor="let col of columns">
         <!-- Objects -->
         <div *ngIf="rowData[col.field]?.id" [ngSwitch]="col.field">
-          <div *ngSwitchCase="'availableProjects'">
-            {{rowData['name'].availableProjects}}
+          <div *ngSwitchCase="'availableProject'">
+            {{rowData[col.field].nameProyect}}
+          </div>
+          <div *ngSwitchCase="'name'">
+            {{rowData['name'].persons}}
           </div>
         </div>
-        
+
 
         <!--Fields-->
         <div *ngIf="!rowData[col.field]?.id" [ngSwitch]="col.field">
-          <div *ngSwitchCase="'availableProjects'">
-            {{rowData['name'].availableProjects}}
+          <div *ngSwitchCase="'departureDateProject'">
+            {{rowData[col.field]|date}}
           </div>
+          <div *ngSwitchCase="'dateEntryProject'">
+            {{rowData[col.field]|date}}
+          </div>
+          <!-- <div *ngSwitchCase="'persons'">
+            {{rowData['name'].persons}}
+          </div> -->
           <div *ngSwitchDefault>{{rowData[col.field]}}</div>
         </div>
       </td>
