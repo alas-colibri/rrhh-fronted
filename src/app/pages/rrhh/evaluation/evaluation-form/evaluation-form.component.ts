@@ -10,13 +10,14 @@ import {
 import {ActivatedRoute, Router} from '@angular/router';
 import {BreadcrumbService, CoreService, MessageService} from '@services/resources';
 import {OnExitInterface} from '@shared/interfaces';
-import { EvaluationsHttpService } from '@services/rrhh';
+import { EvaluationsHttpService, PersonalInformationService } from '@services/rrhh';
 import { CatalogueTypeEnum } from '@shared/enums';
 import { format } from 'date-fns';
 import { DateValidators } from '@shared/validators';
 import { ProjectAssignmentModel } from '@models/rrhh/projectAssignment';
 import { ProjectAssignmentHttpService } from '@services/rrhh/projectAssignment-http.service';
 import { CreateEvaluationDto, UpdateEvaluationDto } from '@models/rrhh/evaluation.model';
+import { PersonModel } from '@models/rrhh/person.model';
 
 @Component({
   selector: 'app-evaluation-form',
@@ -32,7 +33,7 @@ export class EvaluationFormComponent implements OnInit, OnExitInterface {
   isLoadingSkeleton: boolean = false;
   loaded$ = this.coreService.loaded$;
   checked: boolean = true;
-  names: ProjectAssignmentModel[]=[];
+  names: PersonModel[]=[];
   calificacion: any;
   selected1: any;
   selected2: any;
@@ -50,9 +51,10 @@ export class EvaluationFormComponent implements OnInit, OnExitInterface {
     private router: Router,
     private proyectAsHttpService: ProjectAssignmentHttpService,
     private evaluationsHttpService: EvaluationsHttpService,
+    private personHttpService: PersonalInformationService,
   ) {
     this.breadcrumbService.setItems([
-      {label: 'Preguntas', routerLink: ['/rrhh/questions']},
+      {label: 'Listado', routerLink: ['/rrhh/evaluation']},
       {label: 'Añadir Pregunta'},
     ]);
     if (activatedRoute.snapshot.params['id'] !== 'new') {
@@ -140,7 +142,7 @@ export class EvaluationFormComponent implements OnInit, OnExitInterface {
 
   getHolidayname(): void{
     this.isLoadingSkeleton = true;
-    this.proyectAsHttpService.projectAssignment(CatalogueTypeEnum.PROYECT_ASSIGNMENT).subscribe((names) => {
+    this.personHttpService.person(CatalogueTypeEnum.PERSON).subscribe((names) => {
         this.isLoadingSkeleton=false;
         this.names = names;
     })

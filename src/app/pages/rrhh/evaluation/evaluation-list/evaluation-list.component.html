@@ -1,6 +1,6 @@
 <p-toolbar>
   <div class="p-toolbar-group-left">
-  <button pButton type="button" label="Asignar proyecto" class="p-button-raised p-button-warning mr-2" icon="pi pi-plus"
+  <button pButton type="button" label="Añadir Evaluación" class="p-button-raised p-button-warning mr-2" icon="pi pi-plus"
       (click)="redirectCreateForm()"></button>
   <button pButton type="button" label="Refrescar" class="p-button-info mr-2" icon="pi pi-refresh"
     (click)="ngOnInit()"></button>
@@ -15,7 +15,7 @@
   </div>
 </p-toolbar>
 <p-divider></p-divider>
-<h1 class="panel-header text-center">Proyectos asignados</h1>
+<h1 class="panel-header text-center">Listado de Evaluación</h1>
 <p-divider></p-divider>
 <p-table dataKey="id" styleClass="p-datatable-gridlines" [value]="evaluations" [columns]="columns" [sortField]="'sort'"
   [loading]="(loaded$|async)!" [(selection)]="selectedEvaluation" [responsive]="true">
@@ -46,20 +46,33 @@
             {{rowData[col.field].nameProyect}}
           </div>
           <div *ngSwitchCase="'name'">
-            {{rowData['name'].persons}}
+            {{rowData[col.field].identificationCode}}
+          </div>
+          <!-- <div *ngSwitchCase="'name'">
+            {{rowData['name'].identificationCode}}
+          </div> -->
+          <div *ngSwitchCase="'names'">
+            {{rowData['name'].names}}
           </div>
         </div>
 
 
         <!--Fields-->
         <div *ngIf="!rowData[col.field]?.id" [ngSwitch]="col.field">
+          <div *ngSwitchCase="'names'">
+            {{rowData['name'].names}}
+          </div>
           <div *ngSwitchCase="'departureDateProject'">
             {{rowData[col.field]|date}}
           </div>
           <div *ngSwitchCase="'dateEntryProject'">
             {{rowData[col.field]|date}}
           </div>
-          <!-- <div *ngSwitchCase="'persons'">
+          <!-- <div *ngSwitchCase="'name'">
+            {{rowData['name'].projectCharge
+          }}
+          </div>
+          <div *ngSwitchCase="'name'">
             {{rowData['name'].persons}}
           </div> -->
           <div *ngSwitchDefault>{{rowData[col.field]}}</div>
@@ -90,4 +103,6 @@
   <p-paginator [rows]="paginator.limit" [totalRecords]="paginator.totalItems" (onPageChange)="paginate($event)">
   </p-paginator>
 </p-table>
+<p-paginator [rows]="paginator.limit" [totalRecords]="paginator.totalItems"
+(onPageChange)="paginate($event)"></p-paginator>
 <!--</p-card>-->

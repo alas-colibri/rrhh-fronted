@@ -12,15 +12,15 @@
 
       <div class="field xl:col-10 lg:col-10 md:col-10 sm:col-12">
         <label appLabel for="name" label="Seleccionar empleado:" [required]="nameField"></label>
-        <p-dropdown id="name" formControlName="name" dataKey="id" [options]="names" optionLabel="person" [filter]="true"
-          filterBy="person" placeholder="Nombre del empleado">
+        <p-dropdown id="name" formControlName="name" dataKey="id" [options]="names" optionLabel="names" [filter]="true"
+          filterBy="identificationCode" placeholder="Nombre del empleado">
           <ng-template pTemplate="selectedItem">
             <div *ngIf="nameField.value">
-              <div>{{nameField.value.person.names}}</div>
+              <div>{{nameField.value.names}}</div>
             </div>
           </ng-template>
           <ng-template pTemplate="item" let-item>
-            {{item.person.names}}
+            {{item.identificationCode}}
           </ng-template>
         </p-dropdown>
         <small appErrorMessage [errors]="nameField.errors" [touched]="nameField.touched" [dirty]="nameField.dirty">

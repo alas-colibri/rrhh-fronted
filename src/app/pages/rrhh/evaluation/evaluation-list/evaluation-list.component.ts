@@ -24,6 +24,7 @@ export class EvaluationListComponent implements OnInit {
   selectedEvaluation: SelectEvaluationDto = {};
   evaluations: EvaluationModel[] = [];
   actionButtons: MenuItem[] = [];
+  evas: EvaluationModel[] = [];
 
   constructor(
     public authService: AuthService,
@@ -54,8 +55,8 @@ export class EvaluationListComponent implements OnInit {
 
   getColumns(): ColumnModel[] {
     return [
-      {field: 'persons', header: 'Nombre del Trabajador'},
-      {field: 'name', header: 'Proyecto Asignado'},
+      {field: 'name', header: 'Cedúla del Empleado'},
+      {field: 'names', header: 'Nombre del Empleado'},
       {field: 'observation', header: 'Observación'},
       {field: 'noteF', header: 'Nota de desempeño'},
     ]

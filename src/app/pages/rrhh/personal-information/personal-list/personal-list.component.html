@@ -17,7 +17,7 @@
   </p-toolbar>
   <p-paginator [rows]="paginator.limit" [totalRecords]="paginator.totalItems"
     (onPageChange)="paginate($event)"></p-paginator>
-  <p-table dataKey="id" styleClass="p-datatable-striped" [value]="persons" [columns]="columns" [sortField]="'sort'"
+  <p-table dataKey="id" styleClass="p-datatable-gridlines"  [value]="persons" [columns]="columns" [sortField]="'sort'"
     [loading]="(loaded$|async)!" [(selection)]="selectedPersons" [responsive]="true">
     <ng-template pTemplate="header" let-columns>
       <tr>
@@ -57,7 +57,7 @@
             <div *ngSwitchCase="'startDate'">
               {{rowData[col.field]|date}}
             </div>
-            <div *ngSwitchCase="'endDate'">
+            <div *ngSwitchCase="'birthdate'">
               {{rowData[col.field]|date}}
             </div>
             <div *ngSwitchCase="'isEnable'">

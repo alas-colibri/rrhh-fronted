@@ -56,13 +56,13 @@ export class EvaluationsHttpService {
     );
   }
 
-  get evaluations  (): ReadEvaluationDto{
-    return this.selectedEvaluation;
-  }
+  // get evaluations  (): ReadEvaluationDto{
+  //   return this.selectedEvaluation;
+  // }
 
-  set evaluations  (value: ReadEvaluationDto) {
-     this.selectedEvaluation = value ;
-  }
+  // set evaluations  (value: ReadEvaluationDto) {
+  //    this.selectedEvaluation = value ;
+  // }
 
   findOne(id: string): Observable<EvaluationModel> {
     const url = `${this.API_URL}/${id}`;

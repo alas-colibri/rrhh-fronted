@@ -1,8 +1,9 @@
 import { PersonModel } from "./person.model";
+import { ProjectAssignmentModel } from "./projectAssignment";
 
 export interface EvaluationModel {
   id: string;
-  name: PersonModel[];
+  name: PersonModel;
   question1: string;
   question2: string;
   question3: string;
