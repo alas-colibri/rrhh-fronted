@@ -54,8 +54,8 @@ export class EvaluationListComponent implements OnInit {
 
   getColumns(): ColumnModel[] {
     return [
-      {field: 'availableProjects', header: 'Nombre del Trabajador'},
-      {field: 'availableProjects', header: 'Proyecto Asignado'},
+      {field: 'persons', header: 'Nombre del Trabajador'},
+      {field: 'name', header: 'Proyecto Asignado'},
       {field: 'observation', header: 'Observación'},
       {field: 'noteF', header: 'Nota de desempeño'},
     ]

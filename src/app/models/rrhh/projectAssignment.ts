@@ -1,3 +1,5 @@
+import { PersonModel } from './person.model';
+import { ProyectModel } from './proyect.model';
 export interface ProjectAssignmentModel {
   id: string;
   availableProjects: string;
@@ -6,6 +8,14 @@ export interface ProjectAssignmentModel {
   dateEntryProject: Date;
   departureDateProject: Date;
   typeProjectAssignment: string;
+
+
+  person: PersonModel;
+  availableProjects: ProyectModel[];
+  projectCharge: string;
+  dateEntryFoundation: Date;
+  dateEntryProject: Date;
+  departureDateProject: Date;
 
 }
 

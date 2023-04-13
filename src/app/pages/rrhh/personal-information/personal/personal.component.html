@@ -107,11 +107,17 @@
 
         <div class="formgrid grid">
           <div class="field xl:col-4 lg:col-4 md:col-4 sm:col-12">
-            <button pButton pRipple id="btnBack" type="button" label="Cancelar" class="p-button-info p-button-outlined"
+            <button pButton pRipple id="btnBack" type="button"
+            label="Cancelar"
+            class="p-button-outlined p-button-warning"
               icon="pi pi-arrow-left" [loading]="(loaded$|async)!" (click)="back()"></button>
           </div>
           <div class="field xl:col-4 lg:col-4 md:col-4 sm:col-12">
-            <button pButton pRipple id="submit" type="submit" label="Guardar" icon="pi pi-save"
+            <button pButton pRipple id="submit"
+            type="submit"
+            label="Guardar"
+            class="p-button-raised p-button-warning"
+            icon="pi pi-save"
               [loading]="(loaded$|async)!"></button>
           </div>
         </div>

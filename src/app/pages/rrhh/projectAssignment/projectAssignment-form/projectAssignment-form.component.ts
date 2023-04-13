@@ -15,6 +15,9 @@ import { format } from 'date-fns';
 import { DateValidators } from '@shared/validators';
 import { CreateProjectAssignmentDto, UpdateProjectAssignmentDto } from '@models/rrhh/projectAssignment';
 import { ProjectAssignmentHttpService } from '@services/rrhh/projectAssignment-http.service';
+import { PersonModel } from '@models/rrhh/person.model';
+import { ProyectModel } from '@models/rrhh/proyect.model';
+import { PersonalInformationService, ProyectHttpService } from '@services/rrhh';
 
 @Component({
   selector: 'app-projectAssignment-form',
@@ -35,6 +38,10 @@ export class ProjectAssignmentFormComponent implements OnInit, OnExitInterface {
   //names: ProjectAssignmentModel[]=[];
   typeProjectCharge: any;
   selectedTypeProjectChargeField: any;
+  persons: PersonModel[]=[];
+  availableProjects: ProyectModel[]=[];
+  cargo: any;
+  selectcargo: any;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -44,7 +51,8 @@ export class ProjectAssignmentFormComponent implements OnInit, OnExitInterface {
     public messageService: MessageService,
     private router: Router,
     private projectAssignmentHttpService: ProjectAssignmentHttpService,
-
+    private personHttpService: PersonalInformationService,
+    private proyectHttpService: ProyectHttpService,
   ) {
     this.breadcrumbService.setItems([
       { label: 'Asignar proyecto', routerLink: ['/rrhh/projectAssignment'] },
@@ -65,6 +73,10 @@ export class ProjectAssignmentFormComponent implements OnInit, OnExitInterface {
       this.id = activatedRoute.snapshot.params['id'];
       this.panelHeader = 'Cancelar proyecto';
     }
+    this.cargo = [
+      { name: 'Temporal', code: 'Tem' },
+      { name: 'Indefinido', code: 'Ind' }
+    ];
   }
 
   async onExit(): Promise<boolean> {
@@ -75,21 +87,20 @@ export class ProjectAssignmentFormComponent implements OnInit, OnExitInterface {
   }
 
   ngOnInit(): void {
-  //  this.getProjectAssignment();
+   this.getProyectAsName();
+   this.getProyectAsAvalaible();
   }
 
 
   get newForm(): UntypedFormGroup {
     return this.formBuilder.group({
+      
+      person: [null ],
       availableProjects: [null ],
       typeProjectCharge: [null],
       dateEntryFoundation: [null],
       dateEntryProject: [null],
       departureDateProject: [null],
-
-
-
-
     });
   }
 
@@ -117,7 +128,6 @@ export class ProjectAssignmentFormComponent implements OnInit, OnExitInterface {
     });
   }
 
-
   getProjectAssignment(): void {
     this.isLoadingSkeleton = true;
     this.projectAssignmentHttpService.findOne(this.id).subscribe((projectAssignment) => {
@@ -133,10 +143,26 @@ export class ProjectAssignmentFormComponent implements OnInit, OnExitInterface {
     });
   }
 
+  getProyectAsName(): void{
+    this.isLoadingSkeleton = true;
+    this.personHttpService.person(CatalogueTypeEnum.PERSON).subscribe((persons) => {
+        this.isLoadingSkeleton=false;
+        this.persons = persons;
+    })
+  }
+
+  getProyectAsAvalaible(): void{
+    this.isLoadingSkeleton = true;
+    this.proyectHttpService.proyect(CatalogueTypeEnum.PROYECT_ASSIGNMENT).subscribe((availableProjects) => {
+        this.isLoadingSkeleton=false;
+        this.availableProjects = availableProjects;
+    })
+  }
+
   // Getters
 
-  get namePersonField() {
-    return this.form.controls['namePerson'];
+  get personField() {
+    return this.form.controls['person'];
   }
 
   get departureDateProjectField() {
@@ -158,7 +184,6 @@ export class ProjectAssignmentFormComponent implements OnInit, OnExitInterface {
   get availableProjectsField() {
     return this.form.controls['availableProjects'];
   }
-
 
 }
 
