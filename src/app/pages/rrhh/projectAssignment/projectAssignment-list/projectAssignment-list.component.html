@@ -1,11 +1,11 @@
 <!--<p-card>-->
 <p-toolbar>
   <div class="p-toolbar-group-left">
-    <button pButton type="button" label="Asignar Proyecto" class="p-button-raised p-button-warning mr-2"
+    <button pButton type="button" label="Asignar Proyecto" class="p-button-success mr-2"
       icon="pi pi-plus" (click)="redirectCreateForm()"></button>
     <button pButton type="button" label="Refrescar" class="p-button-info mr-2" icon="pi pi-refresh"
       (click)="ngOnInit()"></button>
-    <button *ngIf="selectedProjectAssignments.length>0" pButton type="button" label="Eliminar Proyecto" class="p-button-danger"
+    <button *ngIf="selectedProjectAssignments.length>0" pButton type="button" label="Eliminar Asignacion" class="p-button-danger"
       icon="pi pi-trash" (click)="removeAll()"></button>
   </div>
   <div class="p-toolbar-group-right">
@@ -54,11 +54,11 @@
 
         <!--Fields-->
         <div *ngIf="!rowData[col.field]?.id" [ngSwitch]="col.field">
-          <div *ngSwitchCase="'active'">
+          <!--<div *ngSwitchCase="'active'">
             <p-tag [value]="rowData['active']?'Activo':'Inactivo'"
               [pTooltip]="rowData['maxAttempts']===0?'Exceeded the maximum number of attempts allowed':''"
               [severity]="checkState(rowData)"></p-tag>
-          </div>
+          </div>-->
           <div *ngSwitchCase="'dateEntryFoundation'">
             {{rowData[col.field]|date}}
           </div>
@@ -88,7 +88,7 @@
           <p-splitButton icon="pi pi-ellipsis-v" [model]="actionButtons"
             (onDropdownClick)="selectProjectAssignment(rowData)"></p-splitButton>
         </ng-template>
-        <ng-template #elseBlock>Current Project Assignment</ng-template>
+        <ng-template #elseBlock>Current Event</ng-template>
       </td>
     </tr>
   </ng-template>

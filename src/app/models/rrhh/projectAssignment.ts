@@ -1,10 +1,11 @@
 export interface ProjectAssignmentModel {
   id: string;
   availableProjects: string;
-  projectCharge: string;
+  typeProjectCharge: string;
   dateEntryFoundation: Date;
   dateEntryProject: Date;
   departureDateProject: Date;
+  typeProjectAssignment: string;
 
 }
 

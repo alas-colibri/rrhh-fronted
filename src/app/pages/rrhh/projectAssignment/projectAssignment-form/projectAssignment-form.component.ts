@@ -32,6 +32,9 @@ export class ProjectAssignmentFormComponent implements OnInit, OnExitInterface {
   isLoadingSkeleton: boolean = false;
   loaded$ = this.coreService.loaded$;
   checked: boolean = true;
+  //names: ProjectAssignmentModel[]=[];
+  typeProjectCharge: any;
+  selectedTypeProjectChargeField: any;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -47,6 +50,17 @@ export class ProjectAssignmentFormComponent implements OnInit, OnExitInterface {
       { label: 'Asignar proyecto', routerLink: ['/rrhh/projectAssignment'] },
 
     ]);
+    this.typeProjectCharge = [
+      { name: 'Director del Proyecto', code: 'Dirc'},
+      { name: 'Lider Tecnico', code: 'Lidr' },
+      { name: 'Patrocinador Ejecutivo', code: 'Patro' },
+      { name: 'Gerente Funcional', code: 'Geren' },
+      { name: 'Miembro del Equipo del Proyecto', code: 'Miem' }
+
+    ]
+
+
+
     if (activatedRoute.snapshot.params['id'] !== 'new') {
       this.id = activatedRoute.snapshot.params['id'];
       this.panelHeader = 'Cancelar proyecto';
@@ -68,10 +82,11 @@ export class ProjectAssignmentFormComponent implements OnInit, OnExitInterface {
   get newForm(): UntypedFormGroup {
     return this.formBuilder.group({
       availableProjects: [null ],
-      projectCharge: [null],
+      typeProjectCharge: [null],
       dateEntryFoundation: [null],
       dateEntryProject: [null],
       departureDateProject: [null],
+
 
 
 
@@ -136,21 +151,14 @@ export class ProjectAssignmentFormComponent implements OnInit, OnExitInterface {
     return this.form.controls['dateEntryProject'];
   }
 
-  get projectChargeField() {
-    return this.form.controls['projectCharge'];
+  get typeProjectChargeField() {
+    return this.form.controls['typeProjectCharge'];
   }
 
   get availableProjectsField() {
     return this.form.controls['availableProjects'];
   }
 
-  /*get descripcionProyectField() {
-    return this.form.controls['descripcionProyect'];
-  }
 
-  get tipodeProyectField() {
-    return this.form.controls['tipodeProyect'];
-  }
-*/
 }
 

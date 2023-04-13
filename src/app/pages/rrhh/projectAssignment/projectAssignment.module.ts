@@ -19,7 +19,6 @@ import {ToastModule} from "primeng/toast";
 import {PaginatorModule} from "primeng/paginator";
 import {KeyFilterModule} from "primeng/keyfilter";
 import {DialogModule} from "primeng/dialog";
-import {RrhhModule} from "../rrhh.module";
 import {InputSwitchModule} from "primeng/inputswitch";
 import {PanelModule} from "primeng/panel";
 import {MenuModule} from 'primeng/menu';
