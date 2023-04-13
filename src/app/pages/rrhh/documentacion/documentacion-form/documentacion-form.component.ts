@@ -10,11 +10,15 @@ import {
 import {ActivatedRoute, Router} from '@angular/router';
 import {BreadcrumbService, CoreService, MessageService} from '@services/resources';
 import {OnExitInterface} from '@shared/interfaces';
-import { EventsHttpService } from '@services/rrhh';
+import { EvaluationsHttpService, EventsHttpService, PersonalInformationService } from '@services/rrhh';
 import { CreateEventDto, EventModel, UpdateEventDto } from '@models/rrhh';
 import { CatalogueTypeEnum } from '@shared/enums';
 import { format } from 'date-fns';
 import { DateValidators } from '@shared/validators';
+import { PersonModel } from '@models/rrhh/person.model';
+import { ProjectAssignmentHttpService } from '@services/rrhh/projectAssignment-http.service';
+import { UpdateDocumentacionDto } from '@models/rrhh/documentacion.models';
+import { DocumentacionHttpService } from '@services/rrhh/documentacion-http.service';
 
 @Component({
   selector: 'app-documentacion-form',
@@ -30,7 +34,14 @@ export class DocumentacionFormComponent implements OnInit, OnExitInterface {
   isLoadingSkeleton: boolean = false;
   loaded$ = this.coreService.loaded$;
   checked: boolean = true;
-  documentacion: EventModel[] = [];
+  names: PersonModel[]=[];
+  calificacion: any;
+  selected1: any;
+  selected2: any;
+  selected3: any;
+  selected4: any;
+  selected5: any;
+  selectedCalif: any;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -40,6 +51,9 @@ export class DocumentacionFormComponent implements OnInit, OnExitInterface {
     public messageService: MessageService,
     private router: Router,
     private eventsHttpService: EventsHttpService,
+    private proyectAsHttpService: ProjectAssignmentHttpService,
+    private documentacionHttpService: DocumentacionHttpService,
+    private personHttpService: PersonalInformationService,
   ) {
     this.breadcrumbService.setItems([
       {label: 'Documentos', routerLink: ['/rrhh/documents']},
@@ -59,14 +73,26 @@ export class DocumentacionFormComponent implements OnInit, OnExitInterface {
   }
 
   ngOnInit(): void {
-    //this.getEvent();
+    this.getDocumentacion();
+    this.getHolidayname();
   }
 
 
   get newForm(): UntypedFormGroup {
     return this.formBuilder.group({
-      documents: [null, [Validators.required]],
-      active: [null, [Validators.required]],
+      name: [null, [Validators.required]],
+      question1: [null, [Validators.required]],
+      question2: [null, [Validators.required]],
+      question3: [null, [Validators.required]],
+      question4: [null],
+      question5: [null],
+      note1: [null, [Validators.required]],
+      note2: [null, [Validators.required]],
+      note3: [null, [Validators.required]],
+      note4: [null],
+      note5: [null],
+      observation: [null, [Validators.required]],
+      noteF: [null, [Validators.required]],
     });
   }
 
@@ -95,28 +121,80 @@ export class DocumentacionFormComponent implements OnInit, OnExitInterface {
   }
 
 
-  getEvent(): void {
+  getDocumentacion(): void {
     this.isLoadingSkeleton = true;
-    this.eventsHttpService.findOne(this.id).subscribe((event) => {
+    this.eventsHttpService.findOne(this.id).subscribe((documentacion) => {
       this.isLoadingSkeleton = false;
-      this.form.patchValue(event);
+      this.form.patchValue(documentacion);
     });
   }
 
-  update(event:UpdateEventDto): void {
-    this.eventsHttpService.update(this.id, event).subscribe((event) => {
-      this.form.reset(event);
+  update(documentacion:UpdateDocumentacionDto): void {
+    this.documentacionHttpService.update(this.id, documentacion).subscribe((documentacion) => {
+      this.form.reset(documentacion);
       this.back()
     });
   }
 
-  // Getters
-
-  get documentsField() {
-    return this.form.controls['document'];
+  getHolidayname(): void{
+    this.isLoadingSkeleton = true;
+    this.personHttpService.person(CatalogueTypeEnum.PERSON).subscribe((names) => {
+        this.isLoadingSkeleton=false;
+        this.names = names;
+    })
   }
 
-  get activeField() {
-    return this.form.controls['active'];
+  // Getters
+
+  get nameField() {
+    return this.form.controls['name'];
+  }
+
+  get question1Field() {
+    return this.form.controls['question1'];
+  }
+
+  get question2Field() {
+    return this.form.controls['question2'];
+  }
+
+  get question3Field() {
+    return this.form.controls['question3'];
+  }
+
+  get question4Field() {
+    return this.form.controls['question4'];
+  }
+
+  get question5Field() {
+    return this.form.controls['question5'];
+  }
+
+  get note1Field() {
+    return this.form.controls['note1'];
+  }
+
+  get note2Field() {
+    return this.form.controls['note2'];
+  }
+
+  get note3Field() {
+    return this.form.controls['note3'];
+  }
+
+  get note4Field() {
+    return this.form.controls['note4'];
+  }
+
+  get note5Field() {
+    return this.form.controls['note5'];
+  }
+
+  get observationField() {
+    return this.form.controls['observation'];
+  }
+
+  get noteFField() {
+    return this.form.controls['noteF'];
   }
 }

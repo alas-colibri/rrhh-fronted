@@ -10,7 +10,7 @@ import { CreateEventDto, EventModel, SelectEventDto } from '@models/rrhh';
 import { AuthService } from '@services/auth';
 import { CreateEvaluationDto, UpdateEvaluationDto } from '@models/rrhh/evaluation.model';
 import { CalificacionModel } from '@models/rrhh/calificacion.model';
-import { CreateDocumentacionDto, UpdateDocumentacionDto } from '@models/rrhh/documentacion.models';
+import { CreateDocumentacionDto, DocumentacionModel, SelectDocumentacionDto, UpdateDocumentacionDto } from '@models/rrhh/documentacion.models';
 import { DocumentacionHttpService } from '@services/rrhh/documentacion-http.service';
 
 @Component({
@@ -19,20 +19,17 @@ import { DocumentacionHttpService } from '@services/rrhh/documentacion-http.serv
   styleUrls: ['./documentacion-list.component.scss'],
 })
 export class DocumentacionListComponent implements OnInit {
-  id: string = '';
   columns: ColumnModel[];
-  form: UntypedFormGroup = this.newForm;
   loaded$ = this.coreService.loaded$;
-  pagination$ = this.eventsHttpService.pagination$;
+  pagination$ = this.documentacionHttpService.pagination$;
   paginator: PaginatorModel = this.coreService.paginator;
   search: UntypedFormControl = new UntypedFormControl('');
-  selectedEvents: EventModel[] = [];
-  selectedEvent: SelectEventDto = {};
-  events: EventModel[] = [];
+  selectedDocumento: DocumentacionModel[] = [];
+  selectedDocumentacion: SelectDocumentacionDto = {};
+  documento: DocumentacionModel[] = [];
   actionButtons: MenuItem[] = [];
-  documentacion: EventModel[] = [];
-  calificacion: CalificacionModel[] = [];
-  selectedCali: any;
+  evas: DocumentacionModel[] = [];
+
 
   constructor(
     public authService: AuthService,
@@ -52,100 +49,49 @@ export class DocumentacionListComponent implements OnInit {
     this.actionButtons = this.getActionButtons();
     this.pagination$.subscribe((pagination) => this.paginator = pagination);
     this.search.valueChanges.pipe(debounceTime(500)).subscribe((_) => this.findAll());
-    this.calificacion = [
-      { name: '20-40', code: 'Tem' },
-      { name: '40-60', code: 'Ind' },
-      { name: '60-80', code: 'Irnd' },
-      { name: '80-100', code: 'Inyd' }
-    ];
   }
 
   ngOnInit(): void {
-    //this.findAll();
-    this.findAllQuestions();
-  }
+    this.findAll();
 
-  checkState(event: EventModel): string {
-    if (event.active) return 'success';
-
-  return 'danger';
   }
 
   findAll(page: number = 0) {
-    this.eventsHttpService.findAll(page, this.search.value).subscribe((events) => this.events = events);
-  }
-
-  findAllQuestions(page: number = 0) {
-    this.eventsHttpService
-    .findAll(page, this.search.value)
-    .subscribe((events) => this.events = events.filter((events)=>events.active==true));
-  }
-
-  get newForm(): UntypedFormGroup {
-    return this.formBuilder.group({
-      results: [null, [Validators.required]],
-    });
+    this.documentacionHttpService.findAll(page, this.search.value).subscribe((documento) => this.documento = documento);
   }
 
   getColumns(): ColumnModel[] {
     return [
-      {field: 'documents', header: 'documentos'},
+      {field: 'name', header: 'Cedúla del Empleado'},
+      {field: 'names', header: 'Nombre del Empleado'},
+      {field: 'observation', header: 'Observación'},
+      {field: 'noteF', header: 'Nota de desempeño'},
     ]
   }
 
   getActionButtons(): MenuItem[] {
     return [
       {
-        label: 'Update',
+        label: 'Revisar',
         icon: 'pi pi-pencil',
         command: () => {
-          if (this.selectedEvent.id)
-            this.redirectEditForm(this.selectedEvent.id);
+          if (this.selectedDocumentacion.id)
+            this.redirectEditForm(this.selectedDocumentacion.id);
         },
       },
       {
-        label: 'Delete',
+        label: 'Eliminar',
         icon: 'pi pi-trash',
         command: () => {
-          if (this.selectedEvent.id)
-            this.remove(this.selectedEvent.id);
+          if (this.selectedDocumentacion.id)
+            this.remove(this.selectedDocumentacion.id);
         },
       },
     ];
   }
 
-  onSubmit(): void {
-    if (this.form.valid) {
-      if (this.id != '') {
-        this.update(this.form.value);
-      } else {
-        this.create(this.form.value);
-      }
-    } else {
-      this.form.markAllAsTouched();
-      this.messageService.errorsFields.then();
-    }
-  }
-
-  create(documentacion: CreateDocumentacionDto): void {
-    this.documentacionHttpService.create(documentacion).subscribe(documentacion => {
-      this.form.reset(documentacion);
-      this.back();
-    });
-  }
-
-  update(documentacion:UpdateDocumentacionDto): void {
-    this.documentacionHttpService.update(this.id, documentacion).subscribe((documentacion) => {
-      this.form.reset(documentacion);
-      this.back()
-    });
-  }
-
-  paginate(event: any) {
-    this.findAll(event.page);
-  }
-  back(): void {
-    this.router.navigate(['/rrhh/rrhh-home']);
+  paginate(evaluation: any) {
+    this.findAll(evaluation.page);
   }
 
   redirectCreateForm() {
@@ -160,8 +106,8 @@ export class DocumentacionListComponent implements OnInit {
     this.messageService.questionDelete()
       .then((result) => {
         if (result.isConfirmed) {
-          this.eventsHttpService.remove(id).subscribe((event) => {
-            this.events = this.events.filter(item => item.id !== event.id);
+          this.documentacionHttpService.remove(id).subscribe((documentacion) => {
+            this.documento = this.documento.filter(item => item.id !== documentacion.id);
             this.paginator.totalItems--;
           });
         }
@@ -171,26 +117,19 @@ export class DocumentacionListComponent implements OnInit {
   removeAll() {
     this.messageService.questionDelete().then((result) => {
       if (result.isConfirmed) {
-        this.eventsHttpService.removeAll(this.selectedEvents).subscribe((events) => {
-          this.selectedEvents.forEach(eventDeleted => {
-            this.events = this.events.filter(event => event.id !== eventDeleted.id);
+        this.documentacionHttpService.removeAll(this.selectedDocumento).subscribe((evaluations) => {
+          this.selectedDocumento.forEach(evaluationDeleted => {
+            this.documento = this.documento.filter(documento => documento.id !== documentoDeleted.id);
             this.paginator.totalItems--;
           });
-          this.selectedEvents = [];
+          this.selectedDocumento = [];
         });
       }
     });
   }
 
-  selectEvent(event: EventModel) {
-    this.selectedEvent = event;
-  }
-  /////
-  get resultsField() {
-    return this.form.controls['results'];
-  }
-
-  get forField() {
-    return this.form.controls['for'];
+  selectDocumentacion(documento: DocumentacionModel) {
+    this.selectedDocumentacion = documento;
   }
 }
+
