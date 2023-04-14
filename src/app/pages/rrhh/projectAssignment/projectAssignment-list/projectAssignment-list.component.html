@@ -1,10 +1,18 @@
 <p-toolbar>
   <div class="p-toolbar-group-left">
+
+    <button pButton type="button" label="Asignar Proyecto" class="p-button-success mr-2"
+      icon="pi pi-plus" (click)="redirectCreateForm()"></button>
+    <button pButton type="button" label="Refrescar" class="p-button-info mr-2" icon="pi pi-refresh"
+      (click)="ngOnInit()"></button>
+    <button *ngIf="selectedProjectAssignments.length>0" pButton type="button" label="Eliminar Asignacion" class="p-button-danger"
+
   <button pButton type="button" label="Asignar proyecto" class="p-button-raised p-button-warning mr-2" icon="pi pi-plus"
       (click)="redirectCreateForm()"></button>
   <button pButton type="button" label="Refrescar" class="p-button-info mr-2" icon="pi pi-refresh"
     (click)="ngOnInit()"></button>
     <button *ngIf="selectedProjectAssignments.length>0" pButton type="button" label="Eliminar proyecto" class="p-button-danger"
+
       icon="pi pi-trash" (click)="removeAll()"></button>
   </div>
   <div class="p-toolbar-group-right">
@@ -53,7 +61,15 @@
 
         <!--Fields-->
         <div *ngIf="!rowData[col.field]?.id" [ngSwitch]="col.field">
+          <!--<div *ngSwitchCase="'active'">
+            <p-tag [value]="rowData['active']?'Activo':'Inactivo'"
+              [pTooltip]="rowData['maxAttempts']===0?'Exceeded the maximum number of attempts allowed':''"
+              [severity]="checkState(rowData)"></p-tag>
+          </div>-->
+          <div *ngSwitchCase="'dateEntryFoundation'">
+
           <div *ngSwitchCase="'departureDateProject'">
+
             {{rowData[col.field]|date}}
           </div>
           <div *ngSwitchCase="'dateEntryProject'">
