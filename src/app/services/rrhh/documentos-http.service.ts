@@ -13,7 +13,7 @@ import { CreateDocumentosDto, DocumentosModel, UpdateDocumentosDto } from '@mode
   providedIn: 'root'
 })
 export class DocumentosHttpService {
-  API_URL = `${environment.API_URL}/documentos`;
+  API_URL = `${environment.API_URL}/Documentos`;
   private pagination = new BehaviorSubject<PaginatorModel>(this.coreService.paginator);
   public pagination$ = this.pagination.asObservable();
   selectedEvaluation:ReadEvaluationDto = {};

@@ -42,14 +42,14 @@ import { DocumentosFormComponent } from './documentos-form/documentos-form.compo
 @NgModule({
   declarations: [
     DocumentosComponent,
-   DocumentosFormComponent,
+    DocumentosFormComponent,
     DocumentosListComponent,
   ],
   imports: [
     NgCommonModule,
     CommonModule,
     EvaluationRoutingModule,
-    DocumentosRoutingModule
+    DocumentosRoutingModule,
     ReactiveFormsModule,
     SharedModule,
     //PrimeNg

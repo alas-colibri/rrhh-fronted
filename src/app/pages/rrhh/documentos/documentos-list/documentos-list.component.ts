@@ -42,7 +42,7 @@ export class DocumentosListComponent implements OnInit {
     private route: ActivatedRoute,
   ) {
     this.breadcrumbService.setItems([
-      {label: 'Evaluación Continúa'}
+      {label: 'Documentos'}
     ]);
     this.columns = this.getColumns();
     this.actionButtons = this.getActionButtons();
@@ -63,7 +63,7 @@ export class DocumentosListComponent implements OnInit {
       {field: 'name', header: 'Cedúla del Empleado'},
       {field: 'names', header: 'Nombre del Empleado'},
       {field: 'observation', header: 'Observación'},
-      {field: 'noteF', header: 'Nota de desempeño'},
+      {field: 'noteF', header: 'Avance de Documentos'},
     ]
   }
 

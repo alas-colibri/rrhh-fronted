@@ -29,7 +29,7 @@ import { CreateDocumentosDto, UpdateDocumentosDto } from '@models/rrhh/documento
 export class DocumentosFormComponent implements OnInit, OnExitInterface {
   id: string = '';
   form: UntypedFormGroup = this.newForm;
-  panelHeader: string = 'Documentacion';
+  panelHeader: string = 'Documentos';
   isChangePassword: UntypedFormControl = new UntypedFormControl(false);
   isLoadingSkeleton: boolean = false;
   loaded$ = this.coreService.loaded$;
@@ -56,12 +56,12 @@ export class DocumentosFormComponent implements OnInit, OnExitInterface {
     private personHttpService: PersonalInformationService,
   ) {
     this.breadcrumbService.setItems([
-      {label: 'Listado', routerLink: ['/rrhh/evaluation']},
-      {label: 'Añadir Pregunta'},
+      {label: 'Listado', routerLink: ['/rrhh/documentos']},
+      {label: 'Añadir Documento'},
     ]);
     if (activatedRoute.snapshot.params['id'] !== 'new') {
       this.id = activatedRoute.snapshot.params['id'];
-      this.panelHeader = 'Actualizar Pregunta';
+      this.panelHeader = 'Actualizar Documento';
     }
     this.calificacion = [
       { name: '0-10', code: 'Trrem' },

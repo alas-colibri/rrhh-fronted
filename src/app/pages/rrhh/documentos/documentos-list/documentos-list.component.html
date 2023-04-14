@@ -1,10 +1,10 @@
 <p-toolbar>
   <div class="p-toolbar-group-left">
-  <button pButton type="button" label="Añadir Evaluación" class="p-button-raised p-button-warning mr-2" icon="pi pi-plus"
+  <button pButton type="button" label="Añadir Documento" class="p-button-raised p-button-warning mr-2" icon="pi pi-plus"
       (click)="redirectCreateForm()"></button>
   <button pButton type="button" label="Refrescar" class="p-button-info mr-2" icon="pi pi-refresh"
     (click)="ngOnInit()"></button>
-    <button *ngIf="selectedDocument.length>0" pButton type="button" label="Eliminar proyecto" class="p-button-danger"
+    <button *ngIf="selectedDocument.length>0" pButton type="button" label="Eliminar documento" class="p-button-danger"
       icon="pi pi-trash" (click)="removeAll()"></button>
   </div>
   <div class="p-toolbar-group-right">
