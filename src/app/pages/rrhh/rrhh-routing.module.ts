@@ -36,11 +36,18 @@ const routes: Routes = [
     loadChildren: () =>
       import('./projectAssignment/projectAssignment.module').then((m) => m.ProjectAssignmentModule),
  },
- 
+
  {
     path: 'evaluation',
     loadChildren: () =>
       import('./evaluation/evaluation.module').then((m) => m.EvaluationModule),
+
+  },
+
+  {
+    path: 'documentos',
+    loadChildren: () =>
+      import('./documentos/documentos.module').then((m) => m.DocumentosModule),
 
   },
 ];
