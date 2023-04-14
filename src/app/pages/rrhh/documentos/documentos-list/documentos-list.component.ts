@@ -3,7 +3,7 @@ import {UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators} fr
 import {ActivatedRoute,Router} from '@angular/router';
 import {debounceTime} from "rxjs";
 import {ColumnModel, PaginatorModel} from '@models/resources';
-import {EvaluationsHttpService} from '@services/rrhh';
+import {DocumentosHttpService, EvaluationsHttpService} from '@services/rrhh';
 import {BreadcrumbService, CoreService, MessageService} from '@services/resources';
 import {MenuItem} from "primeng/api";
 import { AuthService } from '@services/auth';

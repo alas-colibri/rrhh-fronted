@@ -10,7 +10,7 @@ import {
 import {ActivatedRoute, Router} from '@angular/router';
 import {BreadcrumbService, CoreService, MessageService} from '@services/resources';
 import {OnExitInterface} from '@shared/interfaces';
-import { EvaluationsHttpService, PersonalInformationService } from '@services/rrhh';
+import { DocumentosHttpService, EvaluationsHttpService, PersonalInformationService } from '@services/rrhh';
 import { CatalogueTypeEnum } from '@shared/enums';
 import { format } from 'date-fns';
 import { DateValidators } from '@shared/validators';
@@ -80,7 +80,7 @@ export class DocumentosFormComponent implements OnInit, OnExitInterface {
   }
 
   ngOnInit(): void {
-    this.getEvaluation();
+    this.getDocumentos();
     this.getHolidayname();
   }
 

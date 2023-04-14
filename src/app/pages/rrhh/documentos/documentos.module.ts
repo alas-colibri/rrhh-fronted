@@ -33,15 +33,16 @@ import { DocumentosComponent } from './documentos.component';
 
 import { EvaluationRoutingModule } from '../evaluation/evaluation-routing.module';
 import { DocumentosRoutingModule } from './documentos-routing.module';
-import { DocumentosFormComponent } from './documentos-form/documentos-form.component';
 import { DocumentosListComponent } from './documentos-list/documentos-list.component';
+import { DocumentosFormComponent } from './documentos-form/documentos-form.component';
+
 
 //import {AuthenticationModule} from "../authentication/authentication.module";
 
 @NgModule({
   declarations: [
     DocumentosComponent,
-    DocumentosFormComponent,
+   DocumentosFormComponent,
     DocumentosListComponent,
   ],
   imports: [

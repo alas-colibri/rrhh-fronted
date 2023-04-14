@@ -1,7 +1,7 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {EvaluationComponent} from './documentos.component';
-import {DocumentosFormComponent, EvaluationFormComponent} from './documentos-form/documentos-form.component';
+import {DocumentosComponent, } from './documentos.component';
+import {DocumentosFormComponent, } from './documentos-form/documentos-form.component';
 import {ExitGuard} from '@shared/guards';
 
 const routes: Routes = [
