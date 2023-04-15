@@ -38,7 +38,7 @@ export class HolidayFormComponent implements OnInit {
     private holidayHttpService: HolidayHttpService,
     private proyectAsHttpService: ProjectAssignmentHttpService,
   ) {
-    this. breadcrumbService.setItems([
+    this.breadcrumbService.setItems([
       {label: 'Convocatorias', routerLink: ['/rrhh/holiday']},
       {label: 'Nueva fase'},
     ]);
