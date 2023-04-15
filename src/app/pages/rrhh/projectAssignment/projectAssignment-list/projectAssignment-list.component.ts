@@ -1,12 +1,19 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { UntypedFormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ColumnModel, PaginatorModel } from '@models/resources';
 import { debounceTime } from 'rxjs';
-import {BreadcrumbService,CoreService,MessageService,} from '@services/resources';
+import { ColumnModel, PaginatorModel } from '@models/resources';
+import {
+  BreadcrumbService,
+  CoreService,
+  MessageService,
+} from '@services/resources';
 import { MenuItem } from 'primeng/api';
 import { AuthService } from '@services/auth';
-import { ProjectAssignmentModel,SelectProjectAssignmentDto,} from '@models/rrhh/projectAssignment';
+import {
+  ProjectAssignmentModel,
+  SelectProjectAssignmentDto,
+} from '@models/rrhh/projectAssignment';
 import { ProjectAssignmentHttpService } from '@services/rrhh/projectAssignment-http.service';
 
 @Component({
@@ -65,16 +72,6 @@ export class ProjectAssignmentListComponent implements OnInit {
 
   getColumns(): ColumnModel[] {
     return [
-
-      { field: 'namePerson', header: 'Nombre del Trabajador' },
-      { field: 'availableProjects', header: 'Proyectos Disponibles' },
-      { field: 'typeprojectCharge', header: 'Tipo de Cargo del Proyecto' },
-      { field: 'dateEntryFoundation', header: 'Fecha de ingreso a la fundacion' },
-      { field: 'dateEntryProject', header: 'Fecha de ingreso al proyecto' },
-      { field: 'departureDateProject', header: 'Fecha de salida al proyecto' },
-      { field: 'isEnable', header: 'Estado' },
-
-
       { field: 'person', header: 'Nombre del Trabajador' },
       { field: 'availableProject', header: 'Proyecto Asignado' },
       { field: 'projectCharge', header: 'Cargo del Proyecto' },

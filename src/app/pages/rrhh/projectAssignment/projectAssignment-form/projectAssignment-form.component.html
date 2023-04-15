@@ -4,7 +4,8 @@
   class="p-fluid"
   collapseIcon="pi pi-times"
   [toggleable]="true"
-  (collapsedChange)="back()">
+  (collapsedChange)="back()"
+>
   <ng-template pTemplate="header">
     <i *ngIf="id === ''" class="pi pi-user-plus mr-2"></i>
     <i *ngIf="id != ''" class="pi pi-user-edit mr-2"></i>
@@ -17,13 +18,6 @@
 
     <div class="formgrid grid">
       <div class="field xl:col-6 lg:col-6 md:col-6 sm:col-12">
-
-        <label htmlFor="username">Nombre del trabajador</label>
-        <span class="p-float-label">
-          <p-dropdown placeholder="Seleccione Nombre" optionLabel="name" inputId="float-label"></p-dropdown>
-          <label for="float-label">Seleccione el Nombre</label>
-        </span>
-
         <label appLabel for="person" label="Nombre del Trabajador:" [required]="personField"></label>
         <p-dropdown id="person" formControlName="person" dataKey="id" [options]="persons" optionLabel="names" [filter]="true"
           filterBy="names" placeholder="Seleccionar empleado">
@@ -42,12 +36,6 @@
 
 
       <div class="field xl:col-6 lg:col-6 md:col-6 sm:col-12">
-        <label appLabel for="endDate" label="Proyecto asignado:" [required]="availableProjectsField"></label>
-        <span class="p-float-label">
-          <p-dropdown placeholder="Seleccione Proyecto" optionLabel="name" inputId="float-label"></p-dropdown>
-          <label for="float-label">Seleccione el Proyecto</label>
-        </span>
-
         <label appLabel for="availableProject" label="Proyectos:" [required]="availableProjectField"></label>
         <p-dropdown id="availableProject" formControlName="availableProject" dataKey="id" [options]="availableProjects" optionLabel="nameProyect" [filter]="true"
           filterBy="nameProyect" placeholder="Seleccionar carrera">
@@ -64,24 +52,7 @@
         </small>
       </div>
     </div>
-
     <div class="formgrid grid">
-      <!--<div class="field xl:col-6 lg:col-6 md:col-6 sm:col-12">
-        <label htmlFor="username">Cargo de Proyecto</label>
-        <span class="p-float-label">
-          <p-dropdown placeholder="Seleccione Cargo" optionLabel="name" inputId="float-label"></p-dropdown>
-          <label for="float-label">Seleccione Cargo</label>
-        </span>
-      </div>-->
-
-
-    <div class="field xl:col-6 lg:col-6 md:col-6 sm:col-12">
-      <label appLabel for="typeProjectCharge" label="Tipo de Cargo del Proyecto:" [required]="typeProjectChargeField"></label>
-        <p-dropdown [options]="typeProjectCharge" [(ngModel)]="selectedTypeProjectChargeField"  optionLabel="name"
-          optionValue="name" formControlName="typeProjectCharge"></p-dropdown>
-        <small appErrorMessage [errors]="typeProjectChargeField.errors" [touched]="typeProjectChargeField.touched" [dirty]="typeProjectChargeField.dirty"></small>
-    </div>
-
       <div class="field xl:col-6 lg:col-6 md:col-6 sm:col-12">
         <label appLabel for="projectCharge" label="Cargo del proyecto:" [required]="projectChargeField"></label>
         <p-dropdown [options]="cargo" [(ngModel)]="selectcargo" optionLabel="name" optionValue="name"
@@ -109,7 +80,7 @@
       </div>
 
       <div class="field xl:col-6 lg:col-6 md:col-6 sm:col-12">
-        <label appLabel for="departureDateProject" label="Fecha de salida al Proyecto:" [required]="departureDateProjectField"></label>
+        <label appLabel for="departureDateProject" label="Fecha de salida la Proyecto:" [required]="departureDateProjectField"></label>
         <p-calendar formControlName="departureDateProject" id="departureDateProject" dateFormat="dd/mm/yy"></p-calendar>
         <small appErrorMessage [errors]="departureDateProjectField.errors" [touched]="departureDateProjectField.touched"
           [dirty]="departureDateProjectField.dirty">
@@ -121,7 +92,7 @@
       <div class="field xl:col-6 lg:col-6 md:col-6 sm:col-12">
         <button pButton pRipple id="btnBack" type="button"
                 label="Cancelar"
-                class="p-button-info p-button-outlined"
+                class="p-button-outlined p-button-warning"
                 icon="pi pi-arrow-left"
                 [loading]="(loaded$|async)!"
                 (click)="back()"></button>
@@ -129,10 +100,45 @@
       <div class="field xl:col-6 lg:col-6 md:col-6 sm:col-12">
         <button pButton pRipple id="submit" type="submit"
                 label="Guardar"
+                class="p-button-raised p-button-warning"
                 icon="pi pi-save"
                 [loading]="(loaded$|async)!"></button>
       </div>
     </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   </form>
 </p-panel>
