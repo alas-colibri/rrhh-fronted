@@ -13,11 +13,11 @@
     <div class="formgrid grid">
       <div class="field xl:col-6 lg:col-6 md:col-6 sm:col-12">
         <label appLabel for="name" label="Nombre del Trabajador:" [required]="nameField"></label>
-        <p-dropdown id="name" formControlName="name" dataKey="id" [options]="names" optionLabel="availableProjects" [filter]="true"
-          filterBy="availableProjects" placeholder="Seleccionar carrera">
+        <p-dropdown id="name" formControlName="name" dataKey="id" [options]="names" optionLabel="availableProject" [filter]="true"
+          filterBy="availableProjects" placeholder="Seleccionar Trabajador">
           <ng-template pTemplate="selectedItem">
             <div *ngIf="nameField.value">
-              <div>{{nameField.value.availableProjects}}</div>
+              <div>{{nameField.value.availableProject}}</div>
             </div>
           </ng-template>
           <ng-template pTemplate="item" let-item>
