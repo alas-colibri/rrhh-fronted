@@ -14,14 +14,14 @@
       <div class="field xl:col-6 lg:col-6 md:col-6 sm:col-12">
         <label appLabel for="name" label="Nombre del Trabajador:" [required]="nameField"></label>
         <p-dropdown id="name" formControlName="name" dataKey="id" [options]="names" optionLabel="availableProject" [filter]="true"
-          filterBy="availableProjects" placeholder="Seleccionar Trabajador">
+          filterBy="availableProject" placeholder="Seleccionar Trabajador">
           <ng-template pTemplate="selectedItem">
             <div *ngIf="nameField.value">
               <div>{{nameField.value.availableProject}}</div>
             </div>
           </ng-template>
           <ng-template pTemplate="item" let-item>
-            {{item.availableProjects}}
+            {{item.availableProject}}
           </ng-template>
         </p-dropdown>
         <small appErrorMessage [errors]="nameField.errors" [touched]="nameField.touched" [dirty]="nameField.dirty">
