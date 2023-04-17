@@ -63,6 +63,7 @@ export class ProyectListComponent implements OnInit {
   getColumns(): ColumnModel[] {
     return [
       {field: 'nameProyect', header: 'Nombre del proyecto'},
+      {field: 'descripcionProyect', header: 'Tipo del proyecto'},
       {field: 'startDate', header: 'Fecha de inicio'},
       {field: 'endDate', header: 'Fecha fin'},
       {field: 'isEnable', header: 'Estado'},

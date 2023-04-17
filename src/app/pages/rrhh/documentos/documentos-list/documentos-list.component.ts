@@ -54,10 +54,10 @@ export class DocumentosListComponent implements OnInit {
 
   getColumns(): ColumnModel[] {
     return [
-      {field: 'name', header: 'Cedúla del Empleado'},
+      {field: 'user', header: 'Cedúla del Empleado'},
       {field: 'names', header: 'Nombre del Empleado'},
-      {field: 'observation', header: 'Observación'},
-      {field: 'noteF', header: 'Avance de Documentos'},
+      // {field: 'observation', header: 'Observación'},
+      // {field: 'noteF', header: 'Avance de Documentos'},
     ]
   }
 
