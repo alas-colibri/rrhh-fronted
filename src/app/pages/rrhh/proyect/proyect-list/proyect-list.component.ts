@@ -73,7 +73,7 @@ export class ProyectListComponent implements OnInit {
   getActionButtons(): MenuItem[] {
     return [
       {
-        label: 'Update',
+        label: 'Editar',
         icon: 'pi pi-pencil',
         command: () => {
           if (this.selectedProyect.id)
@@ -81,7 +81,7 @@ export class ProyectListComponent implements OnInit {
         },
       },
       {
-        label: 'Delete',
+        label: 'Eliminar',
         icon: 'pi pi-trash',
         command: () => {
           if (this.selectedProyect.id)
