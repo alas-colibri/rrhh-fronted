@@ -64,8 +64,8 @@ export class ProyectFormComponent implements OnInit, OnExitInterface {
 
   get newForm(): UntypedFormGroup {
     return this.formBuilder.group({
-      endDate: [null, [Validators.required,DateValidators.min(new Date())]],
-      startDate: [null, [DateValidators.min(new Date())]],
+      endDate: [null],
+      startDate: [null],
       isEnable: [false, [Validators.required]],
       nameProyect: [null, [Validators.required]],
       descripcionProyect: [''],
