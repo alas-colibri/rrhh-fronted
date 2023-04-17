@@ -18,9 +18,10 @@ import { DateValidators } from '@shared/validators';
 })
 
 export class PersonalComponent implements OnInit {
-  planning: string;
+  //planning: string;
   loaded$ = this.coreService.loaded$;
-  id: any;
+  id: string = '';
+  panelHeader: string = 'Actualización de Formulario';
   logoDataUrl: string;
   cities: any;
   selectedCity: any;
@@ -51,7 +52,15 @@ export class PersonalComponent implements OnInit {
     this.breadcrumbService.setItems([
       { label: 'Ficha Personal' },
     ]);
-    //this.loadGenders();
+    if (activatedRoute.snapshot.params['id'] !== 'new') {
+      this.id = activatedRoute.snapshot.params['id'];
+      this.getEvent()
+    }
+    if (activatedRoute.snapshot.params['id'] !== 'new') {
+      this.id = activatedRoute.snapshot.params['id'];
+      this.panelHeader = 'Editar Permiso';
+    }
+    console.log(this.id);
 
     this.typeContract = [
       { name: 'Temporal', code: 'Tem' },
@@ -76,10 +85,6 @@ export class PersonalComponent implements OnInit {
       { name: 'Femenino', code: 'F' },
       { name: 'Prefiero no decirlo', code: 'PNC' }
     ];
-    if (activatedRoute.snapshot.params['id'] !== 'new') {
-      this.id = activatedRoute.snapshot.params['id'];
-      this.getEvent()
-    }
   }
 
 
@@ -100,13 +105,11 @@ export class PersonalComponent implements OnInit {
 
 
   onSubmit(): void {
-
-    console.log(this.form.value)
     if (this.form.valid) {
-      if (this.id != 'new ') {
+      if (this.id != '') {
         this.update(this.form.value);
       } else {
-       this.create(this.form.value);
+        this.create(this.form.value);
       }
     } else {
       this.form.markAllAsTouched();
@@ -116,11 +119,34 @@ export class PersonalComponent implements OnInit {
 
 
   ngOnInit() {
-
+    if (this.id != '') this.getEvent();
   }
 
   redirectCreateForm() {
     this.router.navigate(['/uic/student-informations', 'new']);
+  }
+
+  getEvent(): void {
+    this.isLoadingSkeleton = true;
+    this.personalInformationService.findOne(this.id).subscribe((person) => {
+      this.isLoadingSkeleton = false;
+      person.birthdate = new Date(person.birthdate)
+      this.form.patchValue(person);
+    });
+  }
+
+  create(person: CreatePersonDto): void {
+    this.personService.create(person).subscribe(person => {
+      this.form.reset(person);
+      this.back();
+    });
+  }
+
+  update(person: UpdatePersonDto): void {
+    this.personService.update(this.id, person).subscribe((person) => {
+      this.form.reset(person);
+      this.back()
+    });
   }
 
  // loadGenders(): void {
@@ -180,26 +206,5 @@ export class PersonalComponent implements OnInit {
 
 
 
-  getEvent(): void {
-    this.isLoadingSkeleton = true;
-    this.personalInformationService.findOne(this.id).subscribe((person) => {
-      this.isLoadingSkeleton = false;
-      person.birthdate = new Date(person.birthdate)
-      this.form.patchValue(person);
-    });
-  }
 
-  create(person: CreatePersonDto): void {
-    this.personService.create(person).subscribe(person => {
-      this.form.reset(person);
-      this.back();
-    });
-  }
-
-  update(person: UpdatePersonDto): void {
-    this.personService.update(this.id, person).subscribe((person) => {
-      this.form.reset(person);
-      this.back()
-    });
-  }
 }

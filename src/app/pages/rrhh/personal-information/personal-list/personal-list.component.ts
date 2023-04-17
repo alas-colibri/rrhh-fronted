@@ -134,5 +134,4 @@ export class PersonalListComponent implements OnInit {
   selectProyect(person: PersonModel) {
     this.selectedPerson = person;
   }
-
 }

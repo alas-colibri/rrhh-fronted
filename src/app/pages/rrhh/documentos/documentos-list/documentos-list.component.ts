@@ -7,7 +7,6 @@ import {DocumentosHttpService, EvaluationsHttpService} from '@services/rrhh';
 import {BreadcrumbService, CoreService, MessageService} from '@services/resources';
 import {MenuItem} from "primeng/api";
 import { AuthService } from '@services/auth';
-import { EvaluationModel, SelectEvaluationDto } from '@models/rrhh/evaluation.model';
 import { DocumentosModel, SelectDocumentosDto } from '@models/rrhh/documentos.model';
 
 @Component({
@@ -21,14 +20,10 @@ export class DocumentosListComponent implements OnInit {
   pagination$ = this.documentHttpService.pagination$;
   paginator: PaginatorModel = this.coreService.paginator;
   search: UntypedFormControl = new UntypedFormControl('');
-  selectedEvaluations: EvaluationModel[] = [];
-  selectedEvaluation: SelectEvaluationDto = {};
   selectedDocument: DocumentosModel[] = [];
   selectedDocumentos: SelectDocumentosDto = {};
-  evaluations: EvaluationModel[] = [];
   document:DocumentosModel[] = [];
   actionButtons: MenuItem[] = [];
-  evas: EvaluationModel[] = [];
 
   constructor(
     public authService: AuthService,
@@ -37,7 +32,6 @@ export class DocumentosListComponent implements OnInit {
     private formBuilder: UntypedFormBuilder,
     public messageService: MessageService,
     private router: Router,
-    private evaluationsHttpService: EvaluationsHttpService,
     private documentHttpService: DocumentosHttpService,
     private route: ActivatedRoute,
   ) {
@@ -55,7 +49,7 @@ export class DocumentosListComponent implements OnInit {
     }
 
   findAll(page: number = 0) {
-    this.documentHttpService.findAll(page, this.search.value).subscribe((document) => this.evaluations = document);
+    this.documentHttpService.findAll(page, this.search.value).subscribe((document) => this.document = document);
   }
 
   getColumns(): ColumnModel[] {

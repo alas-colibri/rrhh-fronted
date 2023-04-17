@@ -11,6 +11,10 @@ const routes: Routes = [
   {
     path: ':id',
     component: PersonalComponent
+  },
+  {
+    path: 'new',
+    component: PersonalComponent
   }
 ];
 

@@ -30,8 +30,6 @@ import {SplitButtonModule} from "primeng/splitbutton";
 import {BadgeModule} from 'primeng/badge';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { DocumentosComponent } from './documentos.component';
-
-import { EvaluationRoutingModule } from '../evaluation/evaluation-routing.module';
 import { DocumentosRoutingModule } from './documentos-routing.module';
 import { DocumentosListComponent } from './documentos-list/documentos-list.component';
 import { DocumentosFormComponent } from './documentos-form/documentos-form.component';
@@ -48,7 +46,6 @@ import { DocumentosFormComponent } from './documentos-form/documentos-form.compo
   imports: [
     NgCommonModule,
     CommonModule,
-    EvaluationRoutingModule,
     DocumentosRoutingModule,
     ReactiveFormsModule,
     SharedModule,

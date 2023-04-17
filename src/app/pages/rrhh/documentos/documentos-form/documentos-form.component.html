@@ -1,103 +1,92 @@
-<app-skeleton *ngIf="isLoadingSkeleton" [type]="'card'"></app-skeleton>
-<p-panel *ngIf="!isLoadingSkeleton" class="p-fluid" collapseIcon="pi pi-times" [toggleable]="true"
-  (collapsedChange)="back()">
-  <ng-template pTemplate="header">
-    <i *ngIf="id===''" class="pi pi-user-plus mr-2"></i>
-    <i *ngIf="id!=''" class="pi pi-user-edit mr-2"></i>
-    <h2 class="panel-header">{{panelHeader}}</h2>
-  </ng-template>
-  <small [innerHTML]="this.messageService.requiredFields"></small>
+
+<p-panel class="p-fluid">
+    <h1 class="panel-header text-center">DOCUMENTOS</h1>
   <p-divider></p-divider>
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
-
-      <div class="field xl:col-10 lg:col-10 md:col-10 sm:col-12">
-        <label appLabel for="name" label="Seleccionar empleado:" [required]="nameField"></label>
-        <p-dropdown id="name" formControlName="name" dataKey="id" [options]="names" optionLabel="names" [filter]="true"
+      <div class="formgrid grid" class="panel-header text-center" class="field xl:col-4 lg:col-4 md:col-4 sm:col-10">
+        <label appLabel for="user" label="Seleccionar empleado:" [required]="userField"></label>
+        <p-dropdown id="user" formControlName="user" dataKey="id" [options]="names" optionLabel="names" [filter]="true"
           filterBy="identificationCode" placeholder="Nombre del empleado">
           <ng-template pTemplate="selectedItem">
-            <div *ngIf="nameField.value">
-              <div>{{nameField.value.names}}</div>
+            <div *ngIf="userField.value">
+              <div>{{userField.value.names}}</div>
             </div>
           </ng-template>
           <ng-template pTemplate="item" let-item>
             {{item.identificationCode}}
           </ng-template>
         </p-dropdown>
-        <small appErrorMessage [errors]="nameField.errors" [touched]="nameField.touched" [dirty]="nameField.dirty">
+        <small appErrorMessage [errors]="userField.errors" [touched]="userField.touched" [dirty]="userField.dirty">
         </small>
-      </div>
+    </div>
+      <p-divider></p-divider>
       <!-- pregunta1 -->
       <div class="formgrid grid">
-      <div class="field xl:col-7 lg:col-7 md:col-7 sm:col-10">
-        <label appLabel for="question1" label="Coloque el documento " [required]="question1Field"></label>
-        <input pInputText type="text" id="question1" formControlName="question1"/>
+        <div class="field xl:col-7 lg:col-7 md:col-7 sm:col-10">
+          <h2 class="panel-header text-center">Hoja de vida</h2>
       </div>
       <div class="field xl:col-4 lg:col-4 md:col-4 sm:col-12">
-        <label appLabel for="note1" label="Coloque la nota" [required]="note1Field"></label>
-        <p-dropdown [options]="calificacion" [(ngModel)]="selected1" optionLabel="name" optionValue="name"
-          formControlName="note1"></p-dropdown>
+        <label appLabel for="note1" [required]="note1Field"></label>
+        <p><p-inputSwitch formControlName="note1"></p-inputSwitch></p>
         <small appErrorMessage [errors]="note1Field.errors" [touched]="note1Field.touched" [dirty]="note1Field.dirty">
         </small>
       </div>
     </div>
+    <p-divider></p-divider>
     <!-- pregunta2 -->
     <div class="formgrid grid">
       <div class="field xl:col-7 lg:col-7 md:col-7 sm:col-10">
-        <label appLabel for="question2" label="Coloque el documento " [required]="question2Field"></label>
-        <input pInputText type="text" id="question2" formControlName="question2"/>
+        <h2 class="panel-header text-center">Curriculum vitae</h2>
       </div>
       <div class="field xl:col-4 lg:col-4 md:col-4 sm:col-12">
-        <label appLabel for="note2" label="Coloque la nota" [required]="note2Field"></label>
-        <p-dropdown [options]="calificacion" [(ngModel)]="selected2" optionLabel="name" optionValue="name"
-          formControlName="note2"></p-dropdown>
+        <label appLabel for="note2" [required]="note2Field"></label>
+        <p><p-inputSwitch formControlName="note2"></p-inputSwitch></p>
         <small appErrorMessage [errors]="note2Field.errors" [touched]="note2Field.touched" [dirty]="note2Field.dirty">
         </small>
       </div>
     </div>
+    <p-divider></p-divider>
     <!-- pregunta3 -->
     <div class="formgrid grid">
       <div class="field xl:col-7 lg:col-7 md:col-7 sm:col-10">
-        <label appLabel for="question3" label="Coloque el documento " [required]="question3Field"></label>
-        <input pInputText type="text" id="question3" formControlName="question3"/>
+        <h2 class="panel-header text-center">Constancias educativas</h2>
       </div>
       <div class="field xl:col-4 lg:col-4 md:col-4 sm:col-12">
-        <label appLabel for="note3" label="Coloque la nota" [required]="note1Field"></label>
-        <p-dropdown [options]="calificacion" [(ngModel)]="selected3" optionLabel="name" optionValue="name"
-          formControlName="note3"></p-dropdown>
+        <label appLabel for="note3" [required]="note1Field"></label>
+        <p><p-inputSwitch formControlName="note3"></p-inputSwitch></p>
         <small appErrorMessage [errors]="note3Field.errors" [touched]="note3Field.touched" [dirty]="note3Field.dirty">
         </small>
       </div>
     </div>
+    <p-divider></p-divider>
     <!-- pregunta4 -->
     <div class="formgrid grid">
       <div class="field xl:col-7 lg:col-7 md:col-7 sm:col-10">
-        <label appLabel for="question4" label="Coloque el documento " [required]="question4Field"></label>
-        <input pInputText type="text" id="question4" formControlName="question4"/>
+        <h2 class="panel-header text-center">Contrato de relación laboral </h2>
       </div>
       <div class="field xl:col-4 lg:col-4 md:col-4 sm:col-12">
-        <label appLabel for="note4" label="Coloque la nota" [required]="note4Field"></label>
-        <p-dropdown [options]="calificacion" [(ngModel)]="selected4" optionLabel="name" optionValue="name"
-          formControlName="note4"></p-dropdown>
+        <label appLabel for="note4" [required]="note4Field"></label>
+        <p><p-inputSwitch formControlName="note4"></p-inputSwitch></p>
         <small appErrorMessage [errors]="note4Field.errors" [touched]="note4Field.touched" [dirty]="note4Field.dirty">
         </small>
       </div>
     </div>
+    <p-divider></p-divider>
     <!-- pregunta5 -->
-    <div class="formgrid grid">
+    <!-- <div class="formgrid grid">
       <div class="field xl:col-7 lg:col-7 md:col-7 sm:col-10">
-        <label appLabel for="question5" label="Coloque el documento " [required]="question5Field"></label>
-        <input pInputText type="text" id="question5" formControlName="question5"/>
+        <h2 class="panel-header text-center">Hoja de vida</h2>
       </div>
       <div class="field xl:col-4 lg:col-4 md:col-4 sm:col-12">
-        <label appLabel for="note5" label="Coloque la nota" [required]="note5Field"></label>
-        <p-dropdown [options]="calificacion" [(ngModel)]="selected5" optionLabel="name" optionValue="name"
-          formControlName="note5"></p-dropdown>
+        <label appLabel for="note5" [required]="note5Field"></label>
+        <p><p-inputSwitch formControlName="note5"></p-inputSwitch></p>
         <small appErrorMessage [errors]="note5Field.errors" [touched]="note5Field.touched" [dirty]="note5Field.dirty">
         </small>
       </div>
-    </div>
+    </div> -->
+    <p-divider></p-divider>
     <!-- final -->
-    <div class="formgrid grid">
+    <!-- <div class="formgrid grid">
       <div class="field xl:col-7 lg:col-7 md:col-7 sm:col-10">
         <label appLabel for="observation" label="Coloque la observación" [required]="observationField"></label>
         <input pInputText type="text" id="observation" formControlName="observation"/>
@@ -109,7 +98,7 @@
         <small appErrorMessage [errors]="noteFField.errors" [touched]="noteFField.touched" [dirty]="noteFField.dirty">
         </small>
       </div>
-    </div>
+    </div> -->
     <div class="formgrid grid">
       <div class="field xl:col-6 lg:col-6 md:col-6 sm:col-12">
         <button pButton pRipple id="btnBack" type="button"

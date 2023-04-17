@@ -86,19 +86,17 @@ export class DocumentosFormComponent implements OnInit, OnExitInterface {
 
   get newForm(): UntypedFormGroup {
     return this.formBuilder.group({
-      name: [null, [Validators.required]],
-      question1: [null, [Validators.required]],
-      question2: [null, [Validators.required]],
-      question3: [null, [Validators.required]],
-      question4: [null],
-      question5: [null],
-      note1: [null, [Validators.required]],
-      note2: [null, [Validators.required]],
-      note3: [null, [Validators.required]],
-      note4: [null],
-      note5: [null],
-      observation: [null, [Validators.required]],
-      noteF: [null, [Validators.required]],
+      user: [null, [Validators.required]],
+      // question1: [null, [Validators.required]],
+      // question2: [null, [Validators.required]],
+      // question3: [null, [Validators.required]],
+      // question4: [null],
+      // question5: [null],
+      note1: [false, [Validators.required]],
+      note2: [false, [Validators.required]],
+      note3: [false, [Validators.required]],
+      note4: [false, [Validators.required]],
+      note5: [false],
     });
   }
 
@@ -152,28 +150,8 @@ export class DocumentosFormComponent implements OnInit, OnExitInterface {
 
   // Getters
 
-  get nameField() {
-    return this.form.controls['name'];
-  }
-
-  get question1Field() {
-    return this.form.controls['question1'];
-  }
-
-  get question2Field() {
-    return this.form.controls['question2'];
-  }
-
-  get question3Field() {
-    return this.form.controls['question3'];
-  }
-
-  get question4Field() {
-    return this.form.controls['question4'];
-  }
-
-  get question5Field() {
-    return this.form.controls['question5'];
+  get userField() {
+    return this.form.controls['user'];
   }
 
   get note1Field() {
@@ -196,11 +174,11 @@ export class DocumentosFormComponent implements OnInit, OnExitInterface {
     return this.form.controls['note5'];
   }
 
-  get observationField() {
-    return this.form.controls['observation'];
-  }
+  // get observationField() {
+  //   return this.form.controls['observation'];
+  // }
 
-  get noteFField() {
-    return this.form.controls['noteF'];
-  }
+  // get noteFField() {
+  //   return this.form.controls['noteF'];
+  // }
 }
