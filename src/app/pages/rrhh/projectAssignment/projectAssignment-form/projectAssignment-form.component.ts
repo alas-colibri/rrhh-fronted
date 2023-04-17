@@ -26,7 +26,6 @@ import { PersonalInformationService, ProyectHttpService } from '@services/rrhh';
   encapsulation: ViewEncapsulation.None
 })
 
-
 export class ProjectAssignmentFormComponent implements OnInit, OnExitInterface {
   id: string = '';
   form: UntypedFormGroup = this.newForm;
@@ -60,8 +59,8 @@ export class ProjectAssignmentFormComponent implements OnInit, OnExitInterface {
       this.panelHeader = 'Cancelar proyecto';
     }
     this.cargo = [
-      { name: 'Temporal', code: 'Tem' },
-      { name: 'Indefinido', code: 'Ind' }
+      { name: 'Líder', code: 'Tem' },
+      { name: 'Asesor', code: 'Ind' }
     ];
   }
 
@@ -75,8 +74,8 @@ export class ProjectAssignmentFormComponent implements OnInit, OnExitInterface {
   ngOnInit(): void {
    this.getProyectAsName();
    this.getProyectAsAvalaible();
+   this.getProjectAssignment();
   }
-
 
   get newForm(): UntypedFormGroup {
     return this.formBuilder.group({
@@ -117,6 +116,10 @@ export class ProjectAssignmentFormComponent implements OnInit, OnExitInterface {
     this.isLoadingSkeleton = true;
     this.projectAssignmentHttpService.findOne(this.id).subscribe((projectAssignment) => {
       this.isLoadingSkeleton = false;
+      this.getProyectAsName();
+      this.getProyectAsAvalaible();
+      let dateEntryProject = format(new Date, 'dd/MM/yyyy');
+      this.dateEntryProjectField.setValue(dateEntryProject);
       this.form.patchValue(projectAssignment);
     });
   }
@@ -138,11 +141,18 @@ export class ProjectAssignmentFormComponent implements OnInit, OnExitInterface {
 
   getProyectAsAvalaible(): void{
     this.isLoadingSkeleton = true;
-    this.proyectHttpService.proyect(CatalogueTypeEnum.PROYECT_ASSIGNMENT).subscribe((availableProjects) => {
-        this.isLoadingSkeleton=false;
-        this.availableProjects = availableProjects;
-    })
+    this.proyectHttpService.proyect(CatalogueTypeEnum.PROYECT_ASSIGNMENT)
+    .subscribe((availableProjects) => (this.availableProjects = availableProjects.filter((availableProjects)=>availableProjects.isEnable==true)))
+    //     this.isLoadingSkeleton=false;
+    //     this.availableProjects = availableProjects;
+    // })
   }
+
+  // loadNameModality(): void {
+  //   this.modalitiesHttpService
+  //     .modality(ModalityTypeEnum.PLANNING_NAMES)
+  //     .subscribe((nameModalities) => (this.nameModalities = nameModalities.filter((modalities)=>modalities.state==true)));
+  // }
 
   // Getters
 
