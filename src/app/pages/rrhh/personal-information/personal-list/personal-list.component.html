@@ -15,6 +15,11 @@
       </div>
     </div>
   </p-toolbar>
+
+  <p-divider></p-divider>
+  <h1 class="panel-header text-center">Listado de Personas</h1>
+  <p-divider></p-divider>
+
   <p-paginator [rows]="paginator.limit" [totalRecords]="paginator.totalItems"
     (onPageChange)="paginate($event)"></p-paginator>
   <p-table dataKey="id" styleClass="p-datatable-gridlines"  [value]="persons" [columns]="columns" [sortField]="'sort'"
