@@ -2,8 +2,8 @@
   <div class="p-toolbar-group-left">
   <button pButton type="button" label="Asignar proyecto" class="p-button-raised p-button-warning mr-2" icon="pi pi-plus"
       (click)="redirectCreateForm()"></button>
-  <button pButton type="button" label="Refrescar" class="p-button-info mr-2" icon="pi pi-refresh"
-    (click)="ngOnInit()"></button>
+      <button pButton type="button" label="Refrescar" class="p-button-raised p-button-help mr-2" icon="pi pi-refresh"
+      (click)="findAll()"></button>
     <button *ngIf="selectedProjectAssignments.length>0" pButton type="button" label="Eliminar proyecto" class="p-button-danger"
       icon="pi pi-trash" (click)="removeAll()"></button>
   </div>
