@@ -15,8 +15,10 @@
     </div>
   </div>
 </p-toolbar>
-<p-paginator [rows]="paginator.limit" [totalRecords]="paginator.totalItems"
-  (onPageChange)="paginate($event)"></p-paginator>
+<p-divider></p-divider>
+<h1 class="panel-header text-center">Listado de Proyectos</h1>
+<p-divider></p-divider>
+
 <p-table dataKey="id" styleClass="p-datatable-gridlines"  [value]="proyect" [columns]="columns" [sortField]="'sort'"
   [loading]="(loaded$|async)!" [(selection)]="selectedProyects" [responsive]="true">
   <ng-template pTemplate="header" let-columns>
@@ -29,8 +31,7 @@
         <p-sortIcon [field]="col.field"></p-sortIcon>
       </th>
       <th class="text-center">
-        <button pButton pRipple type="button" class="p-button-help p-button-outlined p-button-rounded"
-          icon="pi pi-cog"></button>
+        <h3>Opciones</h3>
       </th>
     </tr>
   </ng-template>
@@ -91,4 +92,6 @@
     {{messageService.paginatorTotalRegisters(paginator)}}
   </ng-template>
 </p-table>
+<p-paginator [rows]="paginator.limit" [totalRecords]="paginator.totalItems"
+  (onPageChange)="paginate($event)"></p-paginator>
 <!--</p-card>-->

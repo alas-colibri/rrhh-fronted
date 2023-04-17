@@ -1,7 +1,7 @@
 <!--<p-card>-->
 <p-toolbar>
   <div class="p-toolbar-group-left">
-    <button pButton type="button" label="Asiganar Vacaciones" class="p-button-raised p-button-warning mr-2" icon="pi pi-plus"
+    <button pButton type="button" label="Asignar Vacaciones" class="p-button-raised p-button-warning mr-2" icon="pi pi-plus"
       (click)="redirectCreateForm()"></button>
       <button pButton type="button" label="Refrescar" class="p-button-raised p-button-help mr-2" icon="pi pi-refresh"
       (click)="findAll()"></button>
@@ -30,8 +30,7 @@
         <p-sortIcon [field]="col.field"></p-sortIcon>
       </th>
       <th class="text-center">
-        <button pButton pRipple type="button" class="p-button-help p-button-outlined p-button-rounded"
-          icon="pi pi-cog"></button>
+        <h3>Opciones</h3>
       </th>
     </tr>
   </ng-template>
@@ -53,7 +52,7 @@
             {{rowData[col.field]|date}}
           </div>
           <div *ngSwitchCase="'availableProjects'">
-            {{rowData['name'].availableProjects}}
+            {{rowData['name'].availableProject}}
           </div>
         <div *ngSwitchDefault>{{rowData[col.field]}}</div>
       </div>
