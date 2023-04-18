@@ -1,10 +1,11 @@
+import { PersonModel } from "./person.model";
 import { ProjectAssignmentModel } from "./projectAssignment";
 
 export interface HolidayModel {
   id: string;
-  names: ProjectAssignmentModel[];
+  person: PersonModel;
   cedula: string;
-  assigProject: string;
+  observation: string;
   typeHoliday: string;
   startDate: Date;
   endDate: Date;

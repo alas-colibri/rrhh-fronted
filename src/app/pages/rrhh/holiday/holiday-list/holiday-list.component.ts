@@ -61,9 +61,9 @@ export class HolidayListComponent implements OnInit {
 
   getColumns(): ColumnModel[] {
     return [
-      {field: 'availableProjects', header: 'Nombre del Trabajador'},
-      {field: 'names', header: 'Cédula del trabajdor'},
-      {field: 'proyect', header: 'Proyecto Asignado'},
+      {field: 'person', header: 'Nombre del Trabajador'},
+      {field: 'persons', header: 'Cédula del trabajador'},
+      {field: 'observation', header: 'Observaciones'},
       {field: 'typeHoliday', header: 'Tipo de Vacaciones'},
       {field: 'startDate', header: 'Fecha de Inicio'},
       {field: 'endDate', header: 'Fecha Fin'},

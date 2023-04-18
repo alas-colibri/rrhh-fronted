@@ -12,19 +12,19 @@
 
     <div class="formgrid grid">
       <div class="field xl:col-6 lg:col-6 md:col-6 sm:col-12">
-        <label appLabel for="name" label="Nombre del Trabajador:" [required]="nameField"></label>
-        <p-dropdown id="name" formControlName="name" dataKey="id" [options]="names" optionLabel="availableProject" [filter]="true"
-          filterBy="availableProject" placeholder="Seleccionar Trabajador">
+        <label appLabel for="person" label="Nombre del Trabajador:" [required]="personField"></label>
+        <p-dropdown id="person" formControlName="person" dataKey="id" [options]="persons" optionLabel="names" [filter]="true"
+          filterBy="names" placeholder="Seleccionar empleado">
           <ng-template pTemplate="selectedItem">
-            <div *ngIf="nameField.value">
-              <div>{{nameField.value.availableProject}}</div>
+            <div *ngIf="personField.value">
+              <div>{{personField.value.names}}</div>
             </div>
           </ng-template>
           <ng-template pTemplate="item" let-item>
-            {{item.availableProject}}
+            {{item.names}}
           </ng-template>
         </p-dropdown>
-        <small appErrorMessage [errors]="nameField.errors" [touched]="nameField.touched" [dirty]="nameField.dirty">
+        <small appErrorMessage [errors]="personField.errors" [touched]="personField.touched" [dirty]="personField.dirty">
         </small>
       </div>
 
@@ -38,9 +38,9 @@
 
     <div class="formgrid grid">
       <div class="field xl:col-6 lg:col-6 md:col-6 sm:col-12">
-        <label htmlFor="username">Proyecto Asignado:</label>
-        <input pInputText id="username" aria-describedby="username-help" />
-        <small id="username-help">Aquí aparecerá el proyecto que fue asignado el trabajador</small>
+        <label appLabel for="observation" label="Observaciones:" [required]="observationField"></label>
+        <input pInputText type="text" id="observation" formControlName="observation" />
+        
       </div>
 
       <div class="field xl:col-6 lg:col-6 md:col-6 sm:col-12">

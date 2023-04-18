@@ -2,9 +2,10 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CreateHolidayDto, UpdateHolidayDto } from '@models/rrhh';
+import { PersonModel } from '@models/rrhh/person.model';
 import { ProjectAssignmentModel } from '@models/rrhh/projectAssignment';
 import { BreadcrumbService, CoreService, MessageService } from '@services/resources';
-import { HolidayHttpService } from '@services/rrhh';
+import { HolidayHttpService, PersonalInformationService } from '@services/rrhh';
 import { ProjectAssignmentHttpService } from '@services/rrhh/projectAssignment-http.service';
 import { CatalogueTypeEnum } from '@shared/enums';
 import { DateValidators } from '@shared/validators';
@@ -24,7 +25,7 @@ export class HolidayFormComponent implements OnInit {
   isLoadingSkeleton: boolean = false;
   loaded$ = this.coreService.loaded$;
   checked: boolean = true;
-  names: ProjectAssignmentModel[]=[];
+  persons: PersonModel[]=[];
   typeHoliday: any;
   selectedTypeHolidayField: any;
 
@@ -37,6 +38,7 @@ export class HolidayFormComponent implements OnInit {
     private router: Router,
     private holidayHttpService: HolidayHttpService,
     private proyectAsHttpService: ProjectAssignmentHttpService,
+    private personHttpService: PersonalInformationService,
   ) {
     this.breadcrumbService.setItems([
       {label: 'Listado', routerLink: ['/rrhh/holiday']},
@@ -45,7 +47,7 @@ export class HolidayFormComponent implements OnInit {
 
     this.typeHoliday = [
       { name: 'Dependencia', code: 'Dep'},
-      { name: 'Contrato', code: 'Con' }
+      { name: 'Consultoria', code: 'Con' }
     ]
 
     if (activatedRoute.snapshot.params['id'] !== 'new') {
@@ -62,7 +64,7 @@ export class HolidayFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getHolidayname();
+    this.getProyectAsName();
     this.getHoliday();
   }
 
@@ -71,8 +73,9 @@ export class HolidayFormComponent implements OnInit {
     return this.formBuilder.group({
       endDate: [null, [Validators.required,DateValidators.min(new Date())]],
       startDate: [null, [DateValidators.min(new Date())]],
-      name: [null, [Validators.required]],
       typeHoliday: [null, [Validators.required]],
+      observation: [null, [Validators.required]],
+      person: [null ],
     });
   }
 
@@ -116,13 +119,14 @@ export class HolidayFormComponent implements OnInit {
     });
   }
 
-  getHolidayname(): void{
+  getProyectAsName(): void{
     this.isLoadingSkeleton = true;
-    this.proyectAsHttpService.projectAssignment(CatalogueTypeEnum.PROYECT_ASSIGNMENT).subscribe((names) => {
+    this.personHttpService.person(CatalogueTypeEnum.PERSON).subscribe((persons) => {
         this.isLoadingSkeleton=false;
-        this.names = names;
+        this.persons = persons;
     })
   }
+
 
   // Getters
 
@@ -134,8 +138,12 @@ export class HolidayFormComponent implements OnInit {
     return this.form.controls['endDate'];
   }
 
-  get nameField() {
-    return this.form.controls['name'];
+  get personField() {
+    return this.form.controls['person'];
+  }
+
+  get observationField() {
+    return this.form.controls['observation'];
   }
 
   get typeHolidayField() {

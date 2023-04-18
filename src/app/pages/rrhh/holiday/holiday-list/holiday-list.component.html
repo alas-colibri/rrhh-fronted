@@ -41,18 +41,23 @@
       </td>
 
       <td *ngFor="let col of columns">
-        <!--Fields-->
-        <div *ngIf="!rowData[col.field]?.id" [ngSwitch]="col.field">
+        <!-- Objects -->
+        <div *ngIf="rowData[col.field]?.id" [ngSwitch]="col.field">
+          <div *ngSwitchCase="'person'">
+            {{rowData[col.field].names}}
+          </div>
+          <div *ngSwitchCase="'persons'">
+            {{rowData[col.field].identificationCode}}
+          </div>
+
         </div>
+        <!--Fields-->
         <div *ngIf="!rowData[col.field]?.id" [ngSwitch]="col.field">
           <div *ngSwitchCase="'startDate'">
             {{rowData[col.field]|date}}
           </div>
           <div *ngSwitchCase="'endDate'">
             {{rowData[col.field]|date}}
-          </div>
-          <div *ngSwitchCase="'availableProjects'">
-            {{rowData['name'].availableProject}}
           </div>
         <div *ngSwitchDefault>{{rowData[col.field]}}</div>
       </div>
