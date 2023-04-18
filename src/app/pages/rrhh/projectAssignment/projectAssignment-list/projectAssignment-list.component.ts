@@ -83,7 +83,7 @@ export class ProjectAssignmentListComponent implements OnInit {
   getActionButtons(): MenuItem[] {
     return [
       {
-        label: 'Update',
+        label: 'Actualizar',
         icon: 'pi pi-pencil',
         command: () => {
           if (this.selectedProjectAssignment.id)
@@ -91,7 +91,7 @@ export class ProjectAssignmentListComponent implements OnInit {
         },
       },
       {
-        label: 'Delete',
+        label: 'Eliminar',
         icon: 'pi pi-trash',
         command: () => {
           if (this.selectedProjectAssignment.id)

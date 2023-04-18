@@ -23,7 +23,7 @@ export class BreadcrumbComponent {
     this.subscription = breadcrumbService.itemsHandler.subscribe(response => {
       this.items = response as MenuItem[];
     });
-    this.home = {icon: 'pi pi-home', routerLink: '/'};
+    this.home = {icon: 'pi pi-home', routerLink: '/rrhh/personal-info'};
     this.form = {icon: 'pi pi-file-edit', routerLink: '/'};
     this.proyect = {icon: 'pi pi-folder', routerLink: '/'};
     this.vacations = {icon: 'pi pi-calendar-plus', routerLink: '/'};
