@@ -53,6 +53,9 @@
         </div>
         <!--Fields-->
         <div *ngIf="!rowData[col.field]?.id" [ngSwitch]="col.field">
+          <div *ngSwitchCase="'persons'">
+            {{rowData['person'].identificationCode}}
+          </div>
           <div *ngSwitchCase="'startDate'">
             {{rowData[col.field]|date}}
           </div>
